@@ -18,6 +18,7 @@ Color::~Color()
 }
 
 Color::Color(const Color &that)
+  : QObject()
 {
   m_r = that.m_r;
   m_g = that.m_g;
@@ -82,12 +83,9 @@ void Color::fromScriptValue(const QScriptValue &object)
   // red component
   QScriptValue value = object.property("r");
   
-  // TODO: test isValid() ??
-  // TODO: what should we test if the property is not in the object ??
-  
-  if (value.isUndefined())
+  if ((!value.isValid()) || (value.isUndefined()))
   {
-    // property is Undefined. set to 0, not the default NaN
+    // property is not valid or Undefined. set to 0, not the default NaN
     m_r = 0;
   }
   else
@@ -109,15 +107,15 @@ void Color::fromScriptValue(const QScriptValue &object)
   // green component
   value = object.property("g");
   
-  if (value.isUndefined())
+  if ((!value.isValid()) || (value.isUndefined()))
   {
-    // property is Undefined. set to 0, not the default NaN
+    // property is not valid or Undefined. set to 0, not the default NaN
     m_g = 0;
   }
   else
   {
     // convert to unsigned integer
-    quint32 g = value.toUInt16();
+    quint32 g = value.toUInt32();
     
     if (g > MAX_COLOR_VALUE)
     {
@@ -133,7 +131,7 @@ void Color::fromScriptValue(const QScriptValue &object)
   // blue component
   value = object.property("b");
   
-  if (value.isUndefined())
+  if ((!value.isValid()) || (value.isUndefined()))
   {
     // property is Undefined. set to 0, not the default NaN
     m_b = 0;
@@ -141,7 +139,7 @@ void Color::fromScriptValue(const QScriptValue &object)
   else
   {
     // convert to unsigned integer
-    quint32 b = value.toUInt16();
+    quint32 b = value.toUInt32();
     
     if (b > MAX_COLOR_VALUE)
     {

@@ -24,7 +24,7 @@ private:
 public:
   /// Constructor.
   ///
-  /// \param[in] parent Parent of his object.
+  /// \param[in] parent Parent of this object.
   explicit Color(QObject *parent = 0);
   
   /// Destructor.
