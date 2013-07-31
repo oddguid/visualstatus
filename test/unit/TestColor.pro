@@ -2,8 +2,6 @@
 # Unit test for Color class
 #
 
-include(unittest.pri)
-
 TARGET = testcolor 
 
 HEADERS = TestColor.h \
@@ -11,3 +9,5 @@ HEADERS = TestColor.h \
 
 SOURCES = TestColor.cpp \
           ../../src/Color.cpp
+
+include(unittest.pri)

@@ -4,6 +4,8 @@
 
 TEMPLATE = subdirs
 
-SUBDIRS += TestColor 
+SUBDIRS += TestColor \
+           TestJenkinsJob
 
 TestColor.file = TestColor.pro
+TestJenkinsJob.file = TestJenkinsJob.pro
