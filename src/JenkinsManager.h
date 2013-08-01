@@ -8,13 +8,14 @@
 #include <QMap>
 #include <QStringList>
 #include <qscriptengine>
+#include "BaseJenkinsManager.h"
 #include "JenkinsJob.h"
 
 namespace script
 {
 
 /// Class for retrieving the job status from a Jenkins/Hudson build server.
-class JenkinsManager : public QObject
+class JenkinsManager : public BaseJenkinsManager
 {
   Q_OBJECT
 
@@ -30,7 +31,7 @@ public:
   explicit JenkinsManager(QObject *parent = 0);
   
   /// Destructor.
-  ~JenkinsManager();
+  virtual ~JenkinsManager();
 
 signals:
   /// Signal to indicate that the status of the jobs has been retrieved from 
@@ -46,18 +47,18 @@ public slots:
   /// Retrieves the status of the jobs from the build server at the given URL.
   ///
   /// \param[in] url URL of build server (main status page).
-  void getStatus(const QString &url);
+  virtual void getStatus(const QString &url);
 
   /// Returns a list with the names of all jobs found on the build server.
   ///
   /// \return List with job names.
-  QStringList jobNames();
+  virtual QStringList jobNames();
 
   /// Returns the URL of the given job.
   ///
   /// \param[in] jobName Name of job.
   /// \return URL of job, empty if job not found.
-  QString jobUrl(const QString &jobName);
+  virtual QString jobUrl(const QString &jobName);
 
   /// Returns the color (status) of the given job. Possible values
   /// are:
@@ -73,18 +74,18 @@ public slots:
   ///
   /// \param[in] jobName Name of job.
   /// \return Color of job, empty if job not found.
-  QString jobColor(const QString &jobName);
+  virtual QString jobColor(const QString &jobName);
 
   /// Returns a list with all jobs found on the build server.
   ///
   /// \return List with job objects.
-  QObjectList jobs();
+  virtual QObjectList jobs();
 
   /// Returns the job of the given name.
   ///
   /// \param[in] jobName Name of job.
   /// \return Job object, NULL if job not found.
-  QObject *job(const QString &jobName);
+  virtual QObject *job(const QString &jobName);
 
 protected slots:
   /// Processes the received job information.

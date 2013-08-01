@@ -7,7 +7,7 @@ namespace script
 {
 
 JenkinsManager::JenkinsManager(QObject *parent)
-  : QObject(parent)
+  : BaseJenkinsManager(parent)
   , m_manager()
   , m_reply(NULL)
   , m_jobStatus()

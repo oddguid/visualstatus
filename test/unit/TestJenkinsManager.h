@@ -29,6 +29,9 @@ private slots:
 
   /// Tests the job function.
   void job();
+
+  /// Tests the global function jenkinsManagerConstructor.
+  void jenkinsManagerConstructor();
 };
 
 } // unittest
