@@ -31,10 +31,12 @@ win32:win32-msvc2005 {
 
 HEADERS = serial/TimeoutSerial.h \
           Color.h \
-          JenkinsJob.h
+          JenkinsJob.h \
+          JenkinsManager.h
 
 SOURCES = main.cpp \
           serial/TimeoutSerial.cpp \
           Color.cpp \
-          JenkinsJob.cpp
+          JenkinsJob.cpp \
+          JenkinsManager.cpp
  
