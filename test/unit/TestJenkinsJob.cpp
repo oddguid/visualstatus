@@ -53,5 +53,4 @@ void TestJenkinsJob::color()
 
 } // unittest
 
-QTEST_MAIN(unittest::TestJenkinsJob);
-
+QTEST_MAIN(unittest::TestJenkinsJob)

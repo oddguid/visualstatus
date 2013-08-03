@@ -33,12 +33,16 @@ HEADERS = serial/TimeoutSerial.h \
           Color.h \
           JenkinsJob.h \
           BaseJenkinsManager.h \
-          JenkinsManager.h
+          JenkinsManager.h \
+          LogLevel.h \
+          Logger.h
 
 SOURCES = main.cpp \
           serial/TimeoutSerial.cpp \
           Color.cpp \
           JenkinsJob.cpp \
           BaseJenkinsManager.cpp \
-          JenkinsManager.cpp
+          JenkinsManager.cpp \
+          LogLevel.cpp \
+          Logger.cpp
  

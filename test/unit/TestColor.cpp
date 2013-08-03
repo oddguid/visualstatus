@@ -307,4 +307,4 @@ void TestColor::colorFromScriptValue()
 
 } // unittest
 
-QTEST_MAIN(unittest::TestColor);
+QTEST_MAIN(unittest::TestColor)

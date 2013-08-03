@@ -181,4 +181,4 @@ void TestJenkinsManager::jenkinsManagerConstructor()
 
 } // unittest
 
-QTEST_MAIN(unittest::TestJenkinsManager);
+QTEST_MAIN(unittest::TestJenkinsManager)
