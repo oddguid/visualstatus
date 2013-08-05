@@ -28,7 +28,7 @@ public:
   explicit Color(QObject *parent = 0);
   
   /// Destructor.
-  ~Color();
+  virtual ~Color();
 
   /// Copy constructor.
   ///

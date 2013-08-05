@@ -27,7 +27,7 @@ public:
   explicit JenkinsJob(QObject *parent = 0);
   
   /// Destructor.
-  ~JenkinsJob();
+  virtual ~JenkinsJob();
 
   /// Returns the name of the job.
   ///

@@ -24,7 +24,7 @@ public:
   explicit Logger(QObject *parent = 0);
   
   /// Destructor.
-  ~Logger();
+  virtual ~Logger();
 
 signals:
   /// Signal to indicate that the log should be cleared.

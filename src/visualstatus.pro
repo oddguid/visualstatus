@@ -35,7 +35,9 @@ HEADERS = serial/TimeoutSerial.h \
           BaseJenkinsManager.h \
           JenkinsManager.h \
           LogLevel.h \
-          Logger.h
+          Logger.h \
+          BaseSerialPort.h \
+          SerialPort.h
 
 SOURCES = main.cpp \
           serial/TimeoutSerial.cpp \
@@ -44,5 +46,7 @@ SOURCES = main.cpp \
           BaseJenkinsManager.cpp \
           JenkinsManager.cpp \
           LogLevel.cpp \
-          Logger.cpp
+          Logger.cpp \
+          BaseSerialPort.cpp \
+          SerialPort.cpp
  
