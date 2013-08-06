@@ -33,16 +33,6 @@ public:
   /// Destructor.
   virtual ~JenkinsManager();
 
-signals:
-  /// Signal to indicate that the status of the jobs has been retrieved from 
-  /// the build server.
-  void statusAvailable();
-
-  /// Signal to indicate an error has occurred.
-  ///
-  /// \param[in] error Error message.
-  void error(QString error);
-
 public slots:
   /// Retrieves the status of the jobs from the build server at the given URL.
   ///
