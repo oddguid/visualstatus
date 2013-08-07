@@ -56,64 +56,6 @@ void JenkinsManager::getStatus(const QString &url)
           SLOT(sslErrors(QList<QSslError>)));
 }
 
-QStringList JenkinsManager::jobNames()
-{
-  return m_jobStatus.keys();
-}
-
-QString JenkinsManager::jobUrl(const QString &jobName)
-{
-  if (m_jobStatus.contains(jobName))
-  {
-    JenkinsJob *job = m_jobStatus[jobName];
-
-    if (job != NULL)
-    {
-      return job->url();
-    }
-  }
-
-  return QString();
-}
-
-QString JenkinsManager::jobColor(const QString &jobName)
-{
-  if (m_jobStatus.contains(jobName))
-  {
-    JenkinsJob *job = m_jobStatus[jobName];
-
-    if (job != NULL)
-    {
-      return job->color();
-    }
-  }
-
-  return QString();
-}
-
-QObjectList JenkinsManager::jobs()
-{
-  QObjectList jobs;
-  QMap<QString, JenkinsJob *>::iterator iter;
-
-  for (iter = m_jobStatus.begin(); iter != m_jobStatus.end(); ++iter)
-  {
-    jobs.append(iter.value());
-  }
-
-  return jobs;
-}
-
-QObject *JenkinsManager::job(const QString &jobName)
-{
-  if (m_jobStatus.contains(jobName))
-  {
-    return m_jobStatus[jobName];
-  }
-
-  return NULL;
-}
-
 void JenkinsManager::downloadFinished(QNetworkReply *reply)
 {
   if (reply->error())
