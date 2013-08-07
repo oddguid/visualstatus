@@ -10,7 +10,6 @@ JenkinsManager::JenkinsManager(QObject *parent)
   : BaseJenkinsManager(parent)
   , m_manager()
   , m_reply(NULL)
-  , m_jobStatus()
 {
   connect(&m_manager, SIGNAL(finished(QNetworkReply*)),
           this, SLOT(downloadFinished(QNetworkReply*)));
@@ -18,7 +17,6 @@ JenkinsManager::JenkinsManager(QObject *parent)
 
 JenkinsManager::~JenkinsManager()
 {
-  qDeleteAll(m_jobStatus.begin(), m_jobStatus.end());
 }
 
 void JenkinsManager::getStatus(const QString &url)

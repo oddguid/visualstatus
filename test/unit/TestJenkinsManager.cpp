@@ -1,10 +1,10 @@
 #include "TestJenkinsManager.h"
 
-// redefine private to public to get access to the member variables of the
+// redefine protected to public to get access to the member variables of the
 // JenkinsManager class
-#define private public
+#define protected public
 #include "../../src/JenkinsManager.h"
-#undef private
+#undef protected
 
 using namespace script;
 

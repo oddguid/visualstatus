@@ -22,7 +22,6 @@ class JenkinsManager : public BaseJenkinsManager
 private:
   QNetworkAccessManager m_manager;
   QNetworkReply *m_reply;
-  QMap<QString, JenkinsJob *> m_jobStatus;
 
 public:
   /// Constructor.

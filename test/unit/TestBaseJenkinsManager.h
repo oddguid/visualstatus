@@ -49,16 +49,18 @@ public:
   {
   }
 
-  virtual void getStatus(const QString &url)
-  {
-    Q_UNUSED(url);
-  }
-
   QMap<QString, script::JenkinsJob *> &jobMap()
   {
     return m_jobStatus;
   }
+
+public slots:
+  virtual void getStatus(const QString &url)
+  {
+    Q_UNUSED(url);
+  }
 };
 
 } // unittest
+
 #endif

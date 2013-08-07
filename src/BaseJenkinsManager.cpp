@@ -5,11 +5,13 @@ namespace script
 
 BaseJenkinsManager::BaseJenkinsManager(QObject *parent)
   : QObject(parent)
+  , m_jobStatus()
 {
 }
 
 BaseJenkinsManager::~BaseJenkinsManager()
 {
+  qDeleteAll(m_jobStatus.begin(), m_jobStatus.end());
 }
 
 QStringList BaseJenkinsManager::jobNames()
