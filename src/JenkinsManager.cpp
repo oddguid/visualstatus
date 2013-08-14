@@ -88,6 +88,13 @@ void JenkinsManager::downloadFinished(QNetworkReply *reply)
         JenkinsJob *job = new JenkinsJob;
 
         QJson::QObjectHelper::qvariant2qobject(jobMap, job);
+
+        if (m_jobStatus.contains(job->name()))
+        {
+          // delete value if key already exists
+          delete m_jobStatus[job->name()];
+        }
+
         m_jobStatus[job->name()] = job;
       }
 
