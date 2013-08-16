@@ -5,7 +5,7 @@ namespace core
 {
 
 const std::string SerialPort::m_delimiter = "\n";
-const std::string SerialPort::m_expected = '!';
+const std::string SerialPort::m_expected = "!";
 
 SerialPort::SerialPort(QObject *parent)
   : BaseSerialPort(parent)
