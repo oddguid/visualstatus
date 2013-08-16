@@ -15,7 +15,7 @@ SOURCES = TestJenkinsManager.cpp \
           ../../src/JenkinsManager.cpp
 
 QT += network
-include(../../src/macx.pri)
+include(../../src/common.pri)
 
 include(unittest.pri)
 

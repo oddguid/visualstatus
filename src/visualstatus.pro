@@ -3,13 +3,7 @@
 #-------------------------------------------------------------------------------
 
 # set paths and libs
-win32 {
-  include(win32.pri)
-}
-
-macx {
-  include(macx.pri)
-}
+include(common.pri)
 
 TARGET = visualstatus
 TEMPLATE = app
