@@ -36,7 +36,7 @@ void TestJenkinsManager::jenkinsManagerConstructor()
   QScriptValue scriptJenkinsManager =
       ::jenkinsManagerConstructor(scriptContext, scriptEngine);
 
-  QFAIL("TODOD: call script function");
+  QFAIL("TODO: call script function");
 //  scriptJenkinsManager
 }
 

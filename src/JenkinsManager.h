@@ -5,8 +5,6 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QSslError>
-#include <QMap>
-#include <QStringList>
 #include <qscriptengine>
 #include "BaseJenkinsManager.h"
 #include "JenkinsJob.h"

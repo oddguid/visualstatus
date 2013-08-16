@@ -1,7 +1,6 @@
 #include "JenkinsManager.h"
 #include <qjson/parser.h>
 #include <qjson/qobjecthelper.h>
-#include <QStringList>
 
 namespace script
 {
@@ -91,8 +90,9 @@ void JenkinsManager::downloadFinished(QNetworkReply *reply)
 
         if (m_jobStatus.contains(job->name()))
         {
-          // delete value if key already exists
-          delete m_jobStatus[job->name()];
+          // delete if key already exists
+          JenkinsJob *tmp = m_jobStatus.take(job->name());
+          delete tmp;
         }
 
         m_jobStatus[job->name()] = job;
