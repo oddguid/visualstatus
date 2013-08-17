@@ -45,7 +45,7 @@ public:
   QString m_logText;
   bool m_clearCalled;
 
-  DummyLog(QObject *parent = 0)
+  explicit DummyLog(QObject *parent = 0)
     : QObject(parent)
     , m_logLevel(LogLevel::Info)
     , m_logText()
