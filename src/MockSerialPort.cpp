@@ -20,6 +20,8 @@ bool MockSerialPort::open(const QString &deviceName, unsigned int baudrate,
   Q_UNUSED(baudrate);
   Q_UNUSED(timeoutSecs);
 
+  m_error.clear();
+
   m_isOpen = true;
 
   return m_isOpen;
@@ -32,6 +34,8 @@ bool MockSerialPort::isOpen()
 
 bool MockSerialPort::close()
 {
+  m_error.clear();
+
   m_isOpen = false;
 
   return true;
@@ -41,12 +45,16 @@ bool MockSerialPort::setTimeout(unsigned int timeoutSecs)
 {
   Q_UNUSED(timeoutSecs);
 
+  m_error.clear();
+
   return true;
 }
 
 bool MockSerialPort::write(const QString &data)
 {
   Q_UNUSED(data);
+
+  m_error.clear();
 
   if (m_isOpen)
   {
@@ -57,6 +65,8 @@ bool MockSerialPort::write(const QString &data)
   }
 
   // port not open
+  m_error = tr("Cannot write data, serial port is closed.");
+
   return false;
 }
 

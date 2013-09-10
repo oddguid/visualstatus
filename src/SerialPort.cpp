@@ -24,6 +24,8 @@ SerialPort::~SerialPort()
 bool SerialPort::open(const QString &deviceName, unsigned int baudrate,
   unsigned int timeoutSecs)
 {
+  m_error.clear();
+
   try
   {
     m_serialPort.open(deviceName.toStdString(), baudrate);
@@ -37,22 +39,25 @@ bool SerialPort::open(const QString &deviceName, unsigned int baudrate,
       if (answer != m_expected)
       {
         // unexpected answer
+        m_error = QString(tr("Received unexpected answer: %1"))
+                  .arg(QString::fromStdString(answer));
+
         return false;
       }
     }
     else
     {
       // empty answer
+      m_error = tr("Received empty answer.");
+
       return false;
     }
   }
   catch (boost::system::system_error &exc)
   {
-    QString errorMsg = QString("Cannot open serial port. %1 (%2)")
-                       .arg(QString(exc.what()))
-                       .arg(exc.code().value());
-
-    emit error(errorMsg);
+    m_error = QString(tr("Cannot open serial port. %1 (%2)"))
+              .arg(QString(exc.what()))
+              .arg(exc.code().value());
 
     return false;
   }
@@ -67,17 +72,17 @@ bool SerialPort::isOpen()
 
 bool SerialPort::close()
 {
+  m_error.clear();
+
   try
   {
     m_serialPort.close();
   }
   catch (boost::system::system_error &exc)
   {
-    QString errorMsg = QString("Cannot close serial port. %1 (%2)")
-                       .arg(QString(exc.what()))
-                       .arg(exc.code().value());
-
-    emit error(errorMsg);
+    m_error = QString(tr("Cannot close serial port. %1 (%2)"))
+              .arg(QString(exc.what()))
+              .arg(exc.code().value());
 
     return false;
   }
@@ -87,17 +92,17 @@ bool SerialPort::close()
 
 bool SerialPort::setTimeout(unsigned int timeoutSecs)
 {
+  m_error.clear();
+
   try
   {
     m_serialPort.setTimeout(boost::posix_time::seconds(timeoutSecs));
   }
   catch (boost::system::system_error &exc)
   {
-    QString errorMsg = QString("Cannot set serial port timeout. %1 (%2)")
-                       .arg(QString(exc.what()))
-                       .arg(exc.code().value());
-
-    emit error(errorMsg);
+    m_error = QString(tr("Cannot set serial port timeout. %1 (%2)"))
+              .arg(QString(exc.what()))
+              .arg(exc.code().value());
 
     return false;
   }
@@ -112,17 +117,17 @@ bool SerialPort::write(const QString &data)
 
 bool SerialPort::writeString(const QString &data)
 {
+  m_error.clear();
+
   try
   {
     m_serialPort.writeString(data.toStdString());
   }
   catch (boost::system::system_error &exc)
   {
-    QString errorMsg = QString("Cannot write to serial port. %1 (%2)")
-                       .arg(QString(exc.what()))
-                       .arg(exc.code().value());
-
-    emit error(errorMsg);
+    m_error = QString(tr("Cannot write to serial port. %1 (%2)"))
+              .arg(QString(exc.what()))
+              .arg(exc.code().value());
 
     return false;
   }
@@ -133,6 +138,9 @@ bool SerialPort::writeString(const QString &data)
   if (answer != m_expected)
   {
     // unexpected answer
+    m_error = QString(tr("Received unexpected answer: %1"))
+              .arg(QString::fromStdString(answer));
+
     return false;
   }
 
@@ -141,6 +149,7 @@ bool SerialPort::writeString(const QString &data)
 
 QString SerialPort::readStringUntil(const QString &delimiter)
 {
+  m_error.clear();
   std::string value;
 
   try
@@ -149,11 +158,9 @@ QString SerialPort::readStringUntil(const QString &delimiter)
   }
   catch (boost::system::system_error& exc)
   {
-    QString errorMsg = QString("Cannot read from serial port. %1 (%2)")
-                       .arg(QString(exc.what()))
-                       .arg(exc.code().value());
-
-    emit error(errorMsg);
+    m_errorMsg = QString(tr("Cannot read from serial port. %1 (%2)"))
+                 .arg(QString(exc.what()))
+                 .arg(exc.code().value());
   }
 
   return QString::fromStdString(value);

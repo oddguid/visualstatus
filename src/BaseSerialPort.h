@@ -11,6 +11,9 @@ class BaseSerialPort : public QObject
 {
   Q_OBJECT
 
+protected:
+  QString m_error;
+
 public:
   /// Constructor.
   ///
@@ -19,12 +22,6 @@ public:
 
   /// Destructor.
   virtual ~BaseSerialPort();
-
-signals:
-  /// Signal to indicate an error has occurred.
-  ///
-  /// \param[in] error Error message.
-  void error(QString &error);
 
 public slots:
   /// Opens the serial port.
@@ -58,6 +55,11 @@ public slots:
   /// \param[in] data String data to write.
   /// \return True if successful, false on error.
   virtual bool write(const QString &data) = 0;
+
+  /// Returns the last saved error message.
+  ///
+  /// \return Error message.
+  QString error() const;
 };
 
 } // core
