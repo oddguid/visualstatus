@@ -33,11 +33,12 @@ public slots:
   ///
   /// \param[in] deviceName Name of the serial port.
   /// \param[in] baudrate Baudrate for serial port.
-  /// \param[in] timeoutSecs Timeout for serial port in seconds.
+  /// \param[in] timeoutSecs Timeout for serial port in seconds, range is
+  /// 0 <= timeoutSecs <= 65535.
   /// \return True if successful, false on error.
   virtual bool open(const QString &deviceName,
                     unsigned int baudrate,
-                    unsigned int timeoutSecs);
+                    unsigned short timeoutSecs);
 
   /// Indicates whether serial port is open or not.
   ///
@@ -51,9 +52,10 @@ public slots:
 
   /// Sets the timeout of the serial port.
   ///
-  /// \param[in] timeoutSecs Timeout for serial port in seconds.
+  /// \param[in] timeoutSecs Timeout for serial port in seconds, range is
+  /// 0 <= timeoutSecs <= 65535.
   /// \return True is successful, false on error.
-  virtual bool setTimeout(unsigned int timeoutSecs);
+  virtual bool setTimeout(unsigned short timeoutSecs);
 
   /// Write the string data to the serial port.
   ///

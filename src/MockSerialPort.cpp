@@ -14,7 +14,7 @@ MockSerialPort::~MockSerialPort()
 }
 
 bool MockSerialPort::open(const QString &deviceName, unsigned int baudrate,
-  unsigned int timeoutSecs)
+  unsigned short timeoutSecs)
 {
   Q_UNUSED(deviceName);
   Q_UNUSED(baudrate);
@@ -41,7 +41,7 @@ bool MockSerialPort::close()
   return true;
 }
 
-bool MockSerialPort::setTimeout(unsigned int timeoutSecs)
+bool MockSerialPort::setTimeout(unsigned short timeoutSecs)
 {
   Q_UNUSED(timeoutSecs);
 

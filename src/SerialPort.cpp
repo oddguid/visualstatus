@@ -22,7 +22,7 @@ SerialPort::~SerialPort()
 }
 
 bool SerialPort::open(const QString &deviceName, unsigned int baudrate,
-  unsigned int timeoutSecs)
+  unsigned short timeoutSecs)
 {
   m_error.clear();
 
@@ -90,7 +90,7 @@ bool SerialPort::close()
   return true;
 }
 
-bool SerialPort::setTimeout(unsigned int timeoutSecs)
+bool SerialPort::setTimeout(unsigned short timeoutSecs)
 {
   m_error.clear();
 
@@ -158,9 +158,9 @@ QString SerialPort::readStringUntil(const QString &delimiter)
   }
   catch (boost::system::system_error& exc)
   {
-    m_errorMsg = QString(tr("Cannot read from serial port. %1 (%2)"))
-                 .arg(QString(exc.what()))
-                 .arg(exc.code().value());
+    m_error = QString(tr("Cannot read from serial port. %1 (%2)"))
+              .arg(QString(exc.what()))
+              .arg(exc.code().value());
   }
 
   return QString::fromStdString(value);
