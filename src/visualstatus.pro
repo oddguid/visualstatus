@@ -35,7 +35,8 @@ HEADERS = serial/TimeoutSerial.h \
           SerialPort.h \
           MockSerialPort.h \
           BaseHttpPort.h \
-          MockHttpPort.h
+          MockHttpPort.h \
+          HttpPort.h
 
 SOURCES = main.cpp \
           serial/TimeoutSerial.cpp \
@@ -50,5 +51,7 @@ SOURCES = main.cpp \
           SerialPort.cpp \
           MockSerialPort.cpp \
           BaseHttpPort.cpp \
-          MockHttpPort.cpp 
+          MockHttpPort.cpp \
+          HttpPort.cpp
+
 
