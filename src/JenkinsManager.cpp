@@ -18,6 +18,28 @@ JenkinsManager::~JenkinsManager()
 {
 }
 
+QString JenkinsManager::makeJsonUrl(const QString &url)
+{
+  // append /api/json to access JSON interface of Jenkins/Hudson
+  QString jsonUrl(url);
+  QString path = "/api/json";
+
+  if (!url.endsWith(path, Qt::CaseInsensitive))
+  {
+    if (!url.endsWith("/"))
+    {
+      jsonUrl += path;
+    }
+    else
+    {
+      // append path without first slash
+      jsonUrl += path.mid(1);
+    }
+  }
+
+  return jsonUrl;
+}
+
 void JenkinsManager::getStatus(const QString &url)
 {
   // clear job list
@@ -29,20 +51,8 @@ void JenkinsManager::getStatus(const QString &url)
     return;
   }
 
-  // append /api/json to access JSON interface of Jenkins/Hudson
-  QString jsonUrl(url);
-
-  if (!url.endsWith("/api/json", Qt::CaseInsensitive))
-  {
-    if (!url.endsWith("/"))
-    {
-      jsonUrl += "/api/json";
-    }
-    else
-    {
-      jsonUrl += "api/json";
-    }
-  }
+  // make JSON url
+  QString jsonUrl = makeJsonUrl(url);
 
   // download JSON data
   QNetworkRequest request(jsonUrl);

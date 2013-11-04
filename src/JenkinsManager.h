@@ -30,6 +30,11 @@ public:
   /// Destructor.
   virtual ~JenkinsManager();
 
+protected:
+  /// Checks if the given URL ends with /api/json, if it does not the URL
+  /// is fixed by appending /api/json.
+  QString makeJsonUrl(const QString &url);
+
 public slots:
   /// Retrieves the status of the jobs from the build server at the given URL.
   ///

@@ -18,6 +18,26 @@ void TestJenkinsManager::defaultConstructor()
   QVERIFY(manager.jobNames().size() == 0);
 }
 
+void TestJenkinsManager::makeJsonUrl()
+{
+  JenkinsManager manager;
+  QString expectedUrl = "http://example.com/api/json";
+  QString inputUrl = "http://example.com";
+
+  // base address
+  QString outputUrl = manager.makeJsonUrl(inputUrl);
+  QCOMPARE(outputUrl, expectedUrl);
+
+  // base address with trailing slash
+  inputUrl += "/";
+  outputUrl = manager.makeJsonUrl(inputUrl);
+  QCOMPARE(outputUrl, expectedUrl);
+
+  // json address
+  outputUrl = manager.makeJsonUrl(expectedUrl);
+  QCOMPARE(outputUrl, expectedUrl);
+}
+
 void TestJenkinsManager::jenkinsManagerConstructor()
 {
   QScriptEngine *scriptEngine = new QScriptEngine();

@@ -15,6 +15,9 @@ private slots:
   /// Tests the default constructor.
   void defaultConstructor();
 
+  /// Tests the makeJsonUrl function.
+  void makeJsonUrl();
+
   /// Tests the global function jenkinsManagerConstructor.
   void jenkinsManagerConstructor();
 };
