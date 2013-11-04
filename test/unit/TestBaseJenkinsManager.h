@@ -2,8 +2,13 @@
 #define VST_TESTBASEJENKINSMANAGER_H
 
 #include <QtTest/QtTest>
-#include "../../src/BaseJenkinsManager.h"
 #include "../../src/JenkinsJob.h"
+
+// redefine protected to public to get access to the member variables of the
+// BaseJenkinsManager class
+#define protected public
+#include "../../src/BaseJenkinsManager.h"
+#undef protected
 
 namespace unittest
 {
@@ -31,6 +36,9 @@ private slots:
 
   /// Tests the job function.
   void job();
+
+  /// Tests the clearJobs function.
+  void clearJobs();
 };
 
 // Dummy class for testing of BaseJenkinsManager, implements the public slot

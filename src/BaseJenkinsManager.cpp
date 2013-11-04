@@ -11,7 +11,13 @@ BaseJenkinsManager::BaseJenkinsManager(QObject *parent)
 
 BaseJenkinsManager::~BaseJenkinsManager()
 {
+  clearJobs();
+}
+
+void BaseJenkinsManager::clearJobs()
+{
   qDeleteAll(m_jobStatus.begin(), m_jobStatus.end());
+  m_jobStatus.clear();
 }
 
 QStringList BaseJenkinsManager::jobNames()

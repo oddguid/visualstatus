@@ -152,6 +152,42 @@ void TestBaseJenkinsManager::job()
   QVERIFY(job == NULL);
 }
 
+void TestBaseJenkinsManager::clearJobs()
+{
+  DummyJenkinsManager manager;
+
+  // setup test data
+  JenkinsJob *job1 = new JenkinsJob;
+  job1->name("job1");
+  job1->url("http://example.com/job1");
+  job1->color("red");
+
+  JenkinsJob *job2 = new JenkinsJob;
+  job2->name("job2");
+  job2->url("http://example.com/job2");
+  job2->color("yellow_anime");
+
+  JenkinsJob *job3 = new JenkinsJob;
+  job3->name("job3");
+
+  manager.jobMap()[job1->name()] = job1;
+  manager.jobMap()[job2->name()] = job2;
+  manager.jobMap()[job3->name()] = job3;
+
+  // get jobs
+  QObjectList jobs = manager.jobs();
+
+  QVERIFY(jobs.size() == 3);
+
+  // clear jobs
+  manager.clearJobs();
+
+  // get jobs
+  jobs = manager.jobs();
+
+  QVERIFY(jobs.size() == 0);
+}
+
 } // unittest
 
 QTEST_MAIN(unittest::TestBaseJenkinsManager)

@@ -31,6 +31,10 @@ public:
   /// Destructor.
   virtual ~BaseJenkinsManager();
 
+protected:
+  /// Empties the job list.
+  void clearJobs();
+
 signals:
   /// Signal to indicate that the status of the jobs has been retrieved from 
   /// the build server.

@@ -21,8 +21,7 @@ JenkinsManager::~JenkinsManager()
 void JenkinsManager::getStatus(const QString &url)
 {
   // clear job list
-  qDeleteAll(m_jobStatus);
-  m_jobStatus.clear();
+  clearJobs();
 
   if (url.isEmpty())
   {
