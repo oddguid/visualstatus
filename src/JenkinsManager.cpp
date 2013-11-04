@@ -40,6 +40,51 @@ QString JenkinsManager::makeJsonUrl(const QString &url)
   return jsonUrl;
 }
 
+bool JenkinsManager::parseJsonData(const QByteArray &data)
+{
+  if (data.isEmpty())
+  {
+    // no data, done
+    return true;
+  }
+
+  // parse JSON data
+  QJson::Parser parser;
+  bool ok;
+
+  QVariantMap result = parser.parse(data, &ok).toMap();
+
+  if (!ok)
+  {
+    // parse error
+    return false;
+  }
+
+  // convert to jobs and add to list
+  QList<QVariant> jobList = result["jobs"].toList();
+
+  for (int i=0; i<jobList.size(); ++i)
+  {
+    QVariantMap jobMap = jobList.at(i).toMap();
+
+    JenkinsJob *job = new JenkinsJob;
+
+    QJson::QObjectHelper::qvariant2qobject(jobMap, job);
+
+    if (m_jobStatus.contains(job->name()))
+    {
+      // delete if key already exists
+      JenkinsJob *tmp = m_jobStatus.take(job->name());
+      delete tmp;
+    }
+
+    m_jobStatus[job->name()] = job;
+  }
+
+  // done
+  return true;
+}
+
 void JenkinsManager::getStatus(const QString &url)
 {
   // clear job list
@@ -75,39 +120,16 @@ void JenkinsManager::downloadFinished(QNetworkReply *reply)
     QByteArray data = reply->readAll();
 
     // parse JSON data
-    QJson::Parser parser;
-    bool ok;
-
-    QVariantMap result = parser.parse(data, &ok).toMap();
+    bool ok = parseJsonData(data);
 
     if (!ok)
     {
+      // parsing failed
       emit error("Cannot parse JSON data");
     }
     else
     {
-      // convert to jobs and add to list
-      QList<QVariant> jobList = result["jobs"].toList();
-
-      for (int i=0; i<jobList.size(); ++i)
-      {
-        QVariantMap jobMap = jobList.at(i).toMap();
-
-        JenkinsJob *job = new JenkinsJob;
-
-        QJson::QObjectHelper::qvariant2qobject(jobMap, job);
-
-        if (m_jobStatus.contains(job->name()))
-        {
-          // delete if key already exists
-          JenkinsJob *tmp = m_jobStatus.take(job->name());
-          delete tmp;
-        }
-
-        m_jobStatus[job->name()] = job;
-      }
-
-      // done
+      // parsing succeeded, indicate job status available
       emit statusAvailable();
     }
 

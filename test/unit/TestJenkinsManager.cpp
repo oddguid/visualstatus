@@ -38,6 +38,11 @@ void TestJenkinsManager::makeJsonUrl()
   QCOMPARE(outputUrl, expectedUrl);
 }
 
+void TestJenkinsManager::parseJsonData()
+{
+  QFAIL("TODO: implement function");
+}
+
 void TestJenkinsManager::jenkinsManagerConstructor()
 {
   QScriptEngine *scriptEngine = new QScriptEngine();

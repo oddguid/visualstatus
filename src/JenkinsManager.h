@@ -35,6 +35,13 @@ protected:
   /// is fixed by appending /api/json.
   QString makeJsonUrl(const QString &url);
 
+  /// Parses the given JSON data and populates the job list. Does not empty
+  /// the job list before parsing!
+  ///
+  /// \param[in] data Byte array with JSON data.
+  /// \return True on success, false on error.
+  bool parseJsonData(const QByteArray &data);
+
 public slots:
   /// Retrieves the status of the jobs from the build server at the given URL.
   ///

@@ -18,6 +18,9 @@ private slots:
   /// Tests the makeJsonUrl function.
   void makeJsonUrl();
 
+  /// Tests the parseJsonData function.
+  void parseJsonData();
+
   /// Tests the global function jenkinsManagerConstructor.
   void jenkinsManagerConstructor();
 };
