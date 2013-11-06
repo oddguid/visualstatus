@@ -18,8 +18,21 @@ private slots:
   /// Tests the makeJsonUrl function.
   void makeJsonUrl();
 
-  /// Tests the parseJsonData function.
+  /// Tests the parseJsonData function with empty data.
+  void parseJsonDataEmpty();
+
+  /// Tests the parseJsonData function with faulty data.
+  void parseJsonDataError();
+
+  /// Tests the parseJsonData function with correct data.
   void parseJsonData();
+
+  /// Tests the parseJsonData function with correct data. The data contains
+  /// a job twice.
+  void parseJsonDataDouble();
+
+  /// Tests the parseJsonData function with 2 correct, different data buffers.
+  void parseJsonDataTwice();
 
   /// Tests the global function jenkinsManagerConstructor.
   void jenkinsManagerConstructor();
