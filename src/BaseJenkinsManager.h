@@ -21,6 +21,7 @@ class BaseJenkinsManager : public QObject
 
 protected:
   QMap<QString, JenkinsJob *> m_jobStatus;
+  QString m_error;
 
 public:
   /// Constructor.
@@ -35,21 +36,12 @@ protected:
   /// Empties the job list.
   void clearJobs();
 
-signals:
-  /// Signal to indicate that the status of the jobs has been retrieved from 
-  /// the build server.
-  void statusAvailable();
-
-  /// Signal to indicate an error has occurred.
-  ///
-  /// \param[in] error Error message.
-  void error(QString error);
-
 public slots:
   /// Retrieves the status of the jobs from the build server at the given URL.
   ///
   /// \param[in] url URL of build server (main status page).
-  virtual void getStatus(const QString &url) = 0;
+  /// \return True if successful, false if error occurred.
+  virtual bool getStatus(const QString &url) = 0;
 
   /// Returns a list with the names of all jobs found on the build server.
   ///
@@ -88,6 +80,11 @@ public slots:
   /// \param[in] jobName Name of job.
   /// \return Job object, NULL if job not found.
   virtual QObject *job(const QString &jobName);
+
+  /// Returns the last saved error message.
+  ///
+  /// \return Error message.
+  QString error() const;
 };
 
 } // script

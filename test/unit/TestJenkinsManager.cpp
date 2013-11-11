@@ -1,4 +1,5 @@
 #include "TestJenkinsManager.h"
+#include "../../src/MockHttpPort.h"
 
 // redefine protected to public to get access to the member variables of the
 // JenkinsManager class
@@ -13,14 +14,16 @@ namespace unittest
 
 void TestJenkinsManager::defaultConstructor()
 {
-  JenkinsManager manager;
+  core::MockHttpPort *port = new core::MockHttpPort;
+  JenkinsManager manager(port);
 
   QVERIFY(manager.jobNames().size() == 0);
 }
 
 void TestJenkinsManager::makeJsonUrl()
 {
-  JenkinsManager manager;
+  core::MockHttpPort *port = new core::MockHttpPort;
+  JenkinsManager manager(port);
   QString expectedUrl = "http://example.com/api/json";
   QString inputUrl = "http://example.com";
 
@@ -40,7 +43,8 @@ void TestJenkinsManager::makeJsonUrl()
 
 void TestJenkinsManager::parseJsonDataEmpty()
 {
-  JenkinsManager manager;
+  core::MockHttpPort *port = new core::MockHttpPort;
+  JenkinsManager manager(port);
   QByteArray data;
 
   bool ok = manager.parseJsonData(data);
@@ -51,7 +55,8 @@ void TestJenkinsManager::parseJsonDataEmpty()
 
 void TestJenkinsManager::parseJsonDataError()
 {
-  JenkinsManager manager;
+  core::MockHttpPort *port = new core::MockHttpPort;
+  JenkinsManager manager(port);
 
   // error data: ] is missing in first line
   QByteArray data =
@@ -81,7 +86,8 @@ void TestJenkinsManager::parseJsonDataError()
 
 void TestJenkinsManager::parseJsonData()
 {
-  JenkinsManager manager;
+  core::MockHttpPort *port = new core::MockHttpPort;
+  JenkinsManager manager(port);
 
   QByteArray data =
       "{\"assignedLabels\":[{}],"
@@ -116,7 +122,8 @@ void TestJenkinsManager::parseJsonData()
 
 void TestJenkinsManager::parseJsonDataDouble()
 {
-  JenkinsManager manager;
+  core::MockHttpPort *port = new core::MockHttpPort;
+  JenkinsManager manager(port);
 
   QByteArray data =
       "{\"assignedLabels\":[{}],"
@@ -151,7 +158,8 @@ void TestJenkinsManager::parseJsonDataDouble()
 
 void TestJenkinsManager::parseJsonDataTwice()
 {
-  JenkinsManager manager;
+  core::MockHttpPort *port = new core::MockHttpPort;
+  JenkinsManager manager(port);
 
   QByteArray data =
       "{\"assignedLabels\":[{}],"

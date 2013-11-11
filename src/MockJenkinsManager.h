@@ -49,7 +49,8 @@ public slots:
   /// Retrieves the status of the jobs from a file.
   ///
   /// \param[in] fileName Name of the job status file.
-  virtual void getStatus(const QString &fileName);
+  /// \return True if successful, false if error occurred.
+  virtual bool getStatus(const QString &fileName);
 };
 
 } // script

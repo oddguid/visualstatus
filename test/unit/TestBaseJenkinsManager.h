@@ -37,11 +37,14 @@ private slots:
   /// Tests the job function.
   void job();
 
+  /// Tests the error function.
+  void error();
+
   /// Tests the clearJobs function.
   void clearJobs();
 };
 
-// Dummy class for testing of BaseJenkinsManager, implements the public slot
+// Dummy class for testing of BaseJenkinsManager, implements function
 // getStatus(const QString &url).
 class DummyJenkinsManager : public script::BaseJenkinsManager
 {
@@ -63,9 +66,11 @@ public:
   }
 
 public slots:
-  virtual void getStatus(const QString &url)
+  virtual bool getStatus(const QString &url)
   {
     Q_UNUSED(url);
+
+    return true;
   }
 };
 

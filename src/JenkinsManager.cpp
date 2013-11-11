@@ -1,17 +1,19 @@
 #include "JenkinsManager.h"
 #include <qjson/parser.h>
 #include <qjson/qobjecthelper.h>
+#include "HttpPort.h"
 
 namespace script
 {
 
-JenkinsManager::JenkinsManager(QObject *parent)
+JenkinsManager::JenkinsManager(core::BaseHttpPort *httpPort, QObject *parent)
   : BaseJenkinsManager(parent)
-  , m_manager()
-  , m_reply(NULL)
+  , m_httpPort(httpPort)
 {
-  connect(&m_manager, SIGNAL(finished(QNetworkReply*)),
-          this, SLOT(downloadFinished(QNetworkReply*)));
+  if (m_httpPort != NULL)
+  {
+    m_httpPort->setParent(this);
+  }
 }
 
 JenkinsManager::~JenkinsManager()
@@ -85,72 +87,57 @@ bool JenkinsManager::parseJsonData(const QByteArray &data)
   return true;
 }
 
-void JenkinsManager::getStatus(const QString &url)
+bool JenkinsManager::getStatus(const QString &url)
 {
+  m_error.clear();
+
   // clear job list
   clearJobs();
 
   if (url.isEmpty())
   {
     // nothing to do
-    return;
+    return true;
+  }
+
+  if (m_httpPort == NULL)
+  {
+    m_error = QString("No HTTP port set");
+
+    return false;
   }
 
   // make JSON url
   QString jsonUrl = makeJsonUrl(url);
 
-  // download JSON data
-  QNetworkRequest request(jsonUrl);
-  m_reply = m_manager.get(request);
+  // get data
+  bool getOk = m_httpPort->get(QUrl(jsonUrl));
 
-  connect(m_reply, SIGNAL(sslErrors(QList<QSslError>)),
-          SLOT(sslErrors(QList<QSslError>)));
-}
-
-void JenkinsManager::downloadFinished(QNetworkReply *reply)
-{
-  if (reply->error())
+  if (getOk)
   {
-    // error occurred during transfer.
-    emit error(reply->errorString());
+    // get data and parse
+    QByteArray jsonData = m_httpPort->data().toUtf8();
+
+    // parse JSON data
+    bool parseOk = parseJsonData(jsonData);
+
+    if (!parseOk)
+    {
+      // parsing failed
+      m_error = QString("Cannot parse JSON data");
+
+      return false;
+    }
   }
   else
   {
-    // get all received data
-    QByteArray data = reply->readAll();
+    // error getting data
+    m_error = m_httpPort->error();
 
-    // parse JSON data
-    bool ok = parseJsonData(data);
-
-    if (!ok)
-    {
-      // parsing failed
-      emit error("Cannot parse JSON data");
-    }
-    else
-    {
-      // parsing succeeded, indicate job status available
-      emit statusAvailable();
-    }
-
-    m_reply->deleteLater();
-  }
-}
-
-void JenkinsManager::sslErrors(const QList<QSslError> &errors)
-{
-#ifndef QT_NO_OPENSSL
-  QString errorString;
-
-  foreach (const QSslError &error, errors)
-  {
-    // concatenate errors
-    errorString += QString("SSL error: %1\n").arg(error.errorString());
+    return false;
   }
 
-  // signal new error message
-  emit error(errorString);
-#endif
+  return true;
 }
 
 } // script
@@ -162,7 +149,8 @@ QScriptValue jenkinsManagerConstructor(QScriptContext *context,
   QObject *parent = context->argument(0).toQObject();
 
   // create new JenkinsManager object
-  QObject *object = new script::JenkinsManager(parent);
+  core::HttpPort *port = new core::HttpPort;
+  QObject *object = new script::JenkinsManager(port, parent);
 
   // pass object to script
   return engine->newQObject(object, QScriptEngine::ScriptOwnership);

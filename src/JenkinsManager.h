@@ -2,12 +2,10 @@
 #define VST_JENKINSMANAGER_H
 
 #include <QObject>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QSslError>
 #include <qscriptengine>
 #include "BaseJenkinsManager.h"
 #include "JenkinsJob.h"
+#include "BaseHttpPort.h"
 
 namespace script
 {
@@ -18,14 +16,16 @@ class JenkinsManager : public BaseJenkinsManager
   Q_OBJECT
 
 private:
-  QNetworkAccessManager m_manager;
-  QNetworkReply *m_reply;
+  core::BaseHttpPort *m_httpPort;
 
 public:
   /// Constructor.
   ///
+  /// \param[in] httpPort HTTP port to use. This object will be made the
+  /// parent of the HTTP port.
   /// \param[in] parent Parent of this object.
-  explicit JenkinsManager(QObject *parent = 0);
+  JenkinsManager(core::BaseHttpPort *httpPort,
+                 QObject *parent = 0);
   
   /// Destructor.
   virtual ~JenkinsManager();
@@ -46,18 +46,8 @@ public slots:
   /// Retrieves the status of the jobs from the build server at the given URL.
   ///
   /// \param[in] url URL of build server (main status page).
-  virtual void getStatus(const QString &url);
-
-protected slots:
-  /// Processes the received job information.
-  ///
-  /// \param[in] reply HTTP reply with job information.
-  void downloadFinished(QNetworkReply *reply);
-
-  /// Handles SSL errors.
-  ///
-  /// \param[in] errors List of SSL errors.
-  void sslErrors(const QList<QSslError> &errors);
+  /// \return True if successful, false if error occurred.
+  virtual bool getStatus(const QString &url);
 };
 
 } // script

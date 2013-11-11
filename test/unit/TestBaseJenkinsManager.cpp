@@ -152,6 +152,15 @@ void TestBaseJenkinsManager::job()
   QVERIFY(job == NULL);
 }
 
+void TestBaseJenkinsManager::error()
+{
+  DummyJenkinsManager manager;
+  QString errorText = "error text";
+  manager.m_error = errorText;
+
+  QCOMPARE(manager.error(), errorText);
+}
+
 void TestBaseJenkinsManager::clearJobs()
 {
   DummyJenkinsManager manager;

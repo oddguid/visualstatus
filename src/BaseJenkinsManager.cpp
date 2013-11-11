@@ -6,6 +6,7 @@ namespace script
 BaseJenkinsManager::BaseJenkinsManager(QObject *parent)
   : QObject(parent)
   , m_jobStatus()
+  , m_error()
 {
 }
 
@@ -76,6 +77,11 @@ QObject *BaseJenkinsManager::job(const QString &jobName)
   }
 
   return NULL;
+}
+
+QString BaseJenkinsManager::error() const
+{
+  return m_error;
 }
 
 } // script

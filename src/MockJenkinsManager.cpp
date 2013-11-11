@@ -14,8 +14,10 @@ MockJenkinsManager::~MockJenkinsManager()
 {
 }
 
-void MockJenkinsManager::getStatus(const QString &fileName)
+bool MockJenkinsManager::getStatus(const QString &fileName)
 {
+  m_error.clear();
+
   // clear job list
   qDeleteAll(m_jobStatus);
   m_jobStatus.clear();
@@ -23,13 +25,20 @@ void MockJenkinsManager::getStatus(const QString &fileName)
   // open file
   QFile statusFile(fileName);
 
-  if (statusFile.open(QIODevice::ReadOnly | QIODevice::Text))
+  if (!statusFile.open(QIODevice::ReadOnly | QIODevice::Text))
   {
-    // parse contents
-    parseJobBuffer(&statusFile);
+    // cannot open file
+    m_error = QString("Cannot open file %1").arg(fileName);
 
-    statusFile.close();
+    return false;
   }
+
+  // parse contents
+  parseJobBuffer(&statusFile);
+
+  statusFile.close();
+
+  return true;
 }
 
 void MockJenkinsManager::parseJobBuffer(QIODevice *jobBuffer)
