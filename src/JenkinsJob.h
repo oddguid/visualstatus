@@ -50,16 +50,22 @@ public:
   void url(const QString &url);
 
   /// Returns the color of the job, indicating the status. Possible values
-  /// are:
+  /// are (taken from hudson.model.BallColor in schema):
   ///
-  /// red           - failed
-  /// red_anime     - failed in progress
-  /// yellow        - unstable
-  /// yellow_anime  - unstable in progress
-  /// blue          - success
-  /// blue_anime    - success in progress
-  /// grey          - pending (disabled, aborted, not built)
-  /// grey_anime    - pending in progress
+  /// red            - failed
+  /// red_anime      - failed in progress
+  /// yellow         - unstable
+  /// yellow_anime   - unstable in progress
+  /// blue           - success
+  /// blue_anime     - success in progress
+  /// grey           - pending (disabled, aborted, not built)
+  /// grey_anime     - pending in progress
+  /// disabled       - disabled
+  /// disabled_anime - disabled in progress
+  /// aborted        - aborted
+  /// aborted_anime  - aborted in progress
+  /// notbuilt       - not built
+  /// notbuilt_anime - not built in progress
   ///
   /// \return Color.
   QString color() const;
