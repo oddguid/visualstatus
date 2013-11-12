@@ -4,4 +4,6 @@
 
 TEMPLATE = subdirs
 
-SUBDIRS += unit
+SUBDIRS += unit \
+           app
+
