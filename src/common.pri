@@ -1,4 +1,4 @@
-message("Common settings…")
+message("Common settings...")
 
 # win32
 win32 {
