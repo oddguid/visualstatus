@@ -1,8 +1,6 @@
 #include "TestJenkinsJob.h"
 #include "../../src/JenkinsJob.h"
 
-using namespace script;
-
 namespace unittest
 {
 

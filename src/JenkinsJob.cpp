@@ -1,8 +1,5 @@
 #include "JenkinsJob.h"
 
-namespace script
-{
-
 JenkinsJob::JenkinsJob(QObject *parent)
   : QObject(parent)
   , m_name()
@@ -44,6 +41,3 @@ void JenkinsJob::color(const QString &color)
 {
   m_color = color;
 }
-
-} // script
-

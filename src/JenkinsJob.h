@@ -3,9 +3,6 @@
 
 #include <QObject>
 
-namespace script
-{
-
 /// Class for a Jenkins/Hudson job. Contains the job name, job url and color.
 class JenkinsJob : public QObject
 {
@@ -75,7 +72,5 @@ public:
   /// \param[in] color Color of the job.
   void color(const QString &color);
 };
-
-} // script
 
 #endif
