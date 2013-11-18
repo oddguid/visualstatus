@@ -1,9 +1,6 @@
 #include "SerialPort.h"
 #include <QDateTime>
 
-namespace core
-{
-
 const std::string SerialPort::m_delimiter = "\n";
 const std::string SerialPort::m_expected = "!";
 
@@ -165,5 +162,3 @@ QString SerialPort::readStringUntil(const QString &delimiter)
 
   return QString::fromStdString(value);
 }
-
-} // core

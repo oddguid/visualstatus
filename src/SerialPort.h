@@ -5,9 +5,6 @@
 #include "BaseSerialPort.h"
 #include "serial/TimeoutSerial.h"
 
-namespace core
-{
-
 /// Class for serial port operations.
 class SerialPort : public BaseSerialPort
 {
@@ -78,7 +75,5 @@ protected:
   /// \return Received data from the serial port.
   QString readStringUntil(const QString& delimiter = QString("\n"));
 };
-
-} // core
 
 #endif
