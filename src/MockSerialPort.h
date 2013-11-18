@@ -4,9 +4,6 @@
 #include <QObject>
 #include "BaseSerialPort.h"
 
-namespace core
-{
-
 /// Mock class for serial port operations.
 class MockSerialPort : public BaseSerialPort
 {
@@ -63,7 +60,5 @@ public slots:
   /// \return True if successful, false on error.
   virtual bool write(const QString &data);
 };
-
-} // core
 
 #endif

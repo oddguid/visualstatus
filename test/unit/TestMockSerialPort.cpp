@@ -6,8 +6,6 @@
 #include "../../src/MockSerialPort.h"
 #undef private
 
-using namespace core;
-
 namespace unittest
 {
 

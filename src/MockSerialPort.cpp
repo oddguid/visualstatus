@@ -1,8 +1,5 @@
 #include "MockSerialPort.h"
 
-namespace core
-{
-
 MockSerialPort::MockSerialPort(QObject *parent)
   : BaseSerialPort(parent)
   , m_isOpen(false)
@@ -69,5 +66,3 @@ bool MockSerialPort::write(const QString &data)
 
   return false;
 }
-
-} // core
