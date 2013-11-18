@@ -4,9 +4,6 @@
 #include <QObject>
 #include <QUrl>
 
-namespace core
-{
-
 /// Base class for classes that use the HTTP protocol.
 class BaseHttpPort : public QObject
 {
@@ -70,7 +67,5 @@ public slots:
   /// \return Error message.
   QString error() const;
 };
-
-} // core
 
 #endif
