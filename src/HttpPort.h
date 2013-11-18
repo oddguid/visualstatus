@@ -8,9 +8,6 @@
 #include <curlpp/Easy.hpp>
 #include "BaseHttpPort.h"
 
-namespace core
-{
-
 /// Class for HTTP operations, uses curlpp.
 class HttpPort : public BaseHttpPort
 {
@@ -70,7 +67,5 @@ public slots:
                         const QString &host,
                         unsigned short port);
 };
-
-} // core
 
 #endif

@@ -2,9 +2,6 @@
 #include <curlpp/Options.hpp>
 #include <curlpp/Exception.hpp>
 
-namespace core
-{
-
 HttpPort::HttpPort(QObject *parent)
   : BaseHttpPort(parent)
   , m_request()
@@ -161,5 +158,3 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
 
   return true;
 }
-
-} // core
