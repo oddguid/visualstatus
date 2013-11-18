@@ -1,8 +1,5 @@
 #include "BaseSerialPort.h"
 
-namespace core
-{
-
 BaseSerialPort::BaseSerialPort(QObject *parent)
   : QObject(parent)
   , m_error()
@@ -17,5 +14,3 @@ QString BaseSerialPort::error() const
 {
   return m_error;
 }
-
-} // core

@@ -3,9 +3,6 @@
 
 #include <QObject>
 
-namespace core
-{
-
 /// Base class for classes that work with a serial port.
 class BaseSerialPort : public QObject
 {
@@ -63,7 +60,5 @@ public slots:
   /// \return Error message.
   QString error() const;
 };
-
-} // core
 
 #endif
