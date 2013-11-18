@@ -1,8 +1,5 @@
 #include "MockHttpPort.h"
 
-namespace core
-{
-
 MockHttpPort::MockHttpPort(QObject *parent)
   : BaseHttpPort(parent)
   , m_data()
@@ -56,5 +53,3 @@ bool MockHttpPort::setProxy(const QString &user, const QString &password,
 
   return true;
 }
-
-} // core

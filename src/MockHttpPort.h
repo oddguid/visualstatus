@@ -4,9 +4,6 @@
 #include <QObject>
 #include "BaseHttpPort.h"
 
-namespace core
-{
-
 /// Mock class for HTTP operations.
 class MockHttpPort : public BaseHttpPort
 {
@@ -70,7 +67,5 @@ public slots:
                         const QString &host,
                         unsigned short port);
 };
-
-} // core
 
 #endif

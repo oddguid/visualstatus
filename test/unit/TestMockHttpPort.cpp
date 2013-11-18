@@ -6,8 +6,6 @@
 #include "../../src/MockHttpPort.h"
 #undef private
 
-using namespace core;
-
 namespace unittest
 {
 
