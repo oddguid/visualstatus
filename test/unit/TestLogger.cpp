@@ -8,8 +8,6 @@
 #include "../../src/Logger.h"
 #undef private
 
-using namespace script;
-
 namespace unittest
 {
 

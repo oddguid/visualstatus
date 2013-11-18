@@ -1,8 +1,5 @@
 #include "Logger.h"
 
-namespace script
-{
-
 Logger::Logger(QObject *parent)
   : QObject(parent)
   , m_logLevel(LogLevel::Info)
@@ -62,5 +59,3 @@ void Logger::logDebug(const QString &text)
     emit appendLog(LogLevel::Debug, text);
   }
 }
-
-} // script

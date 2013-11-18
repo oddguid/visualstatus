@@ -5,9 +5,6 @@
 #include <QString>
 #include "LogLevel.h"
 
-namespace script
-{
-
 /// Log class for use in scripting. The script engine will make this a global
 /// object in the scripting environment.
 class Logger : public QObject
@@ -76,7 +73,5 @@ public slots:
   /// \param[in] text Text to log
   void logDebug(const QString &text);
 };
-
-} // script
 
 #endif
