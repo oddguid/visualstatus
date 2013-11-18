@@ -4,9 +4,6 @@
 #include <QObject>
 #include <qscriptengine>
 
-namespace script
-{
-
 /// Script class for RGB color.
 class Color : public QObject
 {
@@ -93,15 +90,7 @@ public:
   void fromScriptValue(const QScriptValue &object);
 };
 
-#ifdef WIN32
 Q_DECLARE_METATYPE(Color);
-#endif
-
-} // script
-
-#ifndef WIN32
-Q_DECLARE_METATYPE(script::Color);
-#endif
 
 /// Custom constructor function for a Color object. This function makes it 
 /// possible to create a Color object in a script:
@@ -122,7 +111,7 @@ QScriptValue colorConstructor(QScriptContext *context,
 /// \param[in] engine Script engine that will create the QScriptValue object.
 /// \return QScriptValue object.
 QScriptValue colorToScriptValue(QScriptEngine *engine, 
-                                const script::Color &color);
+                                const Color &color);
 
 /// Custom function to set a Color object from a QScriptValue object. The 
 /// actual conversion is performed by the function Color::fromScriptValue().
@@ -130,6 +119,6 @@ QScriptValue colorToScriptValue(QScriptEngine *engine,
 /// \param[in] object QScriptValue object to set from.
 /// \param[out] color Color object to set.
 void colorFromScriptValue(const QScriptValue &object, 
-                          script::Color &color);
+                          Color &color);
 
 #endif

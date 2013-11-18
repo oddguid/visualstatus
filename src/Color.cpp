@@ -2,9 +2,6 @@
 
 #define MAX_COLOR_VALUE 255
 
-namespace script
-{
-
 Color::Color(QObject *parent)
   : QObject(parent)
   , m_r(0)
@@ -153,8 +150,6 @@ void Color::fromScriptValue(const QScriptValue &object)
   }
 }
 
-} // script
-
 QScriptValue colorConstructor(QScriptContext *context,
   QScriptEngine *engine)
 {
@@ -162,14 +157,14 @@ QScriptValue colorConstructor(QScriptContext *context,
   QObject *parent = context->argument(0).toQObject();
 
   // create new Color object
-  QObject *object = new script::Color(parent);
+  QObject *object = new Color(parent);
 
   // pass object to script
   return engine->newQObject(object, QScriptEngine::ScriptOwnership);
 }
 
 QScriptValue colorToScriptValue(QScriptEngine *engine, 
-  const script::Color &color)
+  const Color &color)
 {
   // create and set new object
   QScriptValue object = color.toScriptValue(engine);
@@ -178,7 +173,7 @@ QScriptValue colorToScriptValue(QScriptEngine *engine,
 }
 
 void colorFromScriptValue(const QScriptValue &object, 
-  script::Color &color)
+  Color &color)
 {
   // set from object
   color.fromScriptValue(object);

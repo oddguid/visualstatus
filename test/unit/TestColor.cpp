@@ -1,8 +1,6 @@
 #include "TestColor.h"
 #include "../../src/Color.h"
 
-using namespace script;
-
 namespace unittest
 {
 
