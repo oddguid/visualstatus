@@ -7,14 +7,12 @@
 #include "../../src/JenkinsManager.h"
 #undef protected
 
-using namespace script;
-
 namespace unittest
 {
 
 void TestJenkinsManager::defaultConstructor()
 {
-  core::MockHttpPort *port = new core::MockHttpPort;
+  MockHttpPort *port = new MockHttpPort;
   JenkinsManager manager(port);
 
   QVERIFY(manager.jobNames().size() == 0);
@@ -22,7 +20,7 @@ void TestJenkinsManager::defaultConstructor()
 
 void TestJenkinsManager::makeJsonUrl()
 {
-  core::MockHttpPort *port = new core::MockHttpPort;
+  MockHttpPort *port = new MockHttpPort;
   JenkinsManager manager(port);
   QString expectedUrl = "http://example.com/api/json";
   QString inputUrl = "http://example.com";
@@ -43,7 +41,7 @@ void TestJenkinsManager::makeJsonUrl()
 
 void TestJenkinsManager::parseJsonDataEmpty()
 {
-  core::MockHttpPort *port = new core::MockHttpPort;
+  MockHttpPort *port = new MockHttpPort;
   JenkinsManager manager(port);
   QByteArray data;
 
@@ -55,7 +53,7 @@ void TestJenkinsManager::parseJsonDataEmpty()
 
 void TestJenkinsManager::parseJsonDataError()
 {
-  core::MockHttpPort *port = new core::MockHttpPort;
+  MockHttpPort *port = new MockHttpPort;
   JenkinsManager manager(port);
 
   // error data: ] is missing in first line
@@ -86,7 +84,7 @@ void TestJenkinsManager::parseJsonDataError()
 
 void TestJenkinsManager::parseJsonData()
 {
-  core::MockHttpPort *port = new core::MockHttpPort;
+  MockHttpPort *port = new MockHttpPort;
   JenkinsManager manager(port);
 
   QByteArray data =
@@ -122,7 +120,7 @@ void TestJenkinsManager::parseJsonData()
 
 void TestJenkinsManager::parseJsonDataDouble()
 {
-  core::MockHttpPort *port = new core::MockHttpPort;
+  MockHttpPort *port = new MockHttpPort;
   JenkinsManager manager(port);
 
   QByteArray data =
@@ -158,7 +156,7 @@ void TestJenkinsManager::parseJsonDataDouble()
 
 void TestJenkinsManager::parseJsonDataTwice()
 {
-  core::MockHttpPort *port = new core::MockHttpPort;
+  MockHttpPort *port = new MockHttpPort;
   JenkinsManager manager(port);
 
   QByteArray data =

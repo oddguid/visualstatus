@@ -7,16 +7,13 @@
 #include "JenkinsJob.h"
 #include "BaseHttpPort.h"
 
-namespace script
-{
-
 /// Class for retrieving the job status from a Jenkins/Hudson build server.
 class JenkinsManager : public BaseJenkinsManager
 {
   Q_OBJECT
 
 private:
-  core::BaseHttpPort *m_httpPort;
+  BaseHttpPort *m_httpPort;
 
 public:
   /// Constructor.
@@ -24,7 +21,7 @@ public:
   /// \param[in] httpPort HTTP port to use. This object will be made the
   /// parent of the HTTP port.
   /// \param[in] parent Parent of this object.
-  JenkinsManager(core::BaseHttpPort *httpPort,
+  JenkinsManager(BaseHttpPort *httpPort,
                  QObject *parent = 0);
   
   /// Destructor.
@@ -49,8 +46,6 @@ public slots:
   /// \return True if successful, false if error occurred.
   virtual bool getStatus(const QString &url);
 };
-
-} // script
 
 /// Custom constructor function for a JenkinsManager object. This function 
 /// makes it possible to create a JenkinsManager object in a script:

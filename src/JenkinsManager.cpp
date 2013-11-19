@@ -3,10 +3,7 @@
 #include <qjson/qobjecthelper.h>
 #include "HttpPort.h"
 
-namespace script
-{
-
-JenkinsManager::JenkinsManager(core::BaseHttpPort *httpPort, QObject *parent)
+JenkinsManager::JenkinsManager(BaseHttpPort *httpPort, QObject *parent)
   : BaseJenkinsManager(parent)
   , m_httpPort(httpPort)
 {
@@ -140,8 +137,6 @@ bool JenkinsManager::getStatus(const QString &url)
   return true;
 }
 
-} // script
-
 QScriptValue jenkinsManagerConstructor(QScriptContext *context,
   QScriptEngine *engine)
 {
@@ -149,8 +144,8 @@ QScriptValue jenkinsManagerConstructor(QScriptContext *context,
   QObject *parent = context->argument(0).toQObject();
 
   // create new JenkinsManager object
-  core::HttpPort *port = new core::HttpPort;
-  QObject *object = new script::JenkinsManager(port, parent);
+  HttpPort *port = new HttpPort;
+  QObject *object = new JenkinsManager(port, parent);
 
   // pass object to script
   return engine->newQObject(object, QScriptEngine::ScriptOwnership);
