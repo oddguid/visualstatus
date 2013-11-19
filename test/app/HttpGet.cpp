@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  core::HttpPort port;
+  HttpPort port;
 
   // get data
   if (!port.get(QString(argv[1])))

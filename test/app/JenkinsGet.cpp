@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  core::HttpPort *port = new core::HttpPort;
-  script::JenkinsManager manager(port);
+  HttpPort *port = new HttpPort;
+  JenkinsManager manager(port);
 
   // get status from Jenkins server
   if (!manager.getStatus(QString(argv[1])))
