@@ -25,7 +25,7 @@ bool MockJenkinsManager::getStatus(const QString &fileName)
   if (!statusFile.open(QIODevice::ReadOnly | QIODevice::Text))
   {
     // cannot open file
-    m_error = QString("Cannot open file %1").arg(fileName);
+    m_error = QString(tr("Cannot open file %1")).arg(fileName);
 
     return false;
   }

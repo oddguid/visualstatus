@@ -94,7 +94,7 @@ bool JenkinsManager::getStatus(const QString &url)
 
   if (m_httpPort == NULL)
   {
-    m_error = QString("No HTTP port set");
+    m_error = tr("No HTTP port set");
 
     return false;
   }
@@ -116,7 +116,7 @@ bool JenkinsManager::getStatus(const QString &url)
     if (!parseOk)
     {
       // parsing failed
-      m_error = QString("Cannot parse JSON data");
+      m_error = tr("Cannot parse JSON data");
 
       return false;
     }
