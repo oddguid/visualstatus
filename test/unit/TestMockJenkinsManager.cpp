@@ -6,8 +6,6 @@
 #include "../../src/MockJenkinsManager.h"
 #undef protected
 
-using namespace script;
-
 namespace unittest
 {
 

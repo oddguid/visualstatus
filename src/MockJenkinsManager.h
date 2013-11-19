@@ -6,9 +6,6 @@
 #include "BaseJenkinsManager.h"
 #include "JenkinsJob.h"
 
-namespace script
-{
-
 /// Mock class for retrieving the job status from a Jenkins/Hudson build
 /// server.
 ///
@@ -52,8 +49,6 @@ public slots:
   /// \return True if successful, false if error occurred.
   virtual bool getStatus(const QString &fileName);
 };
-
-} // script
 
 /// Custom constructor function for a MockJenkinsManager object. This function
 /// makes it possible to create a MockJenkinsManager object in a script:

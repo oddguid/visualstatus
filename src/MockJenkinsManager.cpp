@@ -2,9 +2,6 @@
 #include <QStringList>
 #include <QFile>
 
-namespace script
-{
-
 MockJenkinsManager::MockJenkinsManager(QObject *parent)
   : BaseJenkinsManager(parent)
 {
@@ -78,8 +75,6 @@ void MockJenkinsManager::parseJobBuffer(QIODevice *jobBuffer)
   }
 }
 
-} // script
-
 QScriptValue mockJenkinsManagerConstructor(QScriptContext *context,
   QScriptEngine *engine)
 {
@@ -87,7 +82,7 @@ QScriptValue mockJenkinsManagerConstructor(QScriptContext *context,
   QObject *parent = context->argument(0).toQObject();
 
   // create new MockJenkinsManager object
-  QObject *object = new script::MockJenkinsManager(parent);
+  QObject *object = new MockJenkinsManager(parent);
 
   // pass object to script
   return engine->newQObject(object, QScriptEngine::ScriptOwnership);
