@@ -1,8 +1,5 @@
 #include "BaseJenkinsManager.h"
 
-namespace script
-{
-
 BaseJenkinsManager::BaseJenkinsManager(QObject *parent)
   : QObject(parent)
   , m_jobStatus()
@@ -83,5 +80,3 @@ QString BaseJenkinsManager::error() const
 {
   return m_error;
 }
-
-} // script

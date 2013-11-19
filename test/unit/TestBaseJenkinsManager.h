@@ -46,7 +46,7 @@ private slots:
 
 // Dummy class for testing of BaseJenkinsManager, implements function
 // getStatus(const QString &url).
-class DummyJenkinsManager : public script::BaseJenkinsManager
+class DummyJenkinsManager : public BaseJenkinsManager
 {
   Q_OBJECT
 
@@ -60,7 +60,7 @@ public:
   {
   }
 
-  QMap<QString, script::JenkinsJob *> &jobMap()
+  QMap<QString, JenkinsJob *> &jobMap()
   {
     return m_jobStatus;
   }

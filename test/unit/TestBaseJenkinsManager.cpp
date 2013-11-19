@@ -1,8 +1,6 @@
 #include "TestBaseJenkinsManager.h"
 #include "../../src/JenkinsJob.h"
 
-using namespace script;
-
 namespace unittest
 {
 

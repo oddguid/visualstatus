@@ -8,9 +8,6 @@
 #include <QMap>
 #include "JenkinsJob.h"
 
-namespace script
-{
-
 class JenkinsJob;
     
 /// Base class for classes retrieving the job status from a Jenkins/Hudson
@@ -86,7 +83,5 @@ public slots:
   /// \return Error message.
   QString error() const;
 };
-
-} // script
 
 #endif
