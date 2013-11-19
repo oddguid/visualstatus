@@ -6,10 +6,10 @@
 #include <QString>
 #include <QStringList>
 #include <QMap>
-#include "JenkinsJob.h"
 
 class JenkinsJob;
-    
+class BaseHttpPort;
+
 /// Base class for classes retrieving the job status from a Jenkins/Hudson
 /// build server.
 class BaseJenkinsManager : public QObject
@@ -19,6 +19,7 @@ class BaseJenkinsManager : public QObject
 protected:
   QMap<QString, JenkinsJob *> m_jobStatus;
   QString m_error;
+  BaseHttpPort *m_httpPort;
 
 public:
   /// Constructor.
@@ -77,6 +78,12 @@ public slots:
   /// \param[in] jobName Name of job.
   /// \return Job object, NULL if job not found.
   virtual QObject *job(const QString &jobName);
+
+  /// Sets the HTTP port to use. This object will not become the parent of the
+  /// HTTP port and will therefore not clean it up.
+  ///
+  /// \param[in] httpPort HTTP port to use.
+  void setHttpPort(BaseHttpPort *port);
 
   /// Returns the last saved error message.
   ///

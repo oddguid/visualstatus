@@ -3,14 +3,9 @@
 #include <qjson/qobjecthelper.h>
 #include "HttpPort.h"
 
-JenkinsManager::JenkinsManager(BaseHttpPort *httpPort, QObject *parent)
+JenkinsManager::JenkinsManager(QObject *parent)
   : BaseJenkinsManager(parent)
-  , m_httpPort(httpPort)
 {
-  if (m_httpPort != NULL)
-  {
-    m_httpPort->setParent(this);
-  }
 }
 
 JenkinsManager::~JenkinsManager()
@@ -144,8 +139,7 @@ QScriptValue jenkinsManagerConstructor(QScriptContext *context,
   QObject *parent = context->argument(0).toQObject();
 
   // create new JenkinsManager object
-  HttpPort *port = new HttpPort;
-  QObject *object = new JenkinsManager(port, parent);
+  QObject *object = new JenkinsManager(parent);
 
   // pass object to script
   return engine->newQObject(object, QScriptEngine::ScriptOwnership);

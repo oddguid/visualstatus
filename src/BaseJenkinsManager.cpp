@@ -1,9 +1,12 @@
 #include "BaseJenkinsManager.h"
+#include "JenkinsJob.h"
+#include "BaseHttpPort.h"
 
 BaseJenkinsManager::BaseJenkinsManager(QObject *parent)
   : QObject(parent)
   , m_jobStatus()
   , m_error()
+  , m_httpPort(NULL)
 {
 }
 
@@ -74,6 +77,11 @@ QObject *BaseJenkinsManager::job(const QString &jobName)
   }
 
   return NULL;
+}
+
+void BaseJenkinsManager::setHttpPort(BaseHttpPort *port)
+{
+  m_httpPort = port;
 }
 
 QString BaseJenkinsManager::error() const

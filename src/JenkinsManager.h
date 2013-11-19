@@ -12,17 +12,11 @@ class JenkinsManager : public BaseJenkinsManager
 {
   Q_OBJECT
 
-private:
-  BaseHttpPort *m_httpPort;
-
 public:
   /// Constructor.
   ///
-  /// \param[in] httpPort HTTP port to use. This object will be made the
-  /// parent of the HTTP port.
   /// \param[in] parent Parent of this object.
-  JenkinsManager(BaseHttpPort *httpPort,
-                 QObject *parent = 0);
+  JenkinsManager(QObject *parent = 0);
   
   /// Destructor.
   virtual ~JenkinsManager();
