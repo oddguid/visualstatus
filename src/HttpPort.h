@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QUrl>
+#include <qscriptengine>
 #include <sstream>
 #include <curlpp/cURLpp.hpp>
 #include <curlpp/Easy.hpp>
@@ -67,5 +68,19 @@ public slots:
                         const QString &host,
                         unsigned short port);
 };
+
+/// Custom constructor function for an HttpPort object. This function
+/// makes it possible to create an HttpPort object in a script:
+///
+/// var port = new HttpPort;
+///
+/// \param[in] context Script context for the HttPort object. The
+/// first argument of the script context is the parent of the new
+/// HttpPort object.
+/// \param[in] engine Script engine which will take ownership of the new
+/// HttpPort object.
+/// \return The new HttpPort object wrapped in a script object.
+QScriptValue httpPortConstructor(QScriptContext *context,
+                                 QScriptEngine *engine);
 
 #endif

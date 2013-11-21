@@ -158,3 +158,16 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
 
   return true;
 }
+
+QScriptValue httpPortConstructor(QScriptContext *context,
+  QScriptEngine *engine)
+{
+  // parent of new object is in context
+  QObject *parent = context->argument(0).toQObject();
+
+  // create new HttpPort object
+  QObject *object = new HttpPort(parent);
+
+  // pass object to script
+  return engine->newQObject(object, QScriptEngine::ScriptOwnership);
+}
