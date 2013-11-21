@@ -74,7 +74,7 @@ public slots:
 ///
 /// var port = new MockHttpPort;
 ///
-/// \param[in] context Script context for the MockHttPort object. The
+/// \param[in] context Script context for the MockHttpPort object. The
 /// first argument of the script context is the parent of the new
 /// MockHttpPort object.
 /// \param[in] engine Script engine which will take ownership of the new

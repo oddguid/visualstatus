@@ -74,7 +74,7 @@ public slots:
 ///
 /// var port = new HttpPort;
 ///
-/// \param[in] context Script context for the HttPort object. The
+/// \param[in] context Script context for the HttpPort object. The
 /// first argument of the script context is the parent of the new
 /// HttpPort object.
 /// \param[in] engine Script engine which will take ownership of the new
