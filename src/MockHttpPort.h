@@ -2,6 +2,7 @@
 #define VST_MOCKHTTPPORT_H
 
 #include <QObject>
+#include <qscriptengine>
 #include "BaseHttpPort.h"
 
 /// Mock class for HTTP operations.
@@ -67,5 +68,19 @@ public slots:
                         const QString &host,
                         unsigned short port);
 };
+
+/// Custom constructor function for a MockHttpPort object. This function
+/// makes it possible to create a MockHttpPort object in a script:
+///
+/// var port = new MockHttpPort;
+///
+/// \param[in] context Script context for the MockHttPort object. The
+/// first argument of the script context is the parent of the new
+/// MockHttpPort object.
+/// \param[in] engine Script engine which will take ownership of the new
+/// MockHttpPort object.
+/// \return The new MockHttpPort object wrapped in a script object.
+QScriptValue mockHttpPortConstructor(QScriptContext *context,
+                                     QScriptEngine *engine);
 
 #endif

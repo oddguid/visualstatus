@@ -53,3 +53,16 @@ bool MockHttpPort::setProxy(const QString &user, const QString &password,
 
   return true;
 }
+
+QScriptValue mockHttpPortConstructor(QScriptContext *context,
+  QScriptEngine *engine)
+{
+  // parent of new object is in context
+  QObject *parent = context->argument(0).toQObject();
+
+  // create new MockHttpPort object
+  QObject *object = new MockHttpPort(parent);
+
+  // pass object to script
+  return engine->newQObject(object, QScriptEngine::ScriptOwnership);
+}
