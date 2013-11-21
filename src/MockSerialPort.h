@@ -2,6 +2,7 @@
 #define VST_MOCKSERIALPORT_H
 
 #include <QObject>
+#include <qscriptengine>
 #include "BaseSerialPort.h"
 
 /// Mock class for serial port operations.
@@ -60,5 +61,19 @@ public slots:
   /// \return True if successful, false on error.
   virtual bool write(const QString &data);
 };
+
+/// Custom constructor function for a MockSerialPort object. This function
+/// makes it possible to create a MockSerialPort object in a script:
+///
+/// var port = new MockSerialPort;
+///
+/// \param[in] context Script context for the MockSerialPort object. The
+/// first argument of the script context is the parent of the new
+/// MockSerialPort object.
+/// \param[in] engine Script engine which will take ownership of the new
+/// MockSerialPort object.
+/// \return The new MockSerialPort object wrapped in a script object.
+QScriptValue mockSerialPortConstructor(QScriptContext *context,
+                                       QScriptEngine *engine);
 
 #endif

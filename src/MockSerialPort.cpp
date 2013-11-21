@@ -66,3 +66,16 @@ bool MockSerialPort::write(const QString &data)
 
   return false;
 }
+
+QScriptValue mockSerialPortConstructor(QScriptContext *context,
+  QScriptEngine *engine)
+{
+  // parent of new object is in context
+  QObject *parent = context->argument(0).toQObject();
+
+  // create new MockSerialPort object
+  QObject *object = new MockSerialPort(parent);
+
+  // pass object to script
+  return engine->newQObject(object, QScriptEngine::ScriptOwnership);
+}
