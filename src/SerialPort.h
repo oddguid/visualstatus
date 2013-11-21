@@ -2,6 +2,7 @@
 #define VST_SERIALPORT_H
 
 #include <QObject>
+#include <qscriptengine>
 #include "BaseSerialPort.h"
 #include "serial/TimeoutSerial.h"
 
@@ -75,5 +76,19 @@ protected:
   /// \return Received data from the serial port.
   QString readStringUntil(const QString& delimiter = QString("\n"));
 };
+
+/// Custom constructor function for a SerialPort object. This function
+/// makes it possible to create a SerialPort object in a script:
+///
+/// var port = new SerialPort;
+///
+/// \param[in] context Script context for the SerialPort object. The
+/// first argument of the script context is the parent of the new
+/// SerialPort object.
+/// \param[in] engine Script engine which will take ownership of the new
+/// SerialPort object.
+/// \return The new SerialPort object wrapped in a script object.
+QScriptValue serialPortConstructor(QScriptContext *context,
+                                   QScriptEngine *engine);
 
 #endif

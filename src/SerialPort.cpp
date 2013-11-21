@@ -162,3 +162,16 @@ QString SerialPort::readStringUntil(const QString &delimiter)
 
   return QString::fromStdString(value);
 }
+
+QScriptValue serialPortConstructor(QScriptContext *context,
+  QScriptEngine *engine)
+{
+  // parent of new object is in context
+  QObject *parent = context->argument(0).toQObject();
+
+  // create new SerialPort object
+  QObject *object = new SerialPort(parent);
+
+  // pass object to script
+  return engine->newQObject(object, QScriptEngine::ScriptOwnership);
+}
