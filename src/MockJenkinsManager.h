@@ -35,19 +35,18 @@ public:
   /// Destructor.
   virtual ~MockJenkinsManager();
 
+  /// Retrieves the status of the jobs from a file.
+  ///
+  /// \param[in] fileName Name of the job status file.
+  /// \return True if successful, false if error occurred.
+  Q_INVOKABLE virtual bool getStatus(const QString &fileName);
+
 protected:
   /// Parses the job status data in the given buffer. Every line is split on
   /// on the separator (|) into three parts and stored in a JenkinsJob.
   ///
   /// \param[in] jobBuffer Buffer with job status data.
   void parseJobBuffer(QIODevice *jobBuffer);
-
-public slots:
-  /// Retrieves the status of the jobs from a file.
-  ///
-  /// \param[in] fileName Name of the job status file.
-  /// \return True if successful, false if error occurred.
-  virtual bool getStatus(const QString &fileName);
 };
 
 /// Custom constructor function for a MockJenkinsManager object. This function
