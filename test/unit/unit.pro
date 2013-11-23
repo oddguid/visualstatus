@@ -12,7 +12,9 @@ SUBDIRS += TestColor \
            TestLogLevel \
            TestLogger \
            TestMockSerialPort \
-           TestMockHttpPort
+           TestMockHttpPort \
+           TestBaseHttpPort \
+           TestBaseSerialPort
 
 TestColor.file = TestColor.pro
 TestJenkinsJob.file = TestJenkinsJob.pro
@@ -23,4 +25,6 @@ TestLogLevel.file = TestLogLevel.pro
 TestLogger.file = TestLogger.pro
 TestMockSerialPort.file = TestMockSerialPort.pro
 TestMockHttpPort.file = TestMockHttpPort.pro
+TestBaseHttpPort.file = TestBaseHttpPort.pro
+TestBaseSerialPort.file = TestBaseSerialPort.pro
 
