@@ -18,8 +18,10 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  HttpPort *port = new HttpPort;
-  JenkinsManager manager(port);
+  HttpPort port;
+  JenkinsManager manager;
+
+  manager.setHttpPort(&port);
 
   // get status from Jenkins server
   if (!manager.getStatus(QString(argv[1])))
