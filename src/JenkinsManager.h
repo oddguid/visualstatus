@@ -16,10 +16,16 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  JenkinsManager(QObject *parent = 0);
+  explicit JenkinsManager(QObject *parent = 0);
   
   /// Destructor.
   virtual ~JenkinsManager();
+
+  /// Retrieves the status of the jobs from the build server at the given URL.
+  ///
+  /// \param[in] url URL of build server (main status page).
+  /// \return True if successful, false if error occurred.
+  Q_INVOKABLE virtual bool getStatus(const QString &url);
 
 protected:
   /// Checks if the given URL ends with /api/json, if it does not the URL
@@ -32,13 +38,6 @@ protected:
   /// \param[in] data Byte array with JSON data.
   /// \return True on success, false on error.
   bool parseJsonData(const QByteArray &data);
-
-public slots:
-  /// Retrieves the status of the jobs from the build server at the given URL.
-  ///
-  /// \param[in] url URL of build server (main status page).
-  /// \return True if successful, false if error occurred.
-  virtual bool getStatus(const QString &url);
 };
 
 /// Custom constructor function for a JenkinsManager object. This function 
