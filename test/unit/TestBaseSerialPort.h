@@ -13,7 +13,7 @@ namespace unittest
 {
 
 /// Unit tests for BaseSerialPort class.
-class TestBaseSerialPort: public QObject
+class TestBaseSerialPort : public QObject
 {
   Q_OBJECT
 

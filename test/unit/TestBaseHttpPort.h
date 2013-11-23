@@ -13,7 +13,7 @@ namespace unittest
 {
 
 /// Unit tests for BaseHttpPort class.
-class TestBaseHttpPort: public QObject
+class TestBaseHttpPort : public QObject
 {
   Q_OBJECT
 
