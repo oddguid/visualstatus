@@ -22,11 +22,6 @@ public:
   /// Destructor.
   virtual ~MockSerialPort();
 
-signals:
-  /// Signal that emits the data from the write function.
-  void writtenData(QString data);
-
-public slots:
   /// Opens the serial port.
   ///
   /// \param[in] deviceName Name of the serial port.
@@ -34,32 +29,36 @@ public slots:
   /// \param[in] timeoutSecs Timeout for serial port in seconds, range is
   /// 0 <= timeoutSecs <= 65535.
   /// \return True if successful, false on error.
-  virtual bool open(const QString &deviceName,
-                    unsigned int baudrate,
-                    unsigned short timeoutSecs);
+  Q_INVOKABLE virtual bool open(const QString &deviceName,
+                                unsigned int baudrate,
+                                unsigned short timeoutSecs);
 
   /// Indicates whether serial port is open or not.
   ///
   /// \return True if serial port is open, false otherwise.
-  virtual bool isOpen();
+  Q_INVOKABLE virtual bool isOpen();
 
   /// Closes the serial port.
   ///
   /// \return True if successful, false on error.
-  virtual bool close();
+  Q_INVOKABLE virtual bool close();
 
   /// Sets the timeout of the serial port.
   ///
   /// \param[in] timeoutSecs Timeout for serial port in seconds., range is
   /// 0 <= timeoutSecs <= 65535
   /// \return True is successful, false on error.
-  virtual bool setTimeout(unsigned short timeoutSecs);
+  Q_INVOKABLE virtual bool setTimeout(unsigned short timeoutSecs);
 
   /// Write the string data to the serial port.
   ///
   /// \param[in] data String data to write.
   /// \return True if successful, false on error.
-  virtual bool write(const QString &data);
+  Q_INVOKABLE virtual bool write(const QString &data);
+
+signals:
+  /// Signal that emits the data from the write function.
+  void writtenData(QString data);
 };
 
 /// Custom constructor function for a MockSerialPort object. This function
