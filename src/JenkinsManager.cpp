@@ -57,7 +57,7 @@ bool JenkinsManager::parseJsonData(const QByteArray &data)
   // convert to jobs and add to list
   QList<QVariant> jobList = result["jobs"].toList();
 
-  for (int i=0; i<jobList.size(); ++i)
+  for (int i = 0; i < jobList.size(); ++i)
   {
     QVariantMap jobMap = jobList.at(i).toMap();
 
