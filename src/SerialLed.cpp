@@ -13,7 +13,7 @@ bool SerialLed::setSolid(unsigned char led, const Color &color)
 {
   QChar padChar('0');
 
-  QString colorString = QString("c%1-%2%3%4\n")
+  QString colorString = QString(":c%1-%2%3%4\012")
                         .arg(led, 3, 10, padChar)
                         .arg(color.r(), 3, 10, padChar)
                         .arg(color.g(), 3, 10, padChar)
@@ -27,7 +27,7 @@ bool SerialLed::setSawtooth(unsigned char led, const Color &startColor,
 {
   QChar padChar('0');
 
-  QString colorString = QString("s%1-%2%3%4-%5%6%7-%8-%9\n")
+  QString colorString = QString(":s%1-%2%3%4-%5%6%7-%8-%9\012")
                         .arg(led, 3, 10, padChar)
                         .arg(startColor.r(), 3, 10, padChar)
                         .arg(startColor.g(), 3, 10, padChar)

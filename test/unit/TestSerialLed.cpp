@@ -16,7 +16,7 @@ void TestSerialLed::setSolid()
   unsigned char ledR = 0;
   unsigned char ledG = 128;
   unsigned char ledB = 255;
-  QString expectedData("c255-000128255\n");
+  QString expectedData(":c255-000128255\012");
 
   SerialLed led;
   DummySerialPort port;
@@ -46,7 +46,7 @@ void TestSerialLed::setSawtooth()
   unsigned short riseTime = 500;
   unsigned short fallTime = 1234;
 
-  QString expectedData("s255-000128255-128255000-00500-01234\n");
+  QString expectedData(":s255-000128255-128255000-00500-01234\012");
 
   SerialLed led;
   DummySerialPort port;
