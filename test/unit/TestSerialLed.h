@@ -20,8 +20,17 @@ private slots:
   /// Tests the setSolid function.
   void setSolid();
 
-  /// Tests the setSawtooth function.
-  void setSawtooth();
+  /// Tests the setToggled function.
+  void setToggled();
+
+  /// Tests the setToggleDelay function.
+  void setToggleDelay();
+
+  /// Tests the clear function.
+  void clear();
+
+  /// Tests the clearAll function.
+  void clearAll();
 };
 
 // Dummy class for testing of SerialLed, implements the pure virtual

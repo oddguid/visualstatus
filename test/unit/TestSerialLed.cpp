@@ -16,16 +16,13 @@ void TestSerialLed::setSolid()
   unsigned char ledR = 0;
   unsigned char ledG = 128;
   unsigned char ledB = 255;
-  QString expectedData(":c255-000128255\012");
+  QString expectedData("w255-000128255-000128255\012");
 
   SerialLed led;
   DummySerialPort port;
   led.setSerialPort(&port);
 
-  Color ledColor;
-  ledColor.r(ledR);
-  ledColor.g(ledG);
-  ledColor.b(ledB);
+  Color ledColor(ledR, ledG, ledB);
 
   // set solid color
   bool ok = led.setSolid(ledNum, ledColor);
@@ -34,7 +31,7 @@ void TestSerialLed::setSolid()
   QCOMPARE(port.data(), expectedData);
 }
 
-void TestSerialLed::setSawtooth()
+void TestSerialLed::setToggled()
 {
   unsigned char ledNum = 255;
   unsigned char ledR1 = 0;
@@ -43,27 +40,64 @@ void TestSerialLed::setSawtooth()
   unsigned char ledR2 = 128;
   unsigned char ledG2 = 255;
   unsigned char ledB2 = 0;
-  unsigned short riseTime = 500;
-  unsigned short fallTime = 1234;
-
-  QString expectedData(":s255-000128255-128255000-00500-01234\012");
+  QString expectedData("w255-000128255-128255000\012");
 
   SerialLed led;
   DummySerialPort port;
   led.setSerialPort(&port);
 
-  Color ledColor1;
-  ledColor1.r(ledR1);
-  ledColor1.g(ledG1);
-  ledColor1.b(ledB1);
+  Color ledColor1(ledR1, ledG1, ledB1);
+  Color ledColor2(ledR2, ledG2, ledB2);
 
-  Color ledColor2;
-  ledColor2.r(ledR2);
-  ledColor2.g(ledG2);
-  ledColor2.b(ledB2);
+  // set toggled color
+  bool ok = led.setToggled(ledNum, ledColor1, ledColor2);
 
-  // set sawtooth color
-  bool ok = led.setSawtooth(ledNum, ledColor1, ledColor2, riseTime, fallTime);
+  QCOMPARE(ok, true);
+  QCOMPARE(port.data(), expectedData);
+}
+
+void TestSerialLed::setToggleDelay()
+{
+  unsigned short delay = 250;
+  QString expectedData("d00250\012");
+
+  SerialLed led;
+  DummySerialPort port;
+  led.setSerialPort(&port);
+
+  // set delay
+  bool ok = led.setToggleDelay(delay);
+
+  QCOMPARE(ok, true);
+  QCOMPARE(port.data(), expectedData);
+}
+
+void TestSerialLed::clear()
+{
+  unsigned char ledNum = 64;
+  QString expectedData("w064-000000000-000000000\012");
+
+  SerialLed led;
+  DummySerialPort port;
+  led.setSerialPort(&port);
+
+  // clear color
+  bool ok = led.clear(ledNum);
+
+  QCOMPARE(ok, true);
+  QCOMPARE(port.data(), expectedData);
+}
+
+void TestSerialLed::clearAll()
+{
+  QString expectedData("c\012");
+
+  SerialLed led;
+  DummySerialPort port;
+  led.setSerialPort(&port);
+
+  // clear all colors
+  bool ok = led.clearAll();
 
   QCOMPARE(ok, true);
   QCOMPARE(port.data(), expectedData);

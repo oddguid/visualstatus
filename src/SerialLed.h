@@ -25,23 +25,39 @@ public:
   /// \param[in] color RGB color for LED.
   /// \return True if successful, false on error.
   Q_INVOKABLE bool setSolid(unsigned char led,
-                           const Color &color);
+                            const Color &color);
 
-  /// Makes the given LED transition between 2 colors.
+  /// Makes the given LED toggle between 2 colors. The toggle speed is
+  /// set with the function setToggleDelay().
   ///
   /// \param[in] led Number of LED to set, range is 0 <= led <= 255.
-  /// \param[in] startColor First RGB color for LED.
-  /// \param[in] endColor Second RGB color for LED.
-  /// \param[in] riseTime Time in milliseconds to transition from the first
-  /// color to the second color. Range is 0 <= riseTime <= 65535 ms.
-  /// \param[in] fallTime Time in milliseconds to transition from the second
-  /// color to the first color. Range is 0 <= fallTime <= 65535 ms.
+  /// \param[in] color1 First RGB color for LED.
+  /// \param[in] color2 Second RGB color for LED.
   /// \return True if successful, false on error.
-  Q_INVOKABLE bool setSawtooth(unsigned char led,
-                               const Color &startColor,
-                               const Color &endColor,
-                               unsigned short riseTime,
-                               unsigned short fallTime);
+  Q_INVOKABLE bool setToggled(unsigned char led,
+                              const Color &color1,
+                              const Color &color2);
+
+  /// Sets the delay in milliseconds between LED toggles. A delay of 500 ms
+  /// will show each color once per second, a delay of 250 ms will show each
+  /// color twice per second. The default value and minimal value are determined
+  /// by the connected hardware.
+  ///
+  /// \param[in] delay Delay between toggles in milliseconds. Range is 0 <=
+  /// delay <= 65535 ms.
+  /// \return True if successful, false on error.
+  Q_INVOKABLE bool setToggleDelay(unsigned short delay);
+
+  /// Clears the color of the given LED.
+  ///
+  /// \param[in] led Number of LED to clear, range is 0 <= led <= 255.
+  /// \return True if successful, false on error.
+  Q_INVOKABLE bool clear(unsigned char led);
+
+  /// Clear the color of all LEDs.
+  ///
+  /// \return True if successful, false on error.
+  Q_INVOKABLE bool clearAll();
 };
 
 /// Custom constructor function for a SerialLed object. This function

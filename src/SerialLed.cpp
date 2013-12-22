@@ -11,34 +11,48 @@ SerialLed::~SerialLed()
 
 bool SerialLed::setSolid(unsigned char led, const Color &color)
 {
+  return setToggled(led, color, color);
+}
+
+bool SerialLed::setToggled(unsigned char led, const Color &color1,
+  const Color &color2)
+{
   QChar padChar('0');
 
-  QString colorString = QString(":c%1-%2%3%4\012")
+  QString colorString = QString("w%1-%2%3%4-%5%6%7\012")
                         .arg(led, 3, 10, padChar)
-                        .arg(color.r(), 3, 10, padChar)
-                        .arg(color.g(), 3, 10, padChar)
-                        .arg(color.b(), 3, 10, padChar);
+                        .arg(color1.r(), 3, 10, padChar)
+                        .arg(color1.g(), 3, 10, padChar)
+                        .arg(color1.b(), 3, 10, padChar)
+                        .arg(color2.r(), 3, 10, padChar)
+                        .arg(color2.g(), 3, 10, padChar)
+                        .arg(color2.b(), 3, 10, padChar);
 
   return write(colorString);
 }
 
-bool SerialLed::setSawtooth(unsigned char led, const Color &startColor,
-  const Color &endColor, unsigned short riseTime, unsigned short fallTime)
+bool SerialLed::setToggleDelay(unsigned short delay)
 {
   QChar padChar('0');
 
-  QString colorString = QString(":s%1-%2%3%4-%5%6%7-%8-%9\012")
-                        .arg(led, 3, 10, padChar)
-                        .arg(startColor.r(), 3, 10, padChar)
-                        .arg(startColor.g(), 3, 10, padChar)
-                        .arg(startColor.b(), 3, 10, padChar)
-                        .arg(endColor.r(), 3, 10, padChar)
-                        .arg(endColor.g(), 3, 10, padChar)
-                        .arg(endColor.b(), 3, 10, padChar)
-                        .arg(riseTime, 5, 10, padChar)
-                        .arg(fallTime, 5, 10, padChar);
+  QString delayString = QString("d%1\012").arg(delay, 5, 10, padChar);
 
-  return write(colorString);
+  return write(delayString);
+}
+
+bool SerialLed::clear(unsigned char led)
+{
+  // clear color by setting it to black
+  Color black(0, 0, 0);
+
+  return setToggled(led, black, black);
+}
+
+bool SerialLed::clearAll()
+{
+  QString clearString("c\012");
+
+  return write(clearString);
 }
 
 QScriptValue serialLedConstructor(QScriptContext *context,
