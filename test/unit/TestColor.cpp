@@ -17,6 +17,19 @@ void TestColor::defaultConstructor()
   QCOMPARE(color.b(), bExp);
 }
 
+void TestColor::rgbConstructor()
+{
+  quint8 rExp = 128;
+  quint8 gExp = 255;
+  quint8 bExp = 0;
+
+  Color color(rExp, gExp, bExp);
+
+  QCOMPARE(color.r(), rExp);
+  QCOMPARE(color.g(), gExp);
+  QCOMPARE(color.b(), bExp);
+}
+
 void TestColor::r()
 {
   quint8 rExp = 128;

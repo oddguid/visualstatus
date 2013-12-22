@@ -10,6 +10,14 @@ Color::Color(QObject *parent)
 {
 }
 
+Color::Color(quint8 r, quint8 g, quint8 b, QObject *parent)
+  : QObject(parent)
+  , m_r(r)
+  , m_g(g)
+  , m_b(b)
+{
+}
+
 Color::~Color()
 {
 }

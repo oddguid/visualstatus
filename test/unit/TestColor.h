@@ -15,6 +15,9 @@ private slots:
   /// Tests the default constructor.
   void defaultConstructor();
 
+  /// Tests the constructor taking an RGB color.
+  void rgbConstructor();
+
   /// Tests the getter and setter functions for the red component of the color.
   void r();
 

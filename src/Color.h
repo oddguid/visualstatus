@@ -24,6 +24,14 @@ public:
   /// \param[in] parent Parent of this object.
   explicit Color(QObject *parent = 0);
   
+  /// Constructor, takes RGB color.
+  ///
+  /// \param[in] r Red component of color, range 0 <= r <= 255.
+  /// \param[in] g Green component of color, range 0 <= g <= 255.
+  /// \param[in] b Blue component of color, range 0 <= b <= 255.
+  /// \param[in] parent Parent of this object.
+  Color(quint8 r, quint8 g, quint8 b, QObject *parent = 0);
+
   /// Destructor.
   virtual ~Color();
 
@@ -44,7 +52,7 @@ public:
 
   /// Sets the red component of the color.
   ///
-  /// \param[in] r Red component.
+  /// \param[in] r Red component, range 0 <= r <= 255.
   void r(quint8 r);
 
   /// Returns the green component of the color.
@@ -54,7 +62,7 @@ public:
 
   /// Sets the green component of the color.
   ///
-  /// \param[in] g Green component.
+  /// \param[in] g Green component, range 0 <= g <= 255.
   void g(quint8 g);
 
   /// Returns the blue component of the color.
@@ -64,7 +72,7 @@ public:
 
   /// Sets the blue component of the color.
   ///
-  /// \param[in] b Blue component.
+  /// \param[in] b Blue component, range 0 <= b <= 255.
   void b(quint8 b);
 
   /// Converts the RGB color object to a QScriptValue object. The QScriptValue
