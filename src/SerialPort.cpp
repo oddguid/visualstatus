@@ -1,7 +1,7 @@
 #include "SerialPort.h"
 #include <QDateTime>
 
-const std::string SerialPort::m_delimiter = "\n";
+const std::string SerialPort::m_delimiter = "\012";
 const std::string SerialPort::m_expected = "!";
 
 SerialPort::SerialPort(QObject *parent)
@@ -33,7 +33,7 @@ bool SerialPort::open(const QString &deviceName, unsigned int baudrate,
 
     if (answer.length() > 0)
     {
-      if (answer != m_expected)
+      if (answer.compare(0, m_expected.length(), m_expected) != 0)
       {
         // unexpected answer
         m_error = QString(tr("Received unexpected answer: %1"))
@@ -49,6 +49,13 @@ bool SerialPort::open(const QString &deviceName, unsigned int baudrate,
 
       return false;
     }
+  }
+  catch (timeout_exception &exc)
+  {
+    m_error = QString(tr("Time-out while opening serial port. %1"))
+              .arg(QString(exc.what()));
+
+    return false;
   }
   catch (boost::system::system_error &exc)
   {
@@ -75,6 +82,13 @@ bool SerialPort::close()
   {
     m_serialPort.close();
   }
+  catch (timeout_exception &exc)
+  {
+    m_error = QString(tr("Time-out while closing serial port. %1"))
+              .arg(QString(exc.what()));
+
+    return false;
+  }
   catch (boost::system::system_error &exc)
   {
     m_error = QString(tr("Cannot close serial port. %1 (%2)"))
@@ -95,6 +109,13 @@ bool SerialPort::setTimeout(unsigned short timeoutSecs)
   {
     m_serialPort.setTimeout(boost::posix_time::seconds(timeoutSecs));
   }
+  catch (timeout_exception &exc)
+  {
+    m_error = QString(tr("Time-out while setting serial port time-out. %1"))
+              .arg(QString(exc.what()));
+
+    return false;
+  }
   catch (boost::system::system_error &exc)
   {
     m_error = QString(tr("Cannot set serial port timeout. %1 (%2)"))
@@ -109,16 +130,18 @@ bool SerialPort::setTimeout(unsigned short timeoutSecs)
 
 bool SerialPort::write(const QString &data)
 {
-  return writeString(data);
-}
-
-bool SerialPort::writeString(const QString &data)
-{
   m_error.clear();
 
   try
   {
     m_serialPort.writeString(data.toStdString());
+  }
+  catch (timeout_exception &exc)
+  {
+    m_error = QString(tr("Time-out while writing to serial port. %1"))
+              .arg(QString(exc.what()));
+
+    return false;
   }
   catch (boost::system::system_error &exc)
   {
@@ -132,7 +155,7 @@ bool SerialPort::writeString(const QString &data)
   // serial device should report a !
   std::string answer = m_serialPort.readStringUntil(m_delimiter);
 
-  if (answer != m_expected)
+  if (answer.compare(0, m_expected.length(), m_expected) != 0)
   {
     // unexpected answer
     m_error = QString(tr("Received unexpected answer: %1"))
@@ -152,6 +175,11 @@ QString SerialPort::readStringUntil(const QString &delimiter)
   try
   {
     value = m_serialPort.readStringUntil(delimiter.toStdString());
+  }
+  catch (timeout_exception &exc)
+  {
+    m_error = QString(tr("Time-out while reading from serial port. %1"))
+              .arg(QString(exc.what()));
   }
   catch (boost::system::system_error& exc)
   {

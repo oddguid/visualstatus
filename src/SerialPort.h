@@ -61,13 +61,6 @@ public:
   Q_INVOKABLE virtual bool write(const QString &data);
 
 protected:
-  /// Write the string data to the serial port
-  ///
-  /// \param[in] data String data to write.
-  /// \return True if successful (!\n is returned by serial device), false on
-  /// error.
-  bool writeString(const QString &data);
-
   /// Reads from the serial port until the given delimiter is received. Default
   /// delimiter is the line end ('\n').
   ///
