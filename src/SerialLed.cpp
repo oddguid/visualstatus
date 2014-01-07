@@ -55,6 +55,13 @@ bool SerialLed::clearAll()
   return write(clearString);
 }
 
+bool SerialLed::show(bool enable)
+{
+  QString showString = QString("m%1\012").arg(enable ? 1 : 0);
+
+  return write(showString);
+}
+
 QScriptValue serialLedConstructor(QScriptContext *context,
   QScriptEngine *engine)
 {

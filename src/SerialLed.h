@@ -5,7 +5,7 @@
 #include "BaseSerialObject.h"
 #include "Color.h"
 
-/// Class for a LED connected to a serial port.
+/// Class for LEDs connected to a serial port.
 class SerialLed : public BaseSerialObject
 {
   Q_OBJECT
@@ -38,9 +38,9 @@ public:
                               const Color &color1,
                               const Color &color2);
 
-  /// Sets the delay in milliseconds between LED toggles. A delay of 500 ms
+  /// Sets the delay in milliseconds between color toggles. A delay of 500 ms
   /// will show each color once per second, a delay of 250 ms will show each
-  /// color twice per second. The default value and minimal value are determined
+  /// color twice per second. The default value and minimal value are set
   /// by the connected hardware.
   ///
   /// \param[in] delay Delay between toggles in milliseconds. Range is 0 <=
@@ -54,10 +54,17 @@ public:
   /// \return True if successful, false on error.
   Q_INVOKABLE bool clear(unsigned char led);
 
-  /// Clear the color of all LEDs.
+  /// Clears the color of all LEDs.
   ///
   /// \return True if successful, false on error.
   Q_INVOKABLE bool clearAll();
+
+  /// Shows the LEDs. Use true to show the LEDs at the set color, use false
+  /// to turn of the LEDs without changing the set colors.
+  ///
+  /// \param[in] enable True to show LED colors, false to turn off LEDs.
+  /// \return True if successfule, false on error.
+  Q_INVOKABLE bool show(bool enable);
 };
 
 /// Custom constructor function for a SerialLed object. This function
