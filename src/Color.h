@@ -75,6 +75,13 @@ public:
   /// \param[in] b Blue component, range 0 <= b <= 255.
   void b(quint8 b);
 
+  /// Sets the color with the given components.
+  ///
+  /// \param[in] r Red component of color, range 0 <= r <= 255.
+  /// \param[in] g Green component of color, range 0 <= g <= 255.
+  /// \param[in] b Blue component of color, range 0 <= b <= 255.
+  void set(quint8 r, quint8 g, quint8 b);
+
   /// Converts the RGB color object to a QScriptValue object. The QScriptValue
   /// object will have the following properties:
   /// - r
@@ -98,7 +105,7 @@ public:
   void fromScriptValue(const QScriptValue &object);
 };
 
-Q_DECLARE_METATYPE(Color);
+Q_DECLARE_METATYPE(Color)
 
 /// Custom constructor function for a Color object. This function makes it 
 /// possible to create a Color object in a script:

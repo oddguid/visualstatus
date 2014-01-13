@@ -29,6 +29,9 @@ private slots:
   /// color.
   void b();
 
+  /// Tests the set function.
+  void set();
+
   /// Tests the copy constructor.
   void copyConstructor();
 

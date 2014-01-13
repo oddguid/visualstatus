@@ -72,6 +72,20 @@ void TestColor::b()
   QCOMPARE(color.b(), bExp);
 }
 
+void TestColor::set()
+{
+  quint8 rExp = 64;
+  quint8 gExp = 128;
+  quint8 bExp = 255;
+
+  Color color;
+  color.set(rExp, gExp, bExp);
+
+  QCOMPARE(color.r(), rExp);
+  QCOMPARE(color.g(), gExp);
+  QCOMPARE(color.b(), bExp);
+}
+
 void TestColor::copyConstructor()
 {
   quint8 rExp = 56;

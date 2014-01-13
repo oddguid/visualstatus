@@ -72,6 +72,13 @@ void Color::b(quint8 b)
   m_b = b;
 }
 
+void Color::set(quint8 r, quint8 g, quint8 b)
+{
+  m_r = r;
+  m_g = g;
+  m_b = b;
+}
+
 QScriptValue Color::toScriptValue(QScriptEngine *engine) const
 {
   QScriptValue object = engine->newObject();
