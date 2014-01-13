@@ -9,12 +9,12 @@ SerialLed::~SerialLed()
 {
 }
 
-bool SerialLed::setSolid(unsigned char led, const Color &color)
+bool SerialLed::setColor(unsigned char led, const Color &color)
 {
-  return setToggled(led, color, color);
+  return setToggledColor(led, color, color);
 }
 
-bool SerialLed::setToggled(unsigned char led, const Color &color1,
+bool SerialLed::setToggledColor(unsigned char led, const Color &color1,
   const Color &color2)
 {
   QChar padChar('0');
@@ -45,7 +45,7 @@ bool SerialLed::clear(unsigned char led)
   // clear color by setting it to black
   Color black(0, 0, 0);
 
-  return setToggled(led, black, black);
+  return setToggledColor(led, black, black);
 }
 
 bool SerialLed::clearAll()

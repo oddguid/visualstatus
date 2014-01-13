@@ -10,7 +10,7 @@ void TestSerialLed::defaultConstructor()
   QVERIFY(led.error().isEmpty() == true);
 }
 
-void TestSerialLed::setSolid()
+void TestSerialLed::setColor()
 {
   unsigned char ledNum = 255;
   unsigned char ledR = 0;
@@ -25,13 +25,13 @@ void TestSerialLed::setSolid()
   Color ledColor(ledR, ledG, ledB);
 
   // set solid color
-  bool ok = led.setSolid(ledNum, ledColor);
+  bool ok = led.setColor(ledNum, ledColor);
 
   QCOMPARE(ok, true);
   QCOMPARE(port.data(), expectedData);
 }
 
-void TestSerialLed::setToggled()
+void TestSerialLed::setToggledColor()
 {
   unsigned char ledNum = 255;
   unsigned char ledR1 = 0;
@@ -50,7 +50,7 @@ void TestSerialLed::setToggled()
   Color ledColor2(ledR2, ledG2, ledB2);
 
   // set toggled color
-  bool ok = led.setToggled(ledNum, ledColor1, ledColor2);
+  bool ok = led.setToggledColor(ledNum, ledColor1, ledColor2);
 
   QCOMPARE(ok, true);
   QCOMPARE(port.data(), expectedData);
@@ -101,6 +101,28 @@ void TestSerialLed::clearAll()
 
   QCOMPARE(ok, true);
   QCOMPARE(port.data(), expectedData);
+}
+
+void TestSerialLed::show()
+{
+  QString expectedDataOn("m1\012");
+  QString expectedDataOff("m0\012");
+
+  SerialLed led;
+  DummySerialPort port;
+  led.setSerialPort(&port);
+
+  // set on
+  bool ok = led.show(true);
+
+  QCOMPARE(ok, true);
+  QCOMPARE(port.data(), expectedDataOn);
+
+  // set off
+  ok = led.show(false);
+
+  QCOMPARE(ok, true);
+  QCOMPARE(port.data(), expectedDataOff);
 }
 
 } // unittest

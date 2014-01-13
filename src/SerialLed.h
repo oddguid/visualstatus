@@ -24,7 +24,7 @@ public:
   /// \param[in] led Number of LED to set, range is 0 <= led <= 255.
   /// \param[in] color RGB color for LED.
   /// \return True if successful, false on error.
-  Q_INVOKABLE bool setSolid(unsigned char led,
+  Q_INVOKABLE bool setColor(unsigned char led,
                             const Color &color);
 
   /// Makes the given LED toggle between 2 colors. The toggle speed is
@@ -34,9 +34,9 @@ public:
   /// \param[in] color1 First RGB color for LED.
   /// \param[in] color2 Second RGB color for LED.
   /// \return True if successful, false on error.
-  Q_INVOKABLE bool setToggled(unsigned char led,
-                              const Color &color1,
-                              const Color &color2);
+  Q_INVOKABLE bool setToggledColor(unsigned char led,
+                                   const Color &color1,
+                                   const Color &color2);
 
   /// Sets the delay in milliseconds between color toggles. A delay of 500 ms
   /// will show each color once per second, a delay of 250 ms will show each

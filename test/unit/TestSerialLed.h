@@ -17,11 +17,11 @@ private slots:
   /// Tests the default constructor.
   void defaultConstructor();
 
-  /// Tests the setSolid function.
-  void setSolid();
+  /// Tests the setColor function.
+  void setColor();
 
-  /// Tests the setToggled function.
-  void setToggled();
+  /// Tests the setToggledColor function.
+  void setToggledColor();
 
   /// Tests the setToggleDelay function.
   void setToggleDelay();
@@ -31,6 +31,9 @@ private slots:
 
   /// Tests the clearAll function.
   void clearAll();
+
+  /// Test the show function.
+  void show();
 };
 
 // Dummy class for testing of SerialLed, implements the pure virtual
