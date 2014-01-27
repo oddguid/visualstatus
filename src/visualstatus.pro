@@ -39,6 +39,7 @@ HEADERS = serial/TimeoutSerial.h \
           HttpPort.h \
           BaseSerialObject.h \
           SerialLed.h \
+          ScriptEngine.h \
           ScriptRunner.h \
           MainConsole.h
 
@@ -59,6 +60,7 @@ SOURCES = main.cpp \
           HttpPort.cpp \
           BaseSerialObject.cpp \
           SerialLed.cpp \
+          ScriptEngine.cpp \
           ScriptRunner.cpp \
           MainConsole.cpp
 

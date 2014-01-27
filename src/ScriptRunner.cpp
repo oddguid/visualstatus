@@ -22,7 +22,7 @@ ScriptRunner::~ScriptRunner()
 
 void ScriptRunner::createScriptEngine()
 {
-  m_scriptEngine = new QScriptEngine(this);
+  m_scriptEngine = new ScriptEngine(this);
   m_scriptEngine->setProcessEventsInterval(100);
 
   // add script objects
@@ -35,6 +35,9 @@ void ScriptRunner::createScriptEngine()
   addMockJenkinsManager();
   addJenkinsManager();
   addSerialLed();
+
+  // connect script engine signals
+  connect(m_scriptEngine, SIGNAL(exitScript()), this, SLOT(exitScript()));
 }
 
 void ScriptRunner::addLogger()
@@ -167,4 +170,15 @@ void ScriptRunner::runScript(const QString &script, const QString &fileName)
 
     emit appendLog(LogLevel::Error, QString("%1").arg(error.toString()));
   }
+}
+
+void ScriptRunner::exitScript()
+{
+  if (m_scriptEngine->isEvaluating())
+  {
+    // abort evaluation of script
+    m_scriptEngine->abortEvaluation();
+  }
+
+  emit exit();
 }

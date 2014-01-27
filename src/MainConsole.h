@@ -39,6 +39,10 @@ protected:
   /// Creates the ScriptRunner object.
   void createScriptRunner();
 
+signals:
+  /// Signal to indicate that the application should exit.
+  void exit();
+
 public slots:
   /// Writes the given log text to stdout.
   ///

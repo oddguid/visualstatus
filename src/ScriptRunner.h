@@ -2,7 +2,7 @@
 #define VST_SCRIPTRUNNER_H
 
 #include <QObject>
-#include <QScriptEngine>
+#include "ScriptEngine.h"
 #include "LogLevel.h"
 
 /// Class for running status scripts. Uses QtScriptEngine for script
@@ -12,7 +12,7 @@ class ScriptRunner : public QObject
   Q_OBJECT
 
 protected:
-  QScriptEngine *m_scriptEngine;
+  ScriptEngine *m_scriptEngine;
 
 public:
   /// Constructor.
@@ -64,6 +64,9 @@ signals:
   /// \param[in] text Text to append to log.
   void appendLog(LogLevel::Enum logLevel, const QString &text);
 
+  /// Signal to indicate that evaluation of the script was exited.
+  void exit();
+
 public slots:
   /// Evaluates the given script. Errors are emitted using the appendLog()
   /// signal.
@@ -71,6 +74,10 @@ public slots:
   /// \param[in] script Script to evaluate.
   /// \param[in] fileName Name of script file, used in error reporting.
   void runScript(const QString &script, const QString &fileName);
+
+private slots:
+  /// Cancels the evaluation of the script and emits the signal exit().
+  void exitScript();
 };
 
 #endif

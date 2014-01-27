@@ -48,6 +48,9 @@ void MainConsole::createScriptRunner()
   // to stdout
   connect(m_scriptRunner, SIGNAL(appendLog(LogLevel::Enum, QString)),
           this, SLOT(log(LogLevel::Enum, QString)));
+
+  // pass through exit signal
+  connect(m_scriptRunner, SIGNAL(exit()), this, SIGNAL(exit()));
 }
 
 void MainConsole::log(LogLevel::Enum logLevel, const QString &text)
