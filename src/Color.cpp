@@ -168,11 +168,65 @@ void Color::fromScriptValue(const QScriptValue &object)
 QScriptValue colorConstructor(QScriptContext *context,
   QScriptEngine *engine)
 {
-  // parent of new object is in context
-  QObject *parent = context->argument(0).toQObject();
+  QObject *object = NULL;
 
-  // create new Color object
-  QObject *object = new Color(parent);
+  if ((context->argumentCount() == 3)
+    || (context->argumentCount() == 4))
+  {
+    // red component
+    quint32 r = context->argument(0).toUInt32();
+
+    if (r > MAX_COLOR_VALUE)
+    {
+      // clip value
+      r = MAX_COLOR_VALUE;
+    }
+
+    // green component
+    quint32 g = context->argument(1).toUInt32();
+
+    if (g > MAX_COLOR_VALUE)
+    {
+      // clip value
+      g = MAX_COLOR_VALUE;
+    }
+
+    // blue component
+    quint32 b = context->argument(2).toUInt32();
+
+    if (b > MAX_COLOR_VALUE)
+    {
+      // clip value
+      b = MAX_COLOR_VALUE;
+    }
+
+    if (context->argumentCount() == 3)
+    {
+      // create new color object
+      object = new Color(static_cast<quint8>(r),
+                         static_cast<quint8>(g),
+                         static_cast<quint8>(b));
+    }
+    else
+    {
+      // parent of new object is last argument in context
+      QObject *parent = context->argument(3).toQObject();
+
+      // create new color object
+      object = new Color(static_cast<quint8>(r),
+                         static_cast<quint8>(g),
+                         static_cast<quint8>(b),
+                         parent);
+    }
+  }
+  else
+  {
+    // parent of new object is in context
+    QObject *parent = context->argument(0).toQObject();
+
+    // create new Color object
+    object = new Color(parent);
+  }
 
   // pass object to script
   return engine->newQObject(object, QScriptEngine::ScriptOwnership);
