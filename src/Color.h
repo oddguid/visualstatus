@@ -111,9 +111,13 @@ Q_DECLARE_METATYPE(Color)
 /// possible to create a Color object in a script:
 ///
 /// var color = new Color;
+/// var color2 = new Color(128, 0, 255);
 ///
-/// \param[in] context Script context for the Color object. The first argument
-/// of the script context is the parent of the new Color object.
+/// \param[in] context Script context for the Color object. If color components
+/// (red, green, blue) are supplied in the constructor, the fourth argument of
+/// the script context is the parent of the new Color object. In other cases the
+/// first argument of the script context is taken to be the parent of the new
+/// Color object.
 /// \param[in] engine Script engine which will take ownership of the new Color
 /// object.
 /// \return The new Color object wrapped in a script object.
