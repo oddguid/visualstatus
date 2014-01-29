@@ -63,7 +63,7 @@ public:
   /// to turn of the LEDs without changing the set colors.
   ///
   /// \param[in] enable True to show LED colors, false to turn off LEDs.
-  /// \return True if successfule, false on error.
+  /// \return True if successful, false on error.
   Q_INVOKABLE bool show(bool enable);
 };
 
