@@ -54,6 +54,9 @@ protected:
   /// Adds the SerialLed object to the script engine.
   void addSerialLed();
 
+  /// Adds the QTimer object to the script engine.
+  void addQTimer();
+
 signals:
   /// Signal to indicate that the log should be cleared.
   void clearLog();
@@ -79,5 +82,19 @@ private slots:
   /// Cancels the evaluation of the script and emits the signal exit().
   void exitScript();
 };
+
+/// Custom constructor function for a QTimer object. This function
+/// makes it possible to create a QTimer object in a script:
+///
+/// var timer = new QTimer;
+///
+/// \param[in] context Script context for the QTimer object. The first
+/// argument of the script context is the parent of the new QTimer
+/// object.
+/// \param[in] engine Script engine which will take ownership of the new
+/// QTimer object.
+/// \return The new QTimer object wrapped in a script object.
+QScriptValue qTimerConstructor(QScriptContext *context,
+                               QScriptEngine *engine);
 
 #endif

@@ -1,4 +1,5 @@
 #include "ScriptRunner.h"
+#include <QTimer>
 #include "Logger.h"
 #include "MockSerialPort.h"
 #include "SerialPort.h"
@@ -35,6 +36,7 @@ void ScriptRunner::createScriptEngine()
   addMockJenkinsManager();
   addJenkinsManager();
   addSerialLed();
+  addQTimer();
 
   // connect script engine signals
   connect(m_scriptEngine, SIGNAL(exitScript()), this, SLOT(exitScript()));
@@ -151,6 +153,17 @@ void ScriptRunner::addSerialLed()
   m_scriptEngine->globalObject().setProperty("SerialLed", metaObject);
 }
 
+void ScriptRunner::addQTimer()
+{
+  // register the custom constructor function
+  QScriptValue ctor = m_scriptEngine->newFunction(qTimerConstructor);
+
+  QScriptValue metaObject =
+    m_scriptEngine->newQMetaObject(&QObject::staticMetaObject, ctor);
+
+  m_scriptEngine->globalObject().setProperty("QTimer", metaObject);
+}
+
 void ScriptRunner::runScript(const QString &script, const QString &fileName)
 {
   // clear exceptions
@@ -181,4 +194,17 @@ void ScriptRunner::exitScript()
   }
 
   emit exit();
+}
+
+QScriptValue qTimerConstructor(QScriptContext *context,
+  QScriptEngine *engine)
+{
+  // parent of new object is in context
+  QObject *parent = context->argument(0).toQObject();
+
+  // create new QTimer object
+  QObject *object = new QTimer(parent);
+
+  // pass object to script
+  return engine->newQObject(object, QScriptEngine::ScriptOwnership);
 }
