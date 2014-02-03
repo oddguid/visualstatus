@@ -9,12 +9,12 @@ SerialLed::~SerialLed()
 {
 }
 
-bool SerialLed::setColor(unsigned char led, const Color &color)
+bool SerialLed::setColor(quint8 led, const Color &color)
 {
   return setToggledColor(led, color, color);
 }
 
-bool SerialLed::setToggledColor(unsigned char led, const Color &color1,
+bool SerialLed::setToggledColor(quint8 led, const Color &color1,
   const Color &color2)
 {
   QChar padChar('0');
@@ -31,7 +31,7 @@ bool SerialLed::setToggledColor(unsigned char led, const Color &color1,
   return write(colorString);
 }
 
-bool SerialLed::setToggleDelay(unsigned short delay)
+bool SerialLed::setToggleDelay(quint16 delay)
 {
   QChar padChar('0');
 
@@ -40,7 +40,7 @@ bool SerialLed::setToggleDelay(unsigned short delay)
   return write(delayString);
 }
 
-bool SerialLed::clear(unsigned char led)
+bool SerialLed::clear(quint8 led)
 {
   // clear color by setting it to black
   Color black(0, 0, 0);

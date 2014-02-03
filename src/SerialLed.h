@@ -24,7 +24,7 @@ public:
   /// \param[in] led Number of LED to set, range is 0 <= led <= 255.
   /// \param[in] color RGB color for LED.
   /// \return True if successful, false on error.
-  Q_INVOKABLE bool setColor(unsigned char led,
+  Q_INVOKABLE bool setColor(quint8 led,
                             const Color &color);
 
   /// Makes the given LED toggle between 2 colors. The toggle speed is
@@ -34,7 +34,7 @@ public:
   /// \param[in] color1 First RGB color for LED.
   /// \param[in] color2 Second RGB color for LED.
   /// \return True if successful, false on error.
-  Q_INVOKABLE bool setToggledColor(unsigned char led,
+  Q_INVOKABLE bool setToggledColor(quint8 led,
                                    const Color &color1,
                                    const Color &color2);
 
@@ -46,13 +46,13 @@ public:
   /// \param[in] delay Delay between toggles in milliseconds. Range is 0 <=
   /// delay <= 65535 ms.
   /// \return True if successful, false on error.
-  Q_INVOKABLE bool setToggleDelay(unsigned short delay);
+  Q_INVOKABLE bool setToggleDelay(quint16 delay);
 
   /// Clears the color of the given LED.
   ///
   /// \param[in] led Number of LED to clear, range is 0 <= led <= 255.
   /// \return True if successful, false on error.
-  Q_INVOKABLE bool clear(unsigned char led);
+  Q_INVOKABLE bool clear(quint8 led);
 
   /// Clears the color of all LEDs.
   ///
