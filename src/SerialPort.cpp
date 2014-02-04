@@ -167,6 +167,45 @@ bool SerialPort::write(const QString &data)
   return true;
 }
 
+bool SerialPort::writeRaw(const QByteArray &data)
+{
+  m_error.clear();
+
+  try
+  {
+    m_serialPort.write(data.constData(), data.size());
+  }
+  catch (timeout_exception &exc)
+  {
+    m_error = QString(tr("Time-out while writing to serial port. %1"))
+              .arg(QString(exc.what()));
+
+    return false;
+  }
+  catch (boost::system::system_error &exc)
+  {
+    m_error = QString(tr("Cannot write to serial port. %1 (%2)"))
+              .arg(QString(exc.what()))
+              .arg(exc.code().value());
+
+    return false;
+  }
+
+  // serial device should report a !
+  std::string answer = m_serialPort.readStringUntil(m_delimiter);
+
+  if (answer.compare(0, m_expected.length(), m_expected) != 0)
+  {
+    // unexpected answer
+    m_error = QString(tr("Received unexpected answer: %1"))
+              .arg(QString::fromStdString(answer));
+
+    return false;
+  }
+
+  return true;
+}
+
 QString SerialPort::readStringUntil(const QString &delimiter)
 {
   m_error.clear();

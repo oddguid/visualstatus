@@ -56,9 +56,18 @@ public:
   /// \return True if successful, false on error.
   Q_INVOKABLE virtual bool write(const QString &data);
 
+  /// Write the raw data to the serial port.
+  ///
+  /// \param[in] data Data to write.
+  /// \return True if successfull, false on error.
+  Q_INVOKABLE virtual bool writeRaw(const QByteArray &data);
+
 signals:
   /// Signal that emits the data from the write function.
   void writtenData(QString data);
+
+  /// Signal that emits the data from the writeRaw function.
+  void writtenRawData(QByteArray data);
 };
 
 /// Custom constructor function for a MockSerialPort object. This function

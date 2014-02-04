@@ -34,6 +34,28 @@ bool BaseSerialObject::write(const QString &data)
   return true;
 }
 
+bool BaseSerialObject::writeRaw(const QByteArray &data)
+{
+  m_error.clear();
+
+  if (m_serialPort == NULL)
+  {
+    // no serial port set
+    m_error = tr("No serial port set");
+
+    return false;
+  }
+
+  if (!m_serialPort->writeRaw(data))
+  {
+    m_error = m_serialPort->error();
+
+    return false;
+  }
+
+  return true;
+}
+
 void BaseSerialObject::setSerialPort(BaseSerialPort *serialPort)
 {
   m_serialPort = serialPort;

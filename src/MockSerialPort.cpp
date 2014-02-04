@@ -49,14 +49,30 @@ bool MockSerialPort::setTimeout(unsigned short timeoutSecs)
 
 bool MockSerialPort::write(const QString &data)
 {
-  Q_UNUSED(data);
-
   m_error.clear();
 
   if (m_isOpen)
   {
     // emit the data
     emit writtenData(data);
+
+    return true;
+  }
+
+  // port not open
+  m_error = tr("Cannot write data, serial port is closed.");
+
+  return false;
+}
+
+bool MockSerialPort::writeRaw(const QByteArray &data)
+{
+  m_error.clear();
+
+  if (m_isOpen)
+  {
+    // emit the data
+    emit writtenRawData(data);
 
     return true;
   }

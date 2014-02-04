@@ -54,6 +54,12 @@ public:
   /// \return True if successful, false on error.
   Q_INVOKABLE virtual bool write(const QString &data) = 0;
 
+  /// Write the raw data to the serial port.
+  ///
+  /// \param[in] data Data to write.
+  /// \return True if successfull, false on error.
+  Q_INVOKABLE virtual bool writeRaw(const QByteArray &data) = 0;
+
   /// Returns the last saved error message.
   ///
   /// \return Error message.

@@ -41,6 +41,12 @@ protected:
   /// \param[in] data Data to write to serial port.
   /// \return True if successful, false on error or if no serial port is set.
   bool write(const QString &data);
+
+  /// Writes the given raw data to the serial port.
+  ///
+  /// \param[in] data Data to write to serial port.
+  /// \return True if successful, false on error or if no serial port is set.
+  bool writeRaw(const QByteArray &data);
 };
 
 #endif
