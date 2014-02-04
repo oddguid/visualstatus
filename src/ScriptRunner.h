@@ -54,6 +54,9 @@ protected:
   /// Adds the SerialLed object to the script engine.
   void addSerialLed();
 
+  /// Adds the SerialLedBuffered object to the script engine.
+  void addSerialLedBuffered();
+
   /// Adds the QTimer object to the script engine.
   void addQTimer();
 

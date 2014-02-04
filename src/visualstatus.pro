@@ -41,7 +41,8 @@ HEADERS = serial/TimeoutSerial.h \
           SerialLed.h \
           ScriptEngine.h \
           ScriptRunner.h \
-          MainConsole.h
+          MainConsole.h \
+          SerialLedBuffered.h
 
 SOURCES = main.cpp \
           serial/TimeoutSerial.cpp \
@@ -62,6 +63,6 @@ SOURCES = main.cpp \
           SerialLed.cpp \
           ScriptEngine.cpp \
           ScriptRunner.cpp \
-          MainConsole.cpp
-
+          MainConsole.cpp \
+          SerialLedBuffered.cpp
 

@@ -8,6 +8,7 @@
 #include "MockJenkinsManager.h"
 #include "JenkinsManager.h"
 #include "SerialLed.h"
+#include "SerialLedBuffered.h"
 
 ScriptRunner::ScriptRunner(QObject *parent)
   : QObject(parent)
@@ -151,6 +152,18 @@ void ScriptRunner::addSerialLed()
     m_scriptEngine->newQMetaObject(&QObject::staticMetaObject, ctor);
 
   m_scriptEngine->globalObject().setProperty("SerialLed", metaObject);
+}
+
+void ScriptRunner::addSerialLedBuffered()
+{
+  // register the custom constructor function
+  QScriptValue ctor =
+      m_scriptEngine->newFunction(serialLedBufferedConstructor);
+
+  QScriptValue metaObject =
+      m_scriptEngine->newQMetaObject(&QObject::staticMetaObject, ctor);
+
+  m_scriptEngine->globalObject().setProperty("SerialLedBuffered", metaObject);
 }
 
 void ScriptRunner::addQTimer()
