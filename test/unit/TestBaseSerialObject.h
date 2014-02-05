@@ -36,6 +36,15 @@ private slots:
 
   /// Tests the write function, normal operation.
   void write();
+
+  /// Tests the writeRaw function, no serial port is set.
+  void writeRawNoSerialPort();
+
+  /// Tests the writeRaw function, serial port returns error.
+  void writeRawSerialPortError();
+
+  /// Tests the writeRaw function, normal operation.
+  void writeRaw();
 };
 
 // Dummy class for testing of BaseSerialObject, implements the pure virtual
@@ -47,6 +56,7 @@ class DummySerialPort : public BaseSerialPort
 protected:
   bool m_writeReturnValue;
   QString m_data;
+  QByteArray m_dataRaw;
 
 public:  
   DummySerialPort(QObject *parent = 0)
@@ -95,6 +105,13 @@ public:
     return m_writeReturnValue;
   }
 
+  virtual bool writeRaw(const QByteArray &data)
+  {
+    m_dataRaw = data;
+
+    return m_writeReturnValue;
+  }
+
   void setWriteReturnValue(bool value)
   {
     m_writeReturnValue = value;
@@ -108,6 +125,11 @@ public:
   QString data() const
   {
     return m_data;
+  }
+
+  QByteArray dataRaw() const
+  {
+    return m_dataRaw;
   }
 };
 

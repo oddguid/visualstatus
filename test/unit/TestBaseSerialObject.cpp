@@ -88,6 +88,57 @@ void TestBaseSerialObject::write()
   QCOMPARE(objectPort->data(), data);
 }
 
+void TestBaseSerialObject::writeRawNoSerialPort()
+{
+  BaseSerialObject object;
+  QString expectedError = "No serial port set";
+
+  // should return false since no serial port is set
+  bool ok = object.writeRaw(QByteArray());
+
+  QCOMPARE(ok, false);
+  QCOMPARE(object.error(), expectedError);
+}
+
+void TestBaseSerialObject::writeRawSerialPortError()
+{
+  BaseSerialObject object;
+  DummySerialPort port;
+
+  // set serial port to return error
+  QString errorText = "Write error";
+  port.setError(errorText);
+  port.setWriteReturnValue(false);
+
+  object.setSerialPort(&port);
+
+  bool ok = object.writeRaw(QByteArray());
+
+  QCOMPARE(ok, false);
+  QCOMPARE(object.error(), errorText);
+}
+
+void TestBaseSerialObject::writeRaw()
+{
+  BaseSerialObject object;
+  DummySerialPort port;
+  QByteArray data = "data";
+
+  // set serial port, will return success
+  object.setSerialPort(&port);
+
+  bool ok = object.writeRaw(data);
+
+  QCOMPARE(ok, true);
+  QVERIFY(object.error().isEmpty() == true);
+
+  // verify "written" data
+  DummySerialPort *objectPort =
+      static_cast<DummySerialPort *>(object.m_serialPort);
+
+  QCOMPARE(objectPort->dataRaw(), data);
+}
+
 } // unittest
 
 QTEST_MAIN(unittest::TestBaseSerialObject)
