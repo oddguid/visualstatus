@@ -69,9 +69,13 @@ void TestMockSerialPort::write()
   connect(&port, SIGNAL(writtenData(QString)),
           &log, SLOT(writtenData(QString)));
 
+  connect(&port, SIGNAL(writtenRawData(QByteArray)),
+          &log, SLOT(writtenDataRaw(QByteArray)));
+
   // write when port is closed
   QVERIFY(port.write("test") == false);
   QVERIFY(log.m_writtenData.isEmpty() == true);
+  QVERIFY(log.m_writtenDataRaw.isEmpty() == true);
 
   // open port and write again
   if (port.open("device", 0, 0))
@@ -81,6 +85,39 @@ void TestMockSerialPort::write()
     QVERIFY(port.write(data) == true);
 
     QCOMPARE(log.m_writtenData, data);
+    QVERIFY(log.m_writtenDataRaw.isEmpty() == true);
+  }
+  else
+  {
+    QFAIL("Cannot open port!");
+  }
+}
+
+void TestMockSerialPort::writeRaw()
+{
+  MockSerialPort port;
+  DummyLog log;
+
+  connect(&port, SIGNAL(writtenData(QString)),
+          &log, SLOT(writtenData(QString)));
+
+  connect(&port, SIGNAL(writtenRawData(QByteArray)),
+          &log, SLOT(writtenDataRaw(QByteArray)));
+
+  // write when port is closed
+  QVERIFY(port.writeRaw("test") == false);
+  QVERIFY(log.m_writtenData.isEmpty() == true);
+  QVERIFY(log.m_writtenDataRaw.isEmpty() == true);
+
+  // open port and write again
+  if (port.open("device", 0, 0))
+  {
+    QByteArray data = "test again";
+
+    QVERIFY(port.writeRaw(data) == true);
+
+    QVERIFY(log.m_writtenData.isEmpty() == true);
+    QCOMPARE(log.m_writtenDataRaw, data);
   }
   else
   {

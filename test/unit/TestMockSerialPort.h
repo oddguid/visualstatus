@@ -29,19 +29,25 @@ private slots:
 
   /// Tests the write function.
   void write();
+
+  /// Tests the writeRaw function.
+  void writeRaw();
 };
 
-// Dummy class for testing the writtenData signal of the MockSerialPort class.
+// Dummy class for testing the writtenData and writtenRawData signals of the
+// MockSerialPort class.
 class DummyLog : public QObject
 {
   Q_OBJECT
 
 public:
   QString m_writtenData;
+  QByteArray m_writtenDataRaw;
 
   explicit DummyLog(QObject *parent = 0)
     : QObject(parent)
     , m_writtenData()
+    , m_writtenDataRaw()
   {
   }
 
@@ -53,6 +59,11 @@ public slots:
   void writtenData(QString data)
   {
     m_writtenData = data;
+  }
+
+  void writtenDataRaw(QByteArray data)
+  {
+    m_writtenDataRaw = data;
   }
 };
 
