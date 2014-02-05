@@ -91,6 +91,14 @@ public:
     return true;
   }
 
+  virtual bool writeRaw(const QByteArray &data)
+  {
+    Q_UNUSED(data)
+
+    // SerialLed does not use writeRaw, always return error
+    return false;
+  }
+
   QString data() const
   {
     return m_data;
