@@ -75,6 +75,13 @@ public:
 
     return true;
   }
+
+  virtual bool writeRaw(const QByteArray &data)
+  {
+    Q_UNUSED(data)
+
+    return true;
+  }
 };
 
 } // unittest
