@@ -63,6 +63,7 @@ public:
     : BaseSerialPort(parent)
     , m_writeReturnValue(true)
     , m_data()
+    , m_dataRaw()
   {
   }
 
