@@ -6,7 +6,8 @@
 #include "Color.h"
 
 /// Class for LEDs connected to a serial port. This class uses a buffer and
-/// binary transport to update the color of the LEDs on the serial device.
+/// binary transport to update the color of the LEDs on the serial device. A
+/// maximum of 85 LEDs is supported.
 ///
 /// The binary transport is based on the EasyTransfer Arduino library by
 /// Bill Porter:
@@ -20,12 +21,10 @@
 /// +-------------------+
 /// | 0x85              |
 /// +-------------------+
-/// | MSB of numColors  |
-/// +-------------------+
-/// | LSB of numColors  |
+/// | numLeds           |
 /// +-------------------+
 /// | RGB triplets      |
-/// |   (numColors * 3) |
+/// |   (numLeds * 3)   |
 /// +-------------------+
 /// | checksum          |
 /// +-------------------+
@@ -34,8 +33,8 @@ class SerialLedBuffered : public BaseSerialObject
   Q_OBJECT
 
 protected:
-  quint8 m_numColors;
-  QByteArray m_colorBuffer;
+  quint8 m_numLeds;
+  QByteArray m_ledBuffer;
 
 public:
   /// Constructor.
@@ -45,9 +44,9 @@ public:
 
   /// Constructor.
   ///
-  /// \param[in] numColors Number of LEDs to use, range is 0 <= size <= 255.
+  /// \param[in] numLeds Number of LEDs to use, range is 0 <= size <= 85.
   /// \param[in] parent Parent of this object.
-  SerialLedBuffered(quint8 numColors, QObject *parent = 0);
+  SerialLedBuffered(quint8 numLeds, QObject *parent = 0);
 
   /// Destructor.
   ~SerialLedBuffered();
@@ -55,18 +54,18 @@ public:
   /// Gives the number of LEDs available in the buffer.
   ///
   /// \return Number of supported LEDs.
-  Q_INVOKABLE quint8 numColors() const;
+  Q_INVOKABLE quint8 numLeds() const;
 
   /// Sets the number of LEDs available in the buffer. After resizing of the
   /// buffer all colors are set to black.
   ///
-  /// \param[in] numColors Number of LEDs to use, range is 0 <= size <= 255.
+  /// \param[in] numLeds Number of LEDs to use, range is 0 <= size <= 85.
   /// \return True if successful, false on error.
-  Q_INVOKABLE void setNumColors(quint8 numColors);
+  Q_INVOKABLE void setNumLeds(quint8 numLeds);
 
   /// Sets a color for the given LED.
   ///
-  /// \param[in] led Number of LED to set, range is 0 <= led <= size().
+  /// \param[in] led Number of LED to set, range is 0 <= led <= numLeds().
   /// \param[in] color RGB color for LED.
   /// \return True if successful, false on error.
   Q_INVOKABLE bool setColor(quint8 led,
@@ -74,7 +73,7 @@ public:
 
   /// Clears the color of the given LED.
   ///
-  /// \param[in] led Number of LED to clear, range is 0 <= led <= size().
+  /// \param[in] led Number of LED to clear, range is 0 <= led <= numLeds().
   /// \return True if successful, false on error.
   Q_INVOKABLE bool clear(quint8 led);
 
