@@ -16,7 +16,8 @@ SUBDIRS += TestColor \
            TestBaseHttpPort \
            TestBaseSerialPort \
            TestBaseSerialObject \
-           TestSerialLed
+           TestSerialLed \
+           TestSerialLedBuffered
 
 TestColor.file = TestColor.pro
 TestJenkinsJob.file = TestJenkinsJob.pro
@@ -31,3 +32,4 @@ TestBaseHttpPort.file = TestBaseHttpPort.pro
 TestBaseSerialPort.file = TestBaseSerialPort.pro
 TestBaseSerialObject.file = TestBaseSerialObject.pro
 TestSerialLed.file = TestSerialLed.pro
+TestSerialLedBuffered.file = TestSerialLedBuffered.pro
