@@ -83,7 +83,7 @@ public:
   Q_INVOKABLE bool clearAll();
 
   /// Updates the color of the LEDs by pushing the buffer to the attached
-  /// serial device.
+  /// serial device. The buffer is not cleared afterwards.
   ///
   /// \return True if successful, false on error.
   Q_INVOKABLE bool update();

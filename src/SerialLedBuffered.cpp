@@ -93,6 +93,9 @@ bool SerialLedBuffered::clearAll()
 
 bool SerialLedBuffered::update()
 {
+  // set checksum
+  setChecksum();
+
   return writeRaw(m_ledBuffer);
 }
 
