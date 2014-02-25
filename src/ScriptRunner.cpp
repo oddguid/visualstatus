@@ -37,6 +37,7 @@ void ScriptRunner::createScriptEngine()
   addMockJenkinsManager();
   addJenkinsManager();
   addSerialLed();
+  addSerialLedBuffered();
   addQTimer();
 
   // connect script engine signals
