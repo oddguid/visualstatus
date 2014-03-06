@@ -70,6 +70,8 @@ visualstatus script.js
 Building
 --------
 
+### Dependencies
+
 Visualstatus depends on the following software:
 
 * [Qt](http://qt-project.org), version 4.8.5 is used for development.
@@ -79,8 +81,19 @@ Visualstatus depends on the following software:
 * [curlpp](http://code.google.com/p/curlpp)
 * [TimeoutSerial](https://gitorious.org/serial-port), a copy is included in this repository.
 
+### Build steps
+
 Build steps, assuming all dependencies are available:
 
-1. qmake
-2. make or nmake
+```
+qmake
+make or nmake
+```
 
+### Documentation
+
+The source documentation can be build using doxygen. Using *doxysrc* in *doc* to generate HTML documentation:
+
+```
+doxygen doxysrc
+```
