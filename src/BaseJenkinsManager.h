@@ -77,7 +77,7 @@ public:
   /// Sets the HTTP port to use. This object will not become the parent of the
   /// HTTP port and will therefore not clean it up.
   ///
-  /// \param[in] httpPort HTTP port to use.
+  /// \param[in] port HTTP port to use.
   Q_INVOKABLE void setHttpPort(BaseHttpPort *port);
 
   /// Returns the last saved error message.

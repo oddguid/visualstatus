@@ -20,7 +20,7 @@ public:
 
   /// Constructor.
   ///
-  /// \parent[in] parent Parent of this object.
+  /// \param[in] parent Parent of this object.
   explicit ScriptEngine(QObject *parent = 0);
 
   /// Destructor.

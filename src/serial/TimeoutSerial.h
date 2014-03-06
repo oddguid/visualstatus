@@ -154,7 +154,7 @@ public:
      * Can only be used if the user is sure that the serial device will not
      * send binary data. For binary data read, use read()
      * The returned string is empty if the line delimiter has not yet arrived.
-     * \param delimiter line delimiter, default="\n"
+     * \param delim line delimiter, default="\n"
      * \return a string with the received data. The delimiter is removed from
      * the string.
      * \throws boost::system::system_error if any error

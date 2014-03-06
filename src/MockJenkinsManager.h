@@ -29,7 +29,7 @@ class MockJenkinsManager : public BaseJenkinsManager
 public:
   /// Constructor.
   ///
-  /// \param[i] parent Parent of this object.
+  /// \param[in] parent Parent of this object.
   explicit MockJenkinsManager(QObject *parent = 0);
 
   /// Destructor.
