@@ -103,7 +103,7 @@ bool JenkinsManager::getStatus(const QString &url)
   QString jsonUrl = makeJsonUrl(url);
 
   // get data
-  bool getOk = m_httpPort->get(QUrl(jsonUrl));
+  bool getOk = m_httpPort->get(jsonUrl);
 
   if (getOk)
   {

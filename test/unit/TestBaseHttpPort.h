@@ -41,7 +41,7 @@ public:
   {
   }
 
-  virtual bool get(const QUrl &url)
+  virtual bool get(const QString &url)
   {
     Q_UNUSED(url)
 

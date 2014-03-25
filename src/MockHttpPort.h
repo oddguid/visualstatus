@@ -31,7 +31,7 @@ public:
   ///
   /// \param[in] url Url to get data from.
   /// \return True if successful, false if error occurred.
-  Q_INVOKABLE virtual bool get(const QUrl &url);
+  Q_INVOKABLE virtual bool get(const QString &url);
 
   /// Returns the received data. Can be called after get() is successfully
   /// called.

@@ -19,7 +19,7 @@ void TestMockHttpPort::defaultConstructor()
 void TestMockHttpPort::get()
 {
   MockHttpPort port;
-  QUrl url("http://example.com");
+  QString url("http://example.com");
 
   // get
   QVERIFY(port.get(url) == true);

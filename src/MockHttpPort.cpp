@@ -15,7 +15,7 @@ void MockHttpPort::data(const QString &data)
   m_data = data;
 }
 
-bool MockHttpPort::get(const QUrl &url)
+bool MockHttpPort::get(const QString &url)
 {
   Q_UNUSED(url);
 

@@ -16,7 +16,7 @@ HttpPort::~HttpPort()
 {
 }
 
-bool HttpPort::get(const QUrl &url)
+bool HttpPort::get(const QString &url)
 {
   // clear error
   m_error.clear();
@@ -28,7 +28,7 @@ bool HttpPort::get(const QUrl &url)
   try
   {
     // set URL
-    curlpp::options::Url urlOption(url.toString().toStdString());
+    curlpp::options::Url urlOption(url.toStdString());
     m_request.setOpt(urlOption);
 
     // get data
