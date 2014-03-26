@@ -55,7 +55,7 @@ QString HttpPort::data()
   return QString::fromStdString(m_data.str());
 }
 
-bool HttpPort::setTimeout(unsigned short timeout)
+bool HttpPort::setTimeout(unsigned short timeoutSecs)
 {
   // clear error
   m_error.clear();
@@ -63,7 +63,7 @@ bool HttpPort::setTimeout(unsigned short timeout)
   try
   {
     // set timeout
-    curlpp::options::Timeout timeoutOption(timeout);
+    curlpp::options::Timeout timeoutOption(timeoutSecs);
     m_request.setOpt(timeoutOption);
   }
   catch (curlpp::RuntimeError &rExc)

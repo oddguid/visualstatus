@@ -35,9 +35,10 @@ public:
 
   /// Sets the connection timeout in seconds.
   ///
-  /// \param[in] timeout Timeout in seconds, range is 1 <= timout <= 65535.
+  /// \param[in] timeoutSecs Timeout in seconds, range is
+  /// 1 <= timeoutSecs <= 65535.
   /// \return True if successful, false if error occurred.
-  Q_INVOKABLE virtual bool setTimeout(unsigned short timeout) = 0;
+  Q_INVOKABLE virtual bool setTimeout(unsigned short timeoutSecs) = 0;
 
   /// Sets the basic authentication properties. This function must be called
   /// before get().

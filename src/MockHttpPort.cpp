@@ -27,9 +27,9 @@ QString MockHttpPort::data()
   return m_data;
 }
 
-bool MockHttpPort::setTimeout(unsigned short timeout)
+bool MockHttpPort::setTimeout(unsigned short timeoutSecs)
 {
-  Q_UNUSED(timeout);
+  Q_UNUSED(timeoutSecs);
 
   return true;
 }
