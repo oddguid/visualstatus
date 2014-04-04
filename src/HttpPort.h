@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QUrl>
-#include <qscriptengine>
+#include <QtScript/QScriptEngine>
 #include <sstream>
 #include <curlpp/cURLpp.hpp>
 #include <curlpp/Easy.hpp>

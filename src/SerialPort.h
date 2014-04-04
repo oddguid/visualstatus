@@ -2,7 +2,7 @@
 #define VST_SERIALPORT_H
 
 #include <QObject>
-#include <qscriptengine>
+#include <QtScript/QScriptEngine>
 #include "BaseSerialPort.h"
 #include "serial/TimeoutSerial.h"
 

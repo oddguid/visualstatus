@@ -2,7 +2,7 @@
 #define VST_MOCKJENKINSMANAGER_H
 
 #include <QIODevice>
-#include <qscriptengine>
+#include <QtScript/QScriptEngine>
 #include "BaseJenkinsManager.h"
 #include "JenkinsJob.h"
 

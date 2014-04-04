@@ -2,7 +2,7 @@
 #define VST_MOCKSERIALPORT_H
 
 #include <QObject>
-#include <qscriptengine>
+#include <QtScript/QScriptEngine>
 #include "BaseSerialPort.h"
 
 /// Mock class for serial port operations.

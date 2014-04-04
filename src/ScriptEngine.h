@@ -2,7 +2,7 @@
 #define VST_SCRIPTENGINE_H
 
 #include <QObject>
-#include <QScriptEngine>
+#include <QtScript/QScriptEngine>
 
 /// Script engine, extends QScriptEngine.
 ///

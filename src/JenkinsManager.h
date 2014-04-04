@@ -2,7 +2,7 @@
 #define VST_JENKINSMANAGER_H
 
 #include <QObject>
-#include <qscriptengine>
+#include <QtScript/QScriptEngine>
 #include "BaseJenkinsManager.h"
 #include "JenkinsJob.h"
 #include "BaseHttpPort.h"

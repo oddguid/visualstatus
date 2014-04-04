@@ -2,7 +2,7 @@
 #define VST_COLOR_H
 
 #include <QObject>
-#include <qscriptengine>
+#include <QtScript/QScriptEngine>
 
 /// Script class for RGB color.
 class Color : public QObject

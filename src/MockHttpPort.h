@@ -2,7 +2,7 @@
 #define VST_MOCKHTTPPORT_H
 
 #include <QObject>
-#include <qscriptengine>
+#include <QtScript/QScriptEngine>
 #include "BaseHttpPort.h"
 
 /// Mock class for HTTP operations.
