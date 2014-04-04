@@ -47,7 +47,7 @@ void ScriptRunner::createScriptEngine()
 void ScriptRunner::addLogger()
 {
   // create logger object
-  Logger *logger = new Logger;
+  Logger *logger = new Logger(this);
 
   // connect signals
   connect(logger, SIGNAL(appendLog(LogLevel::Enum, QString)),
