@@ -12,11 +12,11 @@
 /// The job status is read from a file and this file should have the following
 /// markup:
 /// - one job status per line;
-/// - each line should have the name (mandatory), url (option) and color
+/// - each line should have the name (mandatory), url (optional) and color
 /// (optional);
-/// - each line must have three separators (|);
+/// - each line must have two separators (|);
 /// - it is possible to define multiple jobs with the same name, but only the
-/// last occurence in the file is used.
+/// last occurrence in the file is used.
 ///
 /// For example:
 /// job1|http://example.com|red
