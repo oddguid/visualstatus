@@ -66,7 +66,7 @@ logger.logInfo("an info message");
 
 ### void logWarning(message)
 
-Logs a messge using the log level _warning_.
+Logs a message using the log level _warning_.
 
 ```javascript
 logger.logWarning("a warning message");
