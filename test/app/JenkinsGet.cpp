@@ -1,12 +1,14 @@
 #include <stdio.h>
+#include <iostream>
 #include <QCoreApplication>
+#include <curl/curl.h>
 #include "../../src/JenkinsManager.h"
 #include "../../src/HttpPort.h"
 
 int main(int argc, char *argv[])
 {
-  // automatic cleanup of curl
-  cURLpp::Cleanup curlCleanup;
+  // initialize curl
+  curl_global_init(CURL_GLOBAL_ALL);
 
   QCoreApplication app(argc, argv);
 
@@ -44,6 +46,9 @@ int main(int argc, char *argv[])
               << manager.jobUrl(jobName).toStdString() << "|"
               << manager.jobColor(jobName).toStdString() << std::endl;
   }
+
+  // clean up curl
+  curl_global_cleanup();
 
   return 0;
 }
