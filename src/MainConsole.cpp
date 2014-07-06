@@ -19,13 +19,15 @@ bool MainConsole::prepareScript(const QStringList &arguments)
 {
   m_scriptFileName = "";
 
-  // parse arguments
-  for (int i = 0; i < arguments.size(); ++i)
+  // parse arguments, skip first argument (app name)
+  for (int i = 1; i < arguments.size(); ++i)
   {
-    // argument not starting with '-' is file name
+    // first argument not starting with '-' is file name
     if (!arguments.at(i).startsWith('-'))
     {
       m_scriptFileName = arguments.at(i);
+
+      break;
     }
   }
 
