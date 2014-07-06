@@ -5,8 +5,8 @@
 #include <QUrl>
 #include <QtScript/QScriptEngine>
 #include <sstream>
-#include <curlpp/cURLpp.hpp>
-#include <curlpp/Easy.hpp>
+#include <vector>
+#include <curl/curl.h>
 #include "BaseHttpPort.h"
 
 /// Class for HTTP operations, uses curlpp.
@@ -15,8 +15,10 @@ class HttpPort : public BaseHttpPort
   Q_OBJECT
 
 protected:
-  curlpp::Easy m_request;
-  std::stringstream m_data;
+  CURL *m_curl;
+  std::vector<unsigned char> m_curlErrorBuffer;
+  QByteArray m_data;
+  static QByteArray m_curlData;
 
 public:
   /// Constructor.
@@ -67,6 +69,21 @@ public:
                                     const QString &password,
                                     const QString &host,
                                     unsigned short port);
+
+protected:
+  /// Helper function to collect the data that libCurl receives.
+  ///
+  /// \param[in] ptr Data chunk that was received.
+  /// \param[in] size Number of data tokens that was received.
+  /// \param[in] nmemb Size of a data token in bytes.
+  /// \param[in|out] userdata Structure to which the received data will be
+  /// appended. In this case a static QByteArray will be used.
+  /// \return Number of bytes that was processed, which is normally size *
+  /// nmemb. A different value signals an error.
+  static size_t curlWrite(void *ptr,
+                          size_t size,
+                          size_t nmemb,
+                          void *userdata);
 };
 
 /// Custom constructor function for an HttpPort object. This function

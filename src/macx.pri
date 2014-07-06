@@ -18,11 +18,9 @@ CONFIG(debug, debug|release) {
           -lboost_date_time-mt
 }
 
-# curlpp
+# curl
 CONFIG(debug, debug|release) {
-  LIBS += -lcurl \
-          -lcurlpp
+  LIBS += -lcurl
 } else {
-  LIBS += -lcurl \
-          -lcurlpp
+  LIBS += -lcurl
 }

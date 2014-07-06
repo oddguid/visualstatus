@@ -1,19 +1,28 @@
 #include "HttpPort.h"
-#include <curlpp/Options.hpp>
-#include <curlpp/Exception.hpp>
+#include <curl/curl.h>
+
+QByteArray HttpPort::m_curlData = QByteArray();
 
 HttpPort::HttpPort(QObject *parent)
   : BaseHttpPort(parent)
-  , m_request()
+  , m_curl(NULL)
+  , m_curlErrorBuffer(CURL_ERROR_SIZE)
   , m_data()
 {
-  // set output stream
-  curlpp::options::WriteStream writeStream(&m_data);
-  m_request.setOpt(writeStream);
+  // initial curl settings
+  m_curl = curl_easy_init();
+
+  curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, HttpPort::curlWrite);
+  curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, &m_curlData);
+  curl_easy_setopt(m_curl, CURLOPT_SSL_VERIFYPEER, false);
+  curl_easy_setopt(m_curl, CURLOPT_FOLLOWLOCATION, 1L);
+  curl_easy_setopt(m_curl, CURLOPT_ERRORBUFFER, &m_curlErrorBuffer[0]);
 }
 
 HttpPort::~HttpPort()
 {
+  // cleanup curl
+  curl_easy_cleanup(m_curl);
 }
 
 bool HttpPort::get(const QString &url)
@@ -22,27 +31,49 @@ bool HttpPort::get(const QString &url)
   m_error.clear();
 
   // clear buffer
-  m_data.str(std::string());
-  m_data.clear();
+  m_curlData.clear();
 
-  try
-  {
-    // set URL
-    curlpp::options::Url urlOption(url.toStdString());
-    m_request.setOpt(urlOption);
+  // set URL
+  CURLcode result = curl_easy_setopt(m_curl, CURLOPT_URL,
+                                     url.toStdString().c_str());
 
-    // get data
-    m_request.perform();
-  }
-  catch (curlpp::RuntimeError &rExc)
+  if (result != CURLE_OK)
   {
-    m_error = QString(rExc.what());
+    // error
+    m_error = QString(tr("Error setting URL: %1"))
+              .arg(curl_easy_strerror(result));
 
     return false;
   }
-  catch (curlpp::LogicError &lExc)
+
+  // get data
+  result = curl_easy_perform(m_curl);
+
+  if (result == CURLE_OK)
   {
-    m_error = QString(lExc.what());
+    // get HTTP response code
+    long httpCode = 0;
+
+    curl_easy_getinfo(m_curl, CURLINFO_RESPONSE_CODE, &httpCode);
+
+    if (httpCode >= 400)
+    {
+      // HTTP code 400 or greater is an error
+      m_error = QString(tr("HTTP error: %1")).arg(httpCode);
+
+      return false;
+    }
+    else
+    {
+      // get data from global
+      m_data = m_curlData;
+    }
+  }
+  else
+  {
+    // error
+    std::string errorMsg(m_curlErrorBuffer.begin(), m_curlErrorBuffer.end());
+    m_error = QString(tr("Error getting data: %1")).arg(errorMsg.c_str());
 
     return false;
   }
@@ -52,7 +83,7 @@ bool HttpPort::get(const QString &url)
 
 QString HttpPort::data()
 {
-  return QString::fromStdString(m_data.str());
+  return QString(m_data);
 }
 
 bool HttpPort::setTimeout(unsigned short timeoutSecs)
@@ -60,21 +91,15 @@ bool HttpPort::setTimeout(unsigned short timeoutSecs)
   // clear error
   m_error.clear();
 
-  try
-  {
-    // set timeout
-    curlpp::options::Timeout timeoutOption(timeoutSecs);
-    m_request.setOpt(timeoutOption);
-  }
-  catch (curlpp::RuntimeError &rExc)
-  {
-    m_error = QString(rExc.what());
+  // set timeout
+  CURLcode result = curl_easy_setopt(m_curl, CURLOPT_CONNECTTIMEOUT,
+                                     timeoutSecs);
 
-    return false;
-  }
-  catch (curlpp::LogicError &lExc)
+  if (result != CURLE_OK)
   {
-    m_error = QString(lExc.what());
+    // error
+    m_error = QString(tr("Error setting timeout: %1"))
+              .arg(curl_easy_strerror(result));
 
     return false;
   }
@@ -88,23 +113,28 @@ bool HttpPort::setAuthentication(const QString &user,
   // clear error
   m_error.clear();
 
-  try
-  {
-    // set user and password
-    QString userPwd = QString("%1:%2").arg(user).arg(password);
-    curlpp::options::UserPwd userPwdOption(userPwd.toStdString());
+  // set user
+  CURLcode result = curl_easy_setopt(m_curl, CURLOPT_USERNAME,
+                                     user.toStdString().c_str());
 
-    m_request.setOpt(userPwdOption);
-  }
-  catch (curlpp::RuntimeError &rExc)
+  if (result != CURLE_OK)
   {
-    m_error = QString(rExc.what());
+    // error
+    m_error = QString(tr("Error setting user: %1"))
+              .arg(curl_easy_strerror(result));
 
     return false;
   }
-  catch (curlpp::LogicError &lExc)
+
+  // set password
+  result = curl_easy_setopt(m_curl, CURLOPT_PASSWORD,
+                            password.toStdString().c_str());
+
+  if (result != CURLE_OK)
   {
-    m_error = QString(lExc.what());
+    // error
+    m_error = QString(tr("Error setting password: %1"))
+              .arg(curl_easy_strerror(result));
 
     return false;
   }
@@ -118,45 +148,100 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
   // clear error
   m_error.clear();
 
-  try
+  if (host.isEmpty())
   {
-    if (host.isEmpty())
+    // no proxy
+    CURLcode result = curl_easy_setopt(m_curl, CURLOPT_PROXY, "");
+
+    if (result != CURLE_OK)
     {
-      // no proxy
-      curlpp::options::Proxy hostOption("");
-      m_request.setOpt(hostOption);
-    }
-    else
-    {
-      // proxy host
-      curlpp::options::Proxy hostOption(host.toStdString());
-      m_request.setOpt(hostOption);
+      // error
+      m_error = QString(tr("Error clearing proxy: %1"))
+                .arg(curl_easy_strerror(result));
 
-      // proxy port
-      curlpp::options::ProxyPort portOption(port);
-      m_request.setOpt(portOption);
-
-      // proxy user and password
-      QString userPwd = QString("%1:%2").arg(user).arg(password);
-      curlpp::options::ProxyUserPwd userPwdOption(userPwd.toStdString());
-
-      m_request.setOpt(userPwdOption);
+      return false;
     }
   }
-  catch (curlpp::RuntimeError &rExc)
+  else
   {
-    m_error = QString(rExc.what());
+    // set proxy
+    CURLcode result = curl_easy_setopt(m_curl, CURLOPT_PROXYTYPE,
+                                       CURLPROXY_HTTP);
 
-    return false;
-  }
-  catch (curlpp::LogicError &lExc)
-  {
-    m_error = QString(lExc.what());
+    if (result != CURLE_OK)
+    {
+      // error
+      m_error = QString(tr("Error setting proxy type: %1"))
+                .arg(curl_easy_strerror(result));
 
-    return false;
+      return false;
+    }
+
+    // proxy host
+    result = curl_easy_setopt(m_curl, CURLOPT_PROXY,
+                              host.toStdString().c_str());
+
+    if (result != CURLE_OK)
+    {
+      // error
+      m_error = QString(tr("Error setting proxy host: %1"))
+                .arg(curl_easy_strerror(result));
+
+      return false;
+    }
+
+    // proxy port
+    result = curl_easy_setopt(m_curl, CURLOPT_PROXYPORT, port);
+
+    if (result != CURLE_OK)
+    {
+      // error
+      m_error = QString(tr("Error setting proxy port: %1"))
+                .arg(curl_easy_strerror(result));
+
+      return false;
+    }
+
+    // proxy user
+    result = curl_easy_setopt(m_curl, CURLOPT_PROXYUSERNAME,
+                              user.toStdString().c_str());
+
+    if (result != CURLE_OK)
+    {
+      // error
+      m_error = QString(tr("Error setting proxy user: %1"))
+                .arg(curl_easy_strerror(result));
+
+      return false;
+    }
+
+    // proxy password
+    result = curl_easy_setopt(m_curl, CURLOPT_PROXYPASSWORD,
+                              password.toStdString().c_str());
+
+    if (result != CURLE_OK)
+    {
+      // error
+      m_error = QString(tr("Error setting proxy password: %1"))
+                .arg(curl_easy_strerror(result));
+
+      return false;
+    }
   }
 
   return true;
+}
+
+size_t HttpPort::curlWrite(void *ptr, size_t size, size_t nmemb,
+  void *userdata)
+{
+  QByteArray *byteData = (QByteArray*)userdata;
+  const char *data = (char*)ptr;
+
+  // append data to global
+  byteData->append(data, size * nmemb);
+
+  return size * nmemb;
 }
 
 QScriptValue httpPortConstructor(QScriptContext *context,
