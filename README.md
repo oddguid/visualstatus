@@ -78,7 +78,6 @@ Visualstatus depends on the following software:
 * [qjson](http://qjson.sourceforge.net)
 * [boost](http://www.boost.org), for ASIO
 * [libcurl](http://curl.haxx.se/libcurl)
-* [curlpp](http://code.google.com/p/curlpp)
 * [TimeoutSerial](https://gitorious.org/serial-port), a copy is included in this repository.
 
 ### Build steps
