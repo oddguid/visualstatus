@@ -1,11 +1,13 @@
 #include <stdio.h>
+#include <iostream>
+#include <curl/curl.h>
 #include <QCoreApplication>
 #include "../../src/HttpPort.h"
 
 int main(int argc, char *argv[])
 {
-  // automatic cleanup of curl
-  cURLpp::Cleanup curlCleanup;
+  // initialize curl
+  curl_global_init(CURL_GLOBAL_ALL);
 
   QCoreApplication app(argc, argv);
 
@@ -31,6 +33,9 @@ int main(int argc, char *argv[])
 
   // print data to console
   std::cout << port.data().toStdString() << std::endl;
+
+  // clean up curl
+  curl_global_cleanup();
 
   return 0;
 }
