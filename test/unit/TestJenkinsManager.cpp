@@ -216,28 +216,6 @@ void TestJenkinsManager::parseJsonDataTwice()
   QVERIFY(manager.jobNames().contains("job13") == true);
 }
 
-void TestJenkinsManager::jenkinsManagerConstructor()
-{
-  QScriptEngine *scriptEngine = new QScriptEngine();
-  scriptEngine->setProcessEventsInterval(100);
-
-  QScriptContext *scriptContext = scriptEngine->currentContext();
-
-  // add this-object and activation-object to fake a script function call
-  QScriptValue thisObject;
-  QScriptValue activationObject;
-
-  scriptContext->setThisObject(thisObject);
-  scriptContext->setActivationObject(activationObject);
-
-  // ask for new script jenkinsmanager object
-  QScriptValue scriptJenkinsManager =
-      ::jenkinsManagerConstructor(scriptContext, scriptEngine);
-
-  QFAIL("TODO: call script function");
-//  scriptJenkinsManager
-}
-
 } // unittest
 
 QTEST_MAIN(unittest::TestJenkinsManager)

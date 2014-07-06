@@ -23,9 +23,6 @@ private slots:
 
   /// Tests the parseJobBuffer function with a buffer containing an error.
   void parseJobBufferError();
-
-  /// Tests the global function mockJenkinsManagerConstructor.
-  void mockJenkinsManagerConstructor();
 };
 
 } // unittest

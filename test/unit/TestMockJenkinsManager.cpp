@@ -88,28 +88,6 @@ void TestMockJenkinsManager::parseJobBufferError()
   }
 }
 
-void TestMockJenkinsManager::mockJenkinsManagerConstructor()
-{
-  QScriptEngine *scriptEngine = new QScriptEngine();
-  scriptEngine->setProcessEventsInterval(100);
-
-  QScriptContext *scriptContext = scriptEngine->currentContext();
-
-  // add this-object and activation-object to fake a script function call
-  QScriptValue thisObject;
-  QScriptValue activationObject;
-
-  scriptContext->setThisObject(thisObject);
-  scriptContext->setActivationObject(activationObject);
-
-  // ask for new script mockjenkinsmanager object
-  QScriptValue scriptMockJenkinsManager =
-      ::mockJenkinsManagerConstructor(scriptContext, scriptEngine);
-
-  QFAIL("TODO: call script function");
-//  scriptMockJenkinsManager
-}
-
 } // unittest
 
 QTEST_MAIN(unittest::TestMockJenkinsManager)

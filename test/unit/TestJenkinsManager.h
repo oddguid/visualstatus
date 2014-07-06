@@ -33,9 +33,6 @@ private slots:
 
   /// Tests the parseJsonData function with 2 correct, different data buffers.
   void parseJsonDataTwice();
-
-  /// Tests the global function jenkinsManagerConstructor.
-  void jenkinsManagerConstructor();
 };
 
 } // unittest
