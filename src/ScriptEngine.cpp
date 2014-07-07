@@ -1,11 +1,5 @@
 #include "ScriptEngine.h"
 
-ScriptEngine::ScriptEngine()
-  : QScriptEngine()
-{
-  addFunctions();
-}
-
 ScriptEngine::ScriptEngine(QObject *parent)
   : QScriptEngine(parent)
 {

@@ -16,9 +16,6 @@ class ScriptEngine : public QScriptEngine
 
 public:
   /// Constructor.
-  ScriptEngine();
-
-  /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
   explicit ScriptEngine(QObject *parent = 0);
