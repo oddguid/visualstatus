@@ -36,7 +36,7 @@ bool SerialPort::open(const QString &deviceName, unsigned int baudrate,
       if (answer.compare(0, m_expected.length(), m_expected) != 0)
       {
         // unexpected answer
-        m_error = QString(tr("Received unexpected answer: %1"))
+        m_error = tr("Received unexpected answer: %1")
                   .arg(QString::fromStdString(answer));
 
         return false;
@@ -52,14 +52,14 @@ bool SerialPort::open(const QString &deviceName, unsigned int baudrate,
   }
   catch (timeout_exception &exc)
   {
-    m_error = QString(tr("Time-out while opening serial port. %1"))
+    m_error = tr("Time-out while opening serial port. %1")
               .arg(QString(exc.what()));
 
     return false;
   }
   catch (boost::system::system_error &exc)
   {
-    m_error = QString(tr("Cannot open serial port. %1 (%2)"))
+    m_error = tr("Cannot open serial port. %1 (%2)")
               .arg(QString(exc.what()))
               .arg(exc.code().value());
 
@@ -84,14 +84,14 @@ bool SerialPort::close()
   }
   catch (timeout_exception &exc)
   {
-    m_error = QString(tr("Time-out while closing serial port. %1"))
+    m_error = tr("Time-out while closing serial port. %1")
               .arg(QString(exc.what()));
 
     return false;
   }
   catch (boost::system::system_error &exc)
   {
-    m_error = QString(tr("Cannot close serial port. %1 (%2)"))
+    m_error = tr("Cannot close serial port. %1 (%2)")
               .arg(QString(exc.what()))
               .arg(exc.code().value());
 
@@ -111,14 +111,14 @@ bool SerialPort::setTimeout(unsigned short timeoutSecs)
   }
   catch (timeout_exception &exc)
   {
-    m_error = QString(tr("Time-out while setting serial port time-out. %1"))
+    m_error = tr("Time-out while setting serial port time-out. %1")
               .arg(QString(exc.what()));
 
     return false;
   }
   catch (boost::system::system_error &exc)
   {
-    m_error = QString(tr("Cannot set serial port timeout. %1 (%2)"))
+    m_error = tr("Cannot set serial port timeout. %1 (%2)")
               .arg(QString(exc.what()))
               .arg(exc.code().value());
 
@@ -138,14 +138,14 @@ bool SerialPort::write(const QString &data)
   }
   catch (timeout_exception &exc)
   {
-    m_error = QString(tr("Time-out while writing to serial port. %1"))
+    m_error = tr("Time-out while writing to serial port. %1")
               .arg(QString(exc.what()));
 
     return false;
   }
   catch (boost::system::system_error &exc)
   {
-    m_error = QString(tr("Cannot write to serial port. %1 (%2)"))
+    m_error = tr("Cannot write to serial port. %1 (%2)")
               .arg(QString(exc.what()))
               .arg(exc.code().value());
 
@@ -158,7 +158,7 @@ bool SerialPort::write(const QString &data)
   if (answer.compare(0, m_expected.length(), m_expected) != 0)
   {
     // unexpected answer
-    m_error = QString(tr("Received unexpected answer: %1"))
+    m_error = tr("Received unexpected answer: %1")
               .arg(QString::fromStdString(answer));
 
     return false;
@@ -177,14 +177,14 @@ bool SerialPort::writeRaw(const QByteArray &data)
   }
   catch (timeout_exception &exc)
   {
-    m_error = QString(tr("Time-out while writing to serial port. %1"))
+    m_error = tr("Time-out while writing to serial port. %1")
               .arg(QString(exc.what()));
 
     return false;
   }
   catch (boost::system::system_error &exc)
   {
-    m_error = QString(tr("Cannot write to serial port. %1 (%2)"))
+    m_error = tr("Cannot write to serial port. %1 (%2)")
               .arg(QString(exc.what()))
               .arg(exc.code().value());
 
@@ -197,7 +197,7 @@ bool SerialPort::writeRaw(const QByteArray &data)
   if (answer.compare(0, m_expected.length(), m_expected) != 0)
   {
     // unexpected answer
-    m_error = QString(tr("Received unexpected answer: %1"))
+    m_error = tr("Received unexpected answer: %1")
               .arg(QString::fromStdString(answer));
 
     return false;
@@ -217,12 +217,12 @@ QString SerialPort::readStringUntil(const QString &delimiter)
   }
   catch (timeout_exception &exc)
   {
-    m_error = QString(tr("Time-out while reading from serial port. %1"))
+    m_error = tr("Time-out while reading from serial port. %1")
               .arg(QString(exc.what()));
   }
   catch (boost::system::system_error& exc)
   {
-    m_error = QString(tr("Cannot read from serial port. %1 (%2)"))
+    m_error = tr("Cannot read from serial port. %1 (%2)")
               .arg(QString(exc.what()))
               .arg(exc.code().value());
   }

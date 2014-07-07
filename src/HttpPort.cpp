@@ -40,8 +40,7 @@ bool HttpPort::get(const QString &url)
   if (result != CURLE_OK)
   {
     // error
-    m_error = QString(tr("Error setting URL: %1"))
-              .arg(curl_easy_strerror(result));
+    m_error = tr("Error setting URL. %1").arg(curl_easy_strerror(result));
 
     return false;
   }
@@ -59,7 +58,7 @@ bool HttpPort::get(const QString &url)
     if (httpCode >= 400)
     {
       // HTTP code 400 or greater is an error
-      m_error = QString(tr("HTTP error: %1")).arg(httpCode);
+      m_error = tr("HTTP error %1").arg(httpCode);
 
       return false;
     }
@@ -73,7 +72,7 @@ bool HttpPort::get(const QString &url)
   {
     // error
     std::string errorMsg(m_curlErrorBuffer.begin(), m_curlErrorBuffer.end());
-    m_error = QString(tr("Error getting data: %1")).arg(errorMsg.c_str());
+    m_error = tr("Error getting data. %1").arg(errorMsg.c_str());
 
     return false;
   }
@@ -98,8 +97,7 @@ bool HttpPort::setTimeout(unsigned short timeoutSecs)
   if (result != CURLE_OK)
   {
     // error
-    m_error = QString(tr("Error setting timeout: %1"))
-              .arg(curl_easy_strerror(result));
+    m_error = tr("Error setting timeout. %1").arg(curl_easy_strerror(result));
 
     return false;
   }
@@ -120,8 +118,7 @@ bool HttpPort::setAuthentication(const QString &user,
   if (result != CURLE_OK)
   {
     // error
-    m_error = QString(tr("Error setting user: %1"))
-              .arg(curl_easy_strerror(result));
+    m_error = tr("Error setting user.  %1").arg(curl_easy_strerror(result));
 
     return false;
   }
@@ -133,8 +130,7 @@ bool HttpPort::setAuthentication(const QString &user,
   if (result != CURLE_OK)
   {
     // error
-    m_error = QString(tr("Error setting password: %1"))
-              .arg(curl_easy_strerror(result));
+    m_error = tr("Error setting password. %1").arg(curl_easy_strerror(result));
 
     return false;
   }
@@ -156,8 +152,7 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
     if (result != CURLE_OK)
     {
       // error
-      m_error = QString(tr("Error clearing proxy: %1"))
-                .arg(curl_easy_strerror(result));
+      m_error = tr("Error clearing proxy. %1").arg(curl_easy_strerror(result));
 
       return false;
     }
@@ -171,7 +166,7 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
     if (result != CURLE_OK)
     {
       // error
-      m_error = QString(tr("Error setting proxy type: %1"))
+      m_error = tr("Error setting proxy type. %1")
                 .arg(curl_easy_strerror(result));
 
       return false;
@@ -184,7 +179,7 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
     if (result != CURLE_OK)
     {
       // error
-      m_error = QString(tr("Error setting proxy host: %1"))
+      m_error = tr("Error setting proxy host. %1")
                 .arg(curl_easy_strerror(result));
 
       return false;
@@ -196,7 +191,7 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
     if (result != CURLE_OK)
     {
       // error
-      m_error = QString(tr("Error setting proxy port: %1"))
+      m_error = tr("Error setting proxy port. %1")
                 .arg(curl_easy_strerror(result));
 
       return false;
@@ -209,7 +204,7 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
     if (result != CURLE_OK)
     {
       // error
-      m_error = QString(tr("Error setting proxy user: %1"))
+      m_error = tr("Error setting proxy user. %1")
                 .arg(curl_easy_strerror(result));
 
       return false;
@@ -222,7 +217,7 @@ bool HttpPort::setProxy(const QString &user, const QString &password,
     if (result != CURLE_OK)
     {
       // error
-      m_error = QString(tr("Error setting proxy password: %1"))
+      m_error = tr("Error setting proxy password. %1")
                 .arg(curl_easy_strerror(result));
 
       return false;

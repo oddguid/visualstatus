@@ -193,7 +193,7 @@ void ScriptRunner::runScript(const QString &script, const QString &fileName)
 
     // emit errors
     emit appendLog(LogLevel::Error,
-                   QString(tr("Error in script, line %1:")).arg(lineNumber));
+                   tr("Error in script, line %1:").arg(lineNumber));
 
     emit appendLog(LogLevel::Error, QString("%1").arg(error.toString()));
   }
