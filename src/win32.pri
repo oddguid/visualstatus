@@ -1,4 +1,4 @@
-message("win32 settings...")
+message("Win32 settings...")
 
 # define supported windows version (windows 7 and up)
 DEFINES += "_WIN32_WINNT=0x0601"
