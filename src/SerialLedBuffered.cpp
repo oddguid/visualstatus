@@ -101,8 +101,8 @@ bool SerialLedBuffered::update()
 
 void SerialLedBuffered::initializeBuffer()
 {
-  m_ledBuffer[0] = 0x06;
-  m_ledBuffer[1] = 0x85;
+  m_ledBuffer[0] = static_cast<unsigned char>(0x06);
+  m_ledBuffer[1] = static_cast<unsigned char>(0x85);
   m_ledBuffer[2] = m_numLeds * NUM_COLOR_COMPONENTS;
 }
 
