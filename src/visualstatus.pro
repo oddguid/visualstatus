@@ -16,13 +16,6 @@ QT += script
 
 INCLUDEPATH += .
 
-# embed the manifest on windows + visual studio 2005
-win32:win32-msvc2005 {
-    CONFIG += embed_manifest_exe
-    QMAKE_CLEAN += debug/*.intermediate.manifest
-    QMAKE_CLEAN += release/*.intermediate.manifest
-}
-
 HEADERS = serial/TimeoutSerial.h \
           Color.h \
           JenkinsJob.h \
