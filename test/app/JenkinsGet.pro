@@ -17,7 +17,4 @@ SOURCES = JenkinsGet.cpp \
           ../../src/BaseHttpPort.cpp \
           ../../src/HttpPort.cpp
 
-include(../../src/common.pri)
-
 include(apptest.pri)
-

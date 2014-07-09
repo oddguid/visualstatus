@@ -14,8 +14,4 @@ SOURCES = TestMockJenkinsManager.cpp \
           ../../src/BaseJenkinsManager.cpp \
           ../../src/MockJenkinsManager.cpp
 
-QT += network
-include(../../src/common.pri)
-
 include(unittest.pri)
-

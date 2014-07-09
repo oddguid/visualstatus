@@ -16,19 +16,11 @@ INCLUDEPATH += .
 
 DEPENDPATH += .
 
-# embed the manifest on win32 + vs2005
-win32:win32-msvc2005 {
-  CONFIG += embed_manifest_exe
-  QMAKE_CLEAN += debug/*.intermediate.manifest
-  QMAKE_CLEAN += release/*.intermediate.manifest
-}
+include(../../src/common.pri)
 
 # output dirs and naming
 CONFIG(debug, debug|release) {
   DESTDIR = ../../build/debug
-
-  mac: TARGET = $$join(TARGET,,,_debug)
-  win32: TARGET = $$join(TARGET,,,d)
 } else {
   DESTDIR = ../../build/release
 }
