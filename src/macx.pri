@@ -3,6 +3,9 @@ message("Mac X settings...")
 INCLUDEPATH += /usr/local/include
 QMAKE_LIBDIR += /usr/local/lib
 
+# no app bundle
+CONFIG -= app_bundle
+
 # qjson
 CONFIG(debug, debug|release) {
   LIBS += -lqjson
