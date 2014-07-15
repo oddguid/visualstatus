@@ -14,6 +14,15 @@ CONFIG += console
 QT += network
 QT += script
 
+CONFIG += debug_and_release
+
+# output dirs
+CONFIG(debug, debug|release) {
+  DESTDIR = ../build/debug
+} else {
+  DESTDIR = ../build/release
+}
+
 INCLUDEPATH += .
 
 HEADERS = serial/TimeoutSerial.h \

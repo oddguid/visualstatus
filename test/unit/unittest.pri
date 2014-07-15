@@ -19,7 +19,7 @@ DEPENDPATH += .
 
 include(../../src/common.pri)
 
-# output dirs and naming
+# output dirs
 CONFIG(debug, debug|release) {
   DESTDIR = ../../build/debug
 } else {
