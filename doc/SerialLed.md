@@ -21,7 +21,7 @@ if (port.open("/dev/tty.usbserial-A6004op2", 9600, 10))
   var green = new Color(0, 255, 0);
 
   // set toggled color on first LED
-  led.setToggled(0, red, green);
+  led.setToggledColor(0, red, green);
 
   // set toggle time
   led.setToggleDelay(500);
