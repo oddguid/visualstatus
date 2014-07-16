@@ -1,0 +1,2 @@
+job1|http://example.com/jenkins/job/job1/|disabled
+job2|http://example.com/jenkins/job/job2/|blue
