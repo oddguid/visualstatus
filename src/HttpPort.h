@@ -76,7 +76,7 @@ protected:
   /// \param[in] ptr Data chunk that was received.
   /// \param[in] size Number of data tokens that was received.
   /// \param[in] nmemb Size of a data token in bytes.
-  /// \param[in|out] userdata Structure to which the received data will be
+  /// \param[in,out] userdata Structure to which the received data will be
   /// appended. In this case a static QByteArray will be used.
   /// \return Number of bytes that was processed, which is normally size *
   /// nmemb. A different value signals an error.
