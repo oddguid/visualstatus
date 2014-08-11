@@ -4,7 +4,7 @@
 #include <curl/curl.h>
 #include "MainConsole.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
   // initialize curl
   curl_global_init(CURL_GLOBAL_ALL);
