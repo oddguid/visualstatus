@@ -21,7 +21,7 @@ public:
   explicit ScriptEngine(QObject *parent = 0);
 
   /// Destructor.
-  ~ScriptEngine();
+  virtual ~ScriptEngine();
 
 protected:
   /// Custom function for handling the script function exit(). Emits the

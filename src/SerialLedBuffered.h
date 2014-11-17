@@ -49,7 +49,7 @@ public:
   SerialLedBuffered(quint8 numLeds, QObject *parent = 0);
 
   /// Destructor.
-  ~SerialLedBuffered();
+  virtual ~SerialLedBuffered();
 
   /// Gives the number of LEDs available in the buffer.
   ///

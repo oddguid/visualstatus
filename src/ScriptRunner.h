@@ -21,7 +21,7 @@ public:
   explicit ScriptRunner(QObject *parent = 0);
 
   /// Destructor.
-  ~ScriptRunner();
+  virtual ~ScriptRunner();
 
 protected:
   /// Creates the script engine.

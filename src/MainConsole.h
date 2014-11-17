@@ -26,7 +26,7 @@ public:
   explicit MainConsole(QObject *parent = 0);
 
   /// Destructor.
-  ~MainConsole();
+  virtual ~MainConsole();
 
   /// Prepares the script based on the given arguments. The argument list must
   /// contain the file name of the script to run.

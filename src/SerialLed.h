@@ -17,7 +17,7 @@ public:
   explicit SerialLed(QObject *parent = 0);
 
   /// Destructor.
-  ~SerialLed();
+  virtual ~SerialLed();
 
   /// Sets a solid color for the given LED.
   ///
