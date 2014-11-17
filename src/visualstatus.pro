@@ -26,45 +26,44 @@ CONFIG(debug, debug|release) {
 INCLUDEPATH += .
 
 HEADERS = serial/TimeoutSerial.h \
-          Color.h \
-          JenkinsJob.h \
-          BaseJenkinsManager.h \
-          JenkinsManager.h \
-          MockJenkinsManager.h \
-          LogLevel.h \
-          Logger.h \
-          BaseSerialPort.h \
-          SerialPort.h \
-          MockSerialPort.h \
           BaseHttpPort.h \
-          MockHttpPort.h \
-          HttpPort.h \
+          BaseJenkinsManager.h \
           BaseSerialObject.h \
-          SerialLed.h \
+          BaseSerialPort.h \
+          Color.h \
+          HttpPort.h \
+          JenkinsJob.h \
+          JenkinsManager.h \
+          Logger.h \
+          LogLevel.h \
+          MainConsole.h \
+          MockHttpPort.h \
+          MockJenkinsManager.h \
+          MockSerialPort.h \
           ScriptEngine.h \
           ScriptRunner.h \
-          MainConsole.h \
-          SerialLedBuffered.h
+          SerialLed.h \
+          SerialLedBuffered.h \
+          SerialPort.h
 
-SOURCES = main.cpp \
-          serial/TimeoutSerial.cpp \
-          Color.cpp \
-          JenkinsJob.cpp \
-          BaseJenkinsManager.cpp \
-          JenkinsManager.cpp \
-          MockJenkinsManager.cpp \
-          LogLevel.cpp \
-          Logger.cpp \
-          BaseSerialPort.cpp \
-          SerialPort.cpp \
-          MockSerialPort.cpp \
+SOURCES = serial/TimeoutSerial.cpp \
           BaseHttpPort.cpp \
-          MockHttpPort.cpp \
-          HttpPort.cpp \
+          BaseJenkinsManager.cpp \
           BaseSerialObject.cpp \
-          SerialLed.cpp \
+          BaseSerialPort.cpp \
+          Color.cpp \
+          HttpPort.cpp \
+          JenkinsJob.cpp \
+          JenkinsManager.cpp \
+          Logger.cpp \
+          LogLevel.cpp \
+          main.cpp \
+          MainConsole.cpp \
+          MockHttpPort.cpp \
+          MockJenkinsManager.cpp \
+          MockSerialPort.cpp \
           ScriptEngine.cpp \
           ScriptRunner.cpp \
-          MainConsole.cpp \
-          SerialLedBuffered.cpp
-
+          SerialLed.cpp \
+          SerialLedBuffered.cpp \
+          SerialPort.cpp
