@@ -12,6 +12,59 @@ JenkinsManager::~JenkinsManager()
 {
 }
 
+bool JenkinsManager::getStatus(const QString &url)
+{
+  m_error.clear();
+
+  // clear job list
+  clearJobs();
+
+  if (url.isEmpty())
+  {
+    // nothing to do
+    return true;
+  }
+
+  if (m_httpPort == NULL)
+  {
+    m_error = tr("No HTTP port set");
+
+    return false;
+  }
+
+  // make JSON url
+  QString jsonUrl = makeJsonUrl(url);
+
+  // get data
+  bool getOk = m_httpPort->get(jsonUrl);
+
+  if (getOk)
+  {
+    // get data and parse
+    QByteArray jsonData = m_httpPort->data().toUtf8();
+
+    // parse JSON data
+    bool parseOk = parseJsonData(jsonData);
+
+    if (!parseOk)
+    {
+      // parsing failed
+      m_error = tr("Cannot parse JSON data");
+
+      return false;
+    }
+  }
+  else
+  {
+    // error getting data
+    m_error = m_httpPort->error();
+
+    return false;
+  }
+
+  return true;
+}
+
 QString JenkinsManager::makeJsonUrl(const QString &url)
 {
   // append /api/json to access JSON interface of Jenkins/Hudson
@@ -76,59 +129,6 @@ bool JenkinsManager::parseJsonData(const QByteArray &data)
   }
 
   // done
-  return true;
-}
-
-bool JenkinsManager::getStatus(const QString &url)
-{
-  m_error.clear();
-
-  // clear job list
-  clearJobs();
-
-  if (url.isEmpty())
-  {
-    // nothing to do
-    return true;
-  }
-
-  if (m_httpPort == NULL)
-  {
-    m_error = tr("No HTTP port set");
-
-    return false;
-  }
-
-  // make JSON url
-  QString jsonUrl = makeJsonUrl(url);
-
-  // get data
-  bool getOk = m_httpPort->get(jsonUrl);
-
-  if (getOk)
-  {
-    // get data and parse
-    QByteArray jsonData = m_httpPort->data().toUtf8();
-
-    // parse JSON data
-    bool parseOk = parseJsonData(jsonData);
-
-    if (!parseOk)
-    {
-      // parsing failed
-      m_error = tr("Cannot parse JSON data");
-
-      return false;
-    }
-  }
-  else
-  {
-    // error getting data
-    m_error = m_httpPort->error();
-
-    return false;
-  }
-
   return true;
 }
 

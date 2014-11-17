@@ -15,12 +15,6 @@ BaseJenkinsManager::~BaseJenkinsManager()
   clearJobs();
 }
 
-void BaseJenkinsManager::clearJobs()
-{
-  qDeleteAll(m_jobStatus.begin(), m_jobStatus.end());
-  m_jobStatus.clear();
-}
-
 QStringList BaseJenkinsManager::jobNames()
 {
   return m_jobStatus.keys();
@@ -87,4 +81,10 @@ void BaseJenkinsManager::setHttpPort(BaseHttpPort *port)
 QString BaseJenkinsManager::error() const
 {
   return m_error;
+}
+
+void BaseJenkinsManager::clearJobs()
+{
+  qDeleteAll(m_jobStatus.begin(), m_jobStatus.end());
+  m_jobStatus.clear();
 }

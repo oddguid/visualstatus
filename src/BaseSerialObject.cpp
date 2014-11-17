@@ -12,6 +12,16 @@ BaseSerialObject::~BaseSerialObject()
 {
 }
 
+void BaseSerialObject::setSerialPort(BaseSerialPort *serialPort)
+{
+  m_serialPort = serialPort;
+}
+
+QString BaseSerialObject::error() const
+{
+  return m_error;
+}
+
 bool BaseSerialObject::write(const QString &data)
 {
   m_error.clear();
@@ -54,14 +64,4 @@ bool BaseSerialObject::writeRaw(const QByteArray &data)
   }
 
   return true;
-}
-
-void BaseSerialObject::setSerialPort(BaseSerialPort *serialPort)
-{
-  m_serialPort = serialPort;
-}
-
-QString BaseSerialObject::error() const
-{
-  return m_error;
 }
