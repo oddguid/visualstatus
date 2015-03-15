@@ -9,15 +9,15 @@ CONFIG += embed_manifest_exe
 # boost
 CONFIG(debug, debug|release) {
   win32-msvc2013 {
-    LIBS += libboost_system-vc120-mt-gd-1_55.lib \
-            libboost_thread-vc120-mt-gd-1_55.lib \
-            libboost_date_time-vc120-mt-gd-1_55.lib
+    LIBS += libboost_system-vc120-mt-gd-1_57.lib \
+            libboost_thread-vc120-mt-gd-1_57.lib \
+            libboost_date_time-vc120-mt-gd-1_57.lib
   }
 } else {
   win32-msvc2013 {
-    LIBS += libboost_system-vc120-mt-1_55.lib \
-            libboost_thread-vc120-mt-1_55.lib \
-            libboost_date_time-vc120-mt-1_55.lib
+    LIBS += libboost_system-vc120-mt-1_57.lib \
+            libboost_thread-vc120-mt-1_57.lib \
+            libboost_date_time-vc120-mt-1_57.lib
   }
 }
 
