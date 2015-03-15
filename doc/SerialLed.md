@@ -34,7 +34,7 @@ if (port.open("/dev/tty.usbserial-A6004op2", 9600, 10))
 }
 ```
 
-A description of the protocol that is used can be found here(TODO).
+A description of the protocol that is used can be found [here](https://github.com/oddguid/visualstatus-protocol/blob/master/SerialLed.md).
 
 Functions
 ---------
