@@ -74,8 +74,7 @@ Building
 
 Visualstatus depends on the following software:
 
-* [Qt](http://qt-project.org), version 4.8.5 is used for development.
-* [qjson](http://qjson.sourceforge.net)
+* [Qt](http://qt-project.org), version 5.4.1 is used for development.
 * [boost](http://www.boost.org), for ASIO
 * [libcurl](http://curl.haxx.se/libcurl)
 * [TimeoutSerial](https://gitorious.org/serial-port), a copy is included in this repository.
