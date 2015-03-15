@@ -1,6 +1,8 @@
 #include "JenkinsManager.h"
-#include <qjson/parser.h>
-#include <qjson/qobjecthelper.h>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QStringList>
+#include <QVariantList>
 #include "HttpPort.h"
 
 JenkinsManager::JenkinsManager(QObject *parent)
@@ -96,27 +98,36 @@ bool JenkinsManager::parseJsonData(const QByteArray &data)
   }
 
   // parse JSON data
-  QJson::Parser parser;
-  bool ok;
+  QJsonParseError parseError;
+  QJsonDocument document = QJsonDocument::fromJson(data, &parseError);
 
-  QVariantMap result = parser.parse(data, &ok).toMap();
-
-  if (!ok)
+  if (parseError.error != QJsonParseError::NoError)
   {
     // parse error
     return false;
   }
 
+  if (!document.isObject())
+  {
+    // not an object
+    return false;
+  }
+
+  // convert to map
+  const QVariantMap result = document.object().toVariantMap();
+
   // convert to jobs and add to list
-  QList<QVariant> jobList = result["jobs"].toList();
+  const QVariantList jobList = result["jobs"].toList();
 
   for (int i = 0; i < jobList.size(); ++i)
   {
-    QVariantMap jobMap = jobList.at(i).toMap();
+    const QVariantMap jobMap = jobList.at(i).toMap();
 
+    // create job
     JenkinsJob *job = new JenkinsJob;
-
-    QJson::QObjectHelper::qvariant2qobject(jobMap, job);
+    job->name(jobMap.value("name").toString());
+    job->url(jobMap.value("url").toString());
+    job->color(jobMap.value("color").toString());
 
     if (m_jobStatus.contains(job->name()))
     {

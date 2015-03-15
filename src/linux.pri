@@ -1,12 +1,5 @@
 message("Linux settings...")
 
-# qjson
-CONFIG(debug, debug|release) {
-  LIBS += -lqjson
-} else {
-  LIBS += -lqjson
-}
-
 # boost
 CONFIG(debug, debug|release) {
   LIBS += -lboost_system-mt \

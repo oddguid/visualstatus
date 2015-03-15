@@ -6,13 +6,6 @@ QMAKE_LIBDIR += /usr/local/lib
 # no app bundle
 CONFIG -= app_bundle
 
-# qjson
-CONFIG(debug, debug|release) {
-  LIBS += -lqjson
-} else {
-  LIBS += -lqjson
-}
-
 # boost
 CONFIG(debug, debug|release) {
   LIBS += -lboost_system-mt \
