@@ -154,7 +154,7 @@ void TestBaseJenkinsManager::error()
 {
   DummyJenkinsManager manager;
   QString errorText = "error text";
-  manager.m_error = errorText;
+  manager.refError() = errorText;
 
   QCOMPARE(manager.error(), errorText);
 }

@@ -3,12 +3,7 @@
 
 #include <QtTest/QtTest>
 #include "../../src/JenkinsJob.h"
-
-// redefine protected to public to get access to the member variables of the
-// BaseJenkinsManager class
-#define protected public
 #include "../../src/BaseJenkinsManager.h"
-#undef protected
 
 namespace unittest
 {
@@ -45,7 +40,7 @@ private slots:
 };
 
 // Dummy class for testing of BaseJenkinsManager, implements function
-// getStatus(const QString &url).
+// getStatus(const QString &url) and makes internals accessible.
 class DummyJenkinsManager : public BaseJenkinsManager
 {
   Q_OBJECT
@@ -64,6 +59,15 @@ public:
   {
     return m_jobStatus;
   }
+
+  // make m_error accessible
+  QString &refError()
+  {
+    return m_error;
+  }
+
+  // make clearJobs accessible
+  using BaseJenkinsManager::clearJobs;
 
 public slots:
   virtual bool getStatus(const QString &url)
