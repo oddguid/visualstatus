@@ -233,10 +233,19 @@ size_t HttpPort::curlWrite(void *ptr, size_t size, size_t nmemb,
   QByteArray *byteData = (QByteArray*)userdata;
   const char *data = (char*)ptr;
 
-  // append data to global
-  byteData->append(data, size * nmemb);
+  size_t copySize = size * nmemb;
+  size_t bufferSize = byteData->size();
 
-  return size * nmemb;
+  if ((copySize > INT_MAX) || (bufferSize + copySize > INT_MAX))
+  {
+    // error, data size beyond capacity of QByteArray
+    return 0;
+  }
+
+  // append data to global
+  byteData->append(data, static_cast<int>(copySize));
+
+  return copySize;
 }
 
 QScriptValue httpPortConstructor(QScriptContext *context,
