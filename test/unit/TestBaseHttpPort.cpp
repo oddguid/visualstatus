@@ -7,14 +7,14 @@ void TestBaseHttpPort::defaultConstructor()
 {
   DummyHttpPort port;
 
-  QVERIFY(port.m_error.isEmpty() == true);
+  QVERIFY(port.refError().isEmpty() == true);
 }
 
 void TestBaseHttpPort::error()
 {
   DummyHttpPort port;
   QString errorText = "error text";
-  port.m_error = errorText;
+  port.refError() = errorText;
 
   QCOMPARE(port.error(), errorText);
 }

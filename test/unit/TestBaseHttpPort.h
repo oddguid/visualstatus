@@ -2,12 +2,7 @@
 #define VST_TESTBASEHTTPPORT_H
 
 #include <QtTest/QtTest>
-
-// redefine protected to public to get access to the member variables of the
-// BaseHttpPort class
-#define protected public
 #include "../../src/BaseHttpPort.h"
-#undef protected
 
 namespace unittest
 {
@@ -26,7 +21,7 @@ private slots:
 };
 
 // Dummy class for testing of BaseHttpPort, implements the pure virtual
-// functions.
+// functions and makes the internal data accessible.
 class DummyHttpPort : public BaseHttpPort
 {
   Q_OBJECT
@@ -80,6 +75,12 @@ public:
     Q_UNUSED(port)
 
     return true;
+  }
+
+  // make m_error accessible
+  QString &refError()
+  {
+    return m_error;
   }
 };
 
