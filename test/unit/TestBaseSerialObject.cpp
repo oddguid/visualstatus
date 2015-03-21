@@ -8,7 +8,7 @@ void TestBaseSerialObject::defaultConstructor()
   DummySerialObject object;
 
   QVERIFY(object.refError().isEmpty() == true);
-  QVERIFY(object.refSerialPort() == NULL);
+  QVERIFY(object.refSerialPort() == nullptr);
 }
 
 void TestBaseSerialObject::setSerialPort()
@@ -20,7 +20,7 @@ void TestBaseSerialObject::setSerialPort()
   QString errorText = "test error";
   port.setError(errorText);
 
-  QVERIFY(object.refSerialPort() == NULL);
+  QVERIFY(object.refSerialPort() == nullptr);
 
   object.setSerialPort(&port);
 

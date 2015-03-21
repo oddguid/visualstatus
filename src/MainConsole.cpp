@@ -4,7 +4,7 @@
 
 MainConsole::MainConsole(QObject *parent)
   : QObject(parent)
-  , m_scriptRunner(NULL)
+  , m_scriptRunner(nullptr)
   , m_log(stdout)
   , m_scriptFileName()
 {

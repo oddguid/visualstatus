@@ -12,7 +12,7 @@
 
 ScriptRunner::ScriptRunner(QObject *parent)
   : QObject(parent)
-  , m_scriptEngine(NULL)
+  , m_scriptEngine(nullptr)
 {
   // create script engine
   createScriptEngine();

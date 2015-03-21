@@ -6,7 +6,7 @@ BaseJenkinsManager::BaseJenkinsManager(QObject *parent)
   : QObject(parent)
   , m_jobStatus()
   , m_error()
-  , m_httpPort(NULL)
+  , m_httpPort(nullptr)
 {
 }
 
@@ -26,7 +26,7 @@ QString BaseJenkinsManager::jobUrl(const QString &jobName)
   {
     JenkinsJob *job = m_jobStatus[jobName];
 
-    if (job != NULL)
+    if (job != nullptr)
     {
       return job->url();
     }
@@ -41,7 +41,7 @@ QString BaseJenkinsManager::jobColor(const QString &jobName)
   {
     JenkinsJob *job = m_jobStatus[jobName];
 
-    if (job != NULL)
+    if (job != nullptr)
     {
       return job->color();
     }
@@ -70,7 +70,7 @@ QObject *BaseJenkinsManager::job(const QString &jobName)
     return m_jobStatus[jobName];
   }
 
-  return NULL;
+  return nullptr;
 }
 
 void BaseJenkinsManager::setHttpPort(BaseHttpPort *port)

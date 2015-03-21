@@ -168,7 +168,7 @@ void Color::fromScriptValue(const QScriptValue &object)
 QScriptValue colorConstructor(QScriptContext *context,
   QScriptEngine *engine)
 {
-  QObject *object = NULL;
+  QObject *object = nullptr;
 
   if ((context->argumentCount() == 3)
     || (context->argumentCount() == 4))

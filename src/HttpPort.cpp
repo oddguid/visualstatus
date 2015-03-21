@@ -5,7 +5,7 @@ QByteArray HttpPort::m_curlData = QByteArray();
 
 HttpPort::HttpPort(QObject *parent)
   : BaseHttpPort(parent)
-  , m_curl(NULL)
+  , m_curl(nullptr)
   , m_curlErrorBuffer(CURL_ERROR_SIZE)
   , m_data()
 {

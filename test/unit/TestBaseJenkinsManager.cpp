@@ -137,7 +137,7 @@ void TestBaseJenkinsManager::job()
   // get job
   QObject *job = manager.job("job1");
 
-  QVERIFY(job != NULL);
+  QVERIFY(job != nullptr);
 
   JenkinsJob *jenkinsJob = static_cast<JenkinsJob *>(job);
 
@@ -147,7 +147,7 @@ void TestBaseJenkinsManager::job()
 
   job = manager.job("job3");
 
-  QVERIFY(job == NULL);
+  QVERIFY(job == nullptr);
 }
 
 void TestBaseJenkinsManager::error()

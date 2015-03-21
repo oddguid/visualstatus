@@ -40,7 +40,7 @@ bool MockJenkinsManager::getStatus(const QString &fileName)
 
 void MockJenkinsManager::parseJobBuffer(QIODevice *jobBuffer)
 {
-  if (jobBuffer == NULL)
+  if (jobBuffer == nullptr)
   {
     // nothing to do
     return;

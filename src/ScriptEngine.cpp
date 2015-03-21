@@ -17,7 +17,7 @@ QScriptValue ScriptEngine::exitScriptFunction(QScriptContext *context,
 
   ScriptEngine *scriptEngine = dynamic_cast<ScriptEngine *>(engine);
 
-  if (scriptEngine != NULL)
+  if (scriptEngine != nullptr)
   {
     // signal exit
     emit scriptEngine->exitScript();

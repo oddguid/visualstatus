@@ -27,7 +27,7 @@ bool JenkinsManager::getStatus(const QString &url)
     return true;
   }
 
-  if (m_httpPort == NULL)
+  if (m_httpPort == nullptr)
   {
     m_error = tr("No HTTP port set");
 

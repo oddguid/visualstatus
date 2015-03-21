@@ -4,7 +4,7 @@
 BaseSerialObject::BaseSerialObject(QObject *parent)
   : QObject(parent)
   , m_error()
-  , m_serialPort(NULL)
+  , m_serialPort(nullptr)
 {
 }
 
@@ -26,7 +26,7 @@ bool BaseSerialObject::write(const QString &data)
 {
   m_error.clear();
 
-  if (m_serialPort == NULL)
+  if (m_serialPort == nullptr)
   {
     // no serial port set
     m_error = tr("No serial port set");
@@ -48,7 +48,7 @@ bool BaseSerialObject::writeRaw(const QByteArray &data)
 {
   m_error.clear();
 
-  if (m_serialPort == NULL)
+  if (m_serialPort == nullptr)
   {
     // no serial port set
     m_error = tr("No serial port set");

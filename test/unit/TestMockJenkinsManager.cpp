@@ -15,7 +15,7 @@ void TestMockJenkinsManager::parseJobBufferEmpty()
   DummyJenkinsManager manager;
 
   // no buffer
-  manager.parseJobBuffer(NULL);
+  manager.parseJobBuffer(nullptr);
 
   QVERIFY(manager.jobNames().size() == 0);
 }
