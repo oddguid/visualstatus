@@ -3,12 +3,7 @@
 
 #include <QtTest/QtTest>
 #include "../../src/BaseSerialPort.h"
-
-// redefine protected to public to get access to the member variables of the
-// BaseSerialObject class
-#define protected public
 #include "../../src/BaseSerialObject.h"
-#undef protected
 
 namespace unittest
 {
@@ -45,6 +40,40 @@ private slots:
 
   /// Tests the writeRaw function, normal operation.
   void writeRaw();
+};
+
+// Dummy class for testing of BaseSerialObject, makes internals accessible.
+class DummySerialObject : public BaseSerialObject
+{
+  Q_OBJECT
+
+public:
+  DummySerialObject(QObject *parent = 0)
+    : BaseSerialObject(parent)
+  {
+  }
+
+  ~DummySerialObject()
+  {
+  }
+
+  // make m_error accessible
+  QString &refError()
+  {
+    return m_error;
+  }
+
+  // make m_serialPort accessible
+  BaseSerialPort *refSerialPort()
+  {
+    return m_serialPort;
+  }
+
+  // make write accessible
+  using BaseSerialObject::write;
+
+  // make writeRaw accessible
+  using BaseSerialObject::writeRaw;
 };
 
 // Dummy class for testing of BaseSerialObject, implements the pure virtual
