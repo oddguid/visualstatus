@@ -3,6 +3,7 @@
 
 #include <QtTest/QtTest>
 #include "../../src/BaseSerialPort.h"
+#include "../../src/SerialLedBuffered.h"
 
 namespace unittest
 {
@@ -36,6 +37,45 @@ private slots:
 
   /// Tests the update function.
   void update();
+};
+
+// Dummy class for testing of SerialLedBuffered, makes internals accessible.
+class DummySerialLedBuffered : public SerialLedBuffered
+{
+  Q_OBJECT
+
+public:
+  DummySerialLedBuffered(QObject *parent = 0)
+    : SerialLedBuffered(parent)
+  {
+  }
+
+  DummySerialLedBuffered(quint8 numLeds, QObject *parent = 0)
+    : SerialLedBuffered(numLeds, parent)
+  {
+  }
+
+  ~DummySerialLedBuffered()
+  {
+  }
+
+  // make m_numLeds accessible
+  quint8 &refNumLeds()
+  {
+    return m_numLeds;
+  }
+
+  // make m_ledBuffer accessible
+  QByteArray &refLedBuffer()
+  {
+    return m_ledBuffer;
+  }
+
+  // make initializeBuffer accessible
+  using SerialLedBuffered::initializeBuffer;
+
+  // make setCheckSum accessible
+  using SerialLedBuffered::setChecksum;
 };
 
 // Dummy class for testing of SerialLedBuffered, implements the pure virtual

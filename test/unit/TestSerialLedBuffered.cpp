@@ -1,59 +1,53 @@
 #include "TestSerialLedBuffered.h"
 
-// redefine protected to public to get access to the member variables of the
-// SerialLedBuffered class
-#define protected public
-#include "../../src/SerialLedBuffered.h"
-#undef protected
-
 namespace unittest
 {
 
 void TestSerialLedBuffered::defaultConstructor()
 {
-  SerialLedBuffered led;
+  DummySerialLedBuffered led;
 
   QVERIFY(led.error().isEmpty() == true);
 }
 
 void TestSerialLedBuffered::initializeBuffer()
 {
-  SerialLedBuffered led;
+  DummySerialLedBuffered led;
   int numLeds = 1;
   int bufferSize = numLeds * 3 + 4;
 
   // expand the internal buffer and set all bytes to 0
-  led.m_numLeds = numLeds;
-  led.m_ledBuffer.fill(0, bufferSize);
+  led.refNumLeds() = numLeds;
+  led.refLedBuffer().fill(0, bufferSize);
 
   // initialize buffer
   led.initializeBuffer();
 
   // byte should be 0x06
-  QCOMPARE(led.m_ledBuffer.at(0), static_cast<char>(0x06));
+  QCOMPARE(led.refLedBuffer().at(0), static_cast<char>(0x06));
 
   // byte should be 0x85
-  QCOMPARE(led.m_ledBuffer.at(1), static_cast<char>(0x85));
+  QCOMPARE(led.refLedBuffer().at(1), static_cast<char>(0x85));
 
   // byte should numLeds * 3
-  QCOMPARE(led.m_ledBuffer.at(2), static_cast<char>(3));
+  QCOMPARE(led.refLedBuffer().at(2), static_cast<char>(3));
 
   // other bytes should be 0
-  for (int i = 3; i < led.m_ledBuffer.size(); ++i)
+  for (int i = 3; i < led.refLedBuffer().size(); ++i)
   {
-    QCOMPARE(led.m_ledBuffer.at(i), static_cast<char>(0));
+    QCOMPARE(led.refLedBuffer().at(i), static_cast<char>(0));
   }
 }
 
 void TestSerialLedBuffered::numColors()
 {
-  SerialLedBuffered led;
+  DummySerialLedBuffered led;
   int numLeds = 85;
   int bufferSize = numLeds * 3 + 4;
 
   // should start with 0 LEDs
   QCOMPARE(led.numLeds(), static_cast<quint8>(0));
-  QCOMPARE(led.m_numLeds, static_cast<quint8>(0));
+  QCOMPARE(led.refNumLeds(), static_cast<quint8>(0));
 
   // set number of LEDs
   led.setNumLeds(numLeds);
@@ -61,8 +55,8 @@ void TestSerialLedBuffered::numColors()
   QCOMPARE(led.numLeds(), static_cast<quint8>(numLeds));
 
   // check internal values
-  QCOMPARE(led.m_numLeds, static_cast<quint8>(numLeds));
-  QCOMPARE(led.m_ledBuffer.size(), bufferSize);
+  QCOMPARE(led.refNumLeds(), static_cast<quint8>(numLeds));
+  QCOMPARE(led.refLedBuffer().size(), bufferSize);
 
   // set number of LEDs too large, should default to 85
   led.setNumLeds(123);
@@ -70,13 +64,13 @@ void TestSerialLedBuffered::numColors()
   QCOMPARE(led.numLeds(), static_cast<quint8>(numLeds));
 
   // check internal values
-  QCOMPARE(led.m_numLeds, static_cast<quint8>(numLeds));
-  QCOMPARE(led.m_ledBuffer.size(), bufferSize);
+  QCOMPARE(led.refNumLeds(), static_cast<quint8>(numLeds));
+  QCOMPARE(led.refLedBuffer().size(), bufferSize);
 }
 
 void TestSerialLedBuffered::setColor()
 {
-  SerialLedBuffered led;
+  DummySerialLedBuffered led;
 
   // set number of leds
   led.setNumLeds(3);
@@ -96,20 +90,20 @@ void TestSerialLedBuffered::setColor()
   QCOMPARE(ok, true);
 
   // check internal values
-  QCOMPARE(led.m_ledBuffer.at(3), static_cast<char>(1));
-  QCOMPARE(led.m_ledBuffer.at(4), static_cast<char>(2));
-  QCOMPARE(led.m_ledBuffer.at(5), static_cast<char>(3));
-  QCOMPARE(led.m_ledBuffer.at(6), static_cast<char>(253));
-  QCOMPARE(led.m_ledBuffer.at(7), static_cast<char>(254));
-  QCOMPARE(led.m_ledBuffer.at(8), static_cast<char>(255));
-  QCOMPARE(led.m_ledBuffer.at(9), static_cast<char>(127));
-  QCOMPARE(led.m_ledBuffer.at(10), static_cast<char>(128));
-  QCOMPARE(led.m_ledBuffer.at(11), static_cast<char>(129));
+  QCOMPARE(led.refLedBuffer().at(3), static_cast<char>(1));
+  QCOMPARE(led.refLedBuffer().at(4), static_cast<char>(2));
+  QCOMPARE(led.refLedBuffer().at(5), static_cast<char>(3));
+  QCOMPARE(led.refLedBuffer().at(6), static_cast<char>(253));
+  QCOMPARE(led.refLedBuffer().at(7), static_cast<char>(254));
+  QCOMPARE(led.refLedBuffer().at(8), static_cast<char>(255));
+  QCOMPARE(led.refLedBuffer().at(9), static_cast<char>(127));
+  QCOMPARE(led.refLedBuffer().at(10), static_cast<char>(128));
+  QCOMPARE(led.refLedBuffer().at(11), static_cast<char>(129));
 }
 
 void TestSerialLedBuffered::clear()
 {
-  SerialLedBuffered led;
+  DummySerialLedBuffered led;
 
   // set number of leds
   led.setNumLeds(3);
@@ -128,20 +122,20 @@ void TestSerialLedBuffered::clear()
   QCOMPARE(ok, true);
 
   // check internal values
-  QCOMPARE(led.m_ledBuffer.at(3), static_cast<char>(1));
-  QCOMPARE(led.m_ledBuffer.at(4), static_cast<char>(2));
-  QCOMPARE(led.m_ledBuffer.at(5), static_cast<char>(3));
-  QCOMPARE(led.m_ledBuffer.at(6), static_cast<char>(0));
-  QCOMPARE(led.m_ledBuffer.at(7), static_cast<char>(0));
-  QCOMPARE(led.m_ledBuffer.at(8), static_cast<char>(0));
-  QCOMPARE(led.m_ledBuffer.at(9), static_cast<char>(127));
-  QCOMPARE(led.m_ledBuffer.at(10), static_cast<char>(128));
-  QCOMPARE(led.m_ledBuffer.at(11), static_cast<char>(129));
+  QCOMPARE(led.refLedBuffer().at(3), static_cast<char>(1));
+  QCOMPARE(led.refLedBuffer().at(4), static_cast<char>(2));
+  QCOMPARE(led.refLedBuffer().at(5), static_cast<char>(3));
+  QCOMPARE(led.refLedBuffer().at(6), static_cast<char>(0));
+  QCOMPARE(led.refLedBuffer().at(7), static_cast<char>(0));
+  QCOMPARE(led.refLedBuffer().at(8), static_cast<char>(0));
+  QCOMPARE(led.refLedBuffer().at(9), static_cast<char>(127));
+  QCOMPARE(led.refLedBuffer().at(10), static_cast<char>(128));
+  QCOMPARE(led.refLedBuffer().at(11), static_cast<char>(129));
 }
 
 void TestSerialLedBuffered::clearAll()
 {
-  SerialLedBuffered led;
+  DummySerialLedBuffered led;
 
   // set number of leds
   led.setNumLeds(3);
@@ -160,18 +154,18 @@ void TestSerialLedBuffered::clearAll()
   QCOMPARE(ok, true);
 
   // check internal values
-  for (int i = 3; i < led.m_ledBuffer.size() - 1; ++i)
+  for (int i = 3; i < led.refLedBuffer().size() - 1; ++i)
   {
-    QCOMPARE(led.m_ledBuffer.at(i), static_cast<char>(0));
+    QCOMPARE(led.refLedBuffer().at(i), static_cast<char>(0));
   }
 }
 
 void TestSerialLedBuffered::setChecksum()
 {
-  SerialLedBuffered led;
+  DummySerialLedBuffered led;
 
   // checksum should not be set yet
-  QCOMPARE(led.m_ledBuffer.at(led.m_ledBuffer.size() - 1),
+  QCOMPARE(led.refLedBuffer().at(led.refLedBuffer().size() - 1),
            static_cast<char>(0));
 
   // set checksum
@@ -180,7 +174,7 @@ void TestSerialLedBuffered::setChecksum()
   // expected checksum is based on numColors only
   char expectedCS = 0;
 
-  QCOMPARE(led.m_ledBuffer.at(led.m_ledBuffer.size() - 1), expectedCS);
+  QCOMPARE(led.refLedBuffer().at(led.refLedBuffer().size() - 1), expectedCS);
 
   // expand buffer
   led.setNumLeds(3);
@@ -201,7 +195,7 @@ void TestSerialLedBuffered::setChecksum()
   // (3*3) ^ 1 ^ 2 ^ 3 ^ 253 ^ 254 ^ 255 ^ 127 ^ 128 ^ 129
   expectedCS = 139;
 
-  QCOMPARE(led.m_ledBuffer.at(led.m_ledBuffer.size() - 1), expectedCS);
+  QCOMPARE(led.refLedBuffer().at(led.refLedBuffer().size() - 1), expectedCS);
 }
 
 void TestSerialLedBuffered::update()
@@ -221,7 +215,7 @@ void TestSerialLedBuffered::update()
   expectedData[11] = 129;
   expectedData[12] = 139;
 
-  SerialLedBuffered led(3);
+  DummySerialLedBuffered led(3);
   DummySerialPort port;
   led.setSerialPort(&port);
 
