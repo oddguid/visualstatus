@@ -2,6 +2,7 @@
 #define VST_TESTMOCKHTTPPORT_H
 
 #include <QtTest/QtTest>
+#include "../../src/MockHttpPort.h"
 
 namespace unittest
 {
@@ -29,6 +30,28 @@ private slots:
 
   /// Tests the setProxy function.
   void setProxy();
+};
+
+// Dummy class for testing of MockHttpPort, makes internals accessible.
+class DummyHttpPort : public MockHttpPort
+{
+  Q_OBJECT
+
+public:
+  DummyHttpPort(QObject *parent = 0)
+    : MockHttpPort(parent)
+  {
+  }
+
+  ~DummyHttpPort()
+  {
+  }
+
+  // make m_data accessible
+  QString &refData()
+  {
+    return m_data;
+  }
 };
 
 } // unittest

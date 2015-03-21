@@ -10,7 +10,7 @@ class MockHttpPort : public BaseHttpPort
 {
   Q_OBJECT
 
-private:
+protected:
   QString m_data;
 
 public:

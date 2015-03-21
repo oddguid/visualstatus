@@ -1,35 +1,29 @@
 #include "TestMockHttpPort.h"
 
-// redefine private to public to get access to the member variables of the
-// MockHttpPort class
-#define private public
-#include "../../src/MockHttpPort.h"
-#undef private
-
 namespace unittest
 {
 
 void TestMockHttpPort::defaultConstructor()
 {
-  MockHttpPort port;
+  DummyHttpPort port;
 
-  QVERIFY(port.m_data.isEmpty() == true);
+  QVERIFY(port.refData().isEmpty() == true);
 }
 
 void TestMockHttpPort::get()
 {
-  MockHttpPort port;
+  DummyHttpPort port;
   QString url("http://example.com");
 
   // get
   QVERIFY(port.get(url) == true);
 
-  QVERIFY(port.m_data.isEmpty() == true);
+  QVERIFY(port.refData().isEmpty() == true);
 }
 
 void TestMockHttpPort::data()
 {
-  MockHttpPort port;
+  DummyHttpPort port;
   QString data = "test";
 
   port.data(data);
@@ -40,7 +34,7 @@ void TestMockHttpPort::data()
 
 void TestMockHttpPort::setTimeout()
 {
-  MockHttpPort port;
+  DummyHttpPort port;
   unsigned short timeout = 123;
 
   QVERIFY(port.setTimeout(timeout) == true);
@@ -48,7 +42,7 @@ void TestMockHttpPort::setTimeout()
 
 void TestMockHttpPort::setAuthentication()
 {
-  MockHttpPort port;
+  DummyHttpPort port;
   QString user = "user";
   QString password = "password";
 
@@ -57,7 +51,7 @@ void TestMockHttpPort::setAuthentication()
 
 void TestMockHttpPort::setProxy()
 {
-  MockHttpPort port;
+  DummyHttpPort port;
   QString proxyUser = "user";
   QString proxyPassword = "password";
   QString proxyHost = "host";
