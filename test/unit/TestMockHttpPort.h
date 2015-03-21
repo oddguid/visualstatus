@@ -38,7 +38,7 @@ class DummyHttpPort : public MockHttpPort
   Q_OBJECT
 
 public:
-  DummyHttpPort(QObject *parent = 0)
+  DummyHttpPort(QObject *parent = nullptr)
     : MockHttpPort(parent)
   {
   }

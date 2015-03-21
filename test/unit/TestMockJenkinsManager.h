@@ -32,7 +32,7 @@ class DummyJenkinsManager : public MockJenkinsManager
   Q_OBJECT
 
 public:
-  DummyJenkinsManager(QObject *parent = 0)
+  DummyJenkinsManager(QObject *parent = nullptr)
     : MockJenkinsManager(parent)
   {
   }

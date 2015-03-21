@@ -27,7 +27,7 @@ class DummySerialPort : public BaseSerialPort
   Q_OBJECT
 
 public:
-  DummySerialPort(QObject *parent = 0)
+  DummySerialPort(QObject *parent = nullptr)
     : BaseSerialPort(parent)
   {
   }

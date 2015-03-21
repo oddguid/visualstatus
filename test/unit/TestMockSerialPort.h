@@ -41,7 +41,7 @@ class DummySerialPort : public MockSerialPort
   Q_OBJECT
 
 public:
-  DummySerialPort(QObject *parent = 0)
+  DummySerialPort(QObject *parent = nullptr)
     : MockSerialPort(parent)
   {
   }
@@ -67,7 +67,7 @@ public:
   QString m_writtenData;
   QByteArray m_writtenDataRaw;
 
-  explicit DummyLog(QObject *parent = 0)
+  explicit DummyLog(QObject *parent = nullptr)
     : QObject(parent)
     , m_writtenData()
     , m_writtenDataRaw()

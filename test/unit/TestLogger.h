@@ -42,7 +42,7 @@ class DummyLogger : public Logger
   Q_OBJECT
 
 public:
-  DummyLogger(QObject *parent = 0)
+  DummyLogger(QObject *parent = nullptr)
     : Logger(parent)
   {
   }
@@ -68,7 +68,7 @@ public:
   QString m_logText;
   bool m_clearCalled;
 
-  explicit DummyLog(QObject *parent = 0)
+  explicit DummyLog(QObject *parent = nullptr)
     : QObject(parent)
     , m_logLevel(LogLevel::Info)
     , m_logText()

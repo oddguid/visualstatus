@@ -45,12 +45,12 @@ class DummySerialLedBuffered : public SerialLedBuffered
   Q_OBJECT
 
 public:
-  DummySerialLedBuffered(QObject *parent = 0)
+  DummySerialLedBuffered(QObject *parent = nullptr)
     : SerialLedBuffered(parent)
   {
   }
 
-  DummySerialLedBuffered(quint8 numLeds, QObject *parent = 0)
+  DummySerialLedBuffered(quint8 numLeds, QObject *parent = nullptr)
     : SerialLedBuffered(numLeds, parent)
   {
   }
@@ -88,7 +88,7 @@ protected:
   QByteArray m_dataRaw;
 
 public:  
-  DummySerialPort(QObject *parent = 0)
+  DummySerialPort(QObject *parent = nullptr)
     : BaseSerialPort(parent)
     , m_dataRaw()
   {

@@ -27,7 +27,7 @@ class DummyHttpPort : public BaseHttpPort
   Q_OBJECT
 
 public:
-  DummyHttpPort(QObject *parent = 0)
+  DummyHttpPort(QObject *parent = nullptr)
     : BaseHttpPort(parent)
   {
   }

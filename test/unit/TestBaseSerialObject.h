@@ -48,7 +48,7 @@ class DummySerialObject : public BaseSerialObject
   Q_OBJECT
 
 public:
-  DummySerialObject(QObject *parent = 0)
+  DummySerialObject(QObject *parent = nullptr)
     : BaseSerialObject(parent)
   {
   }
@@ -88,7 +88,7 @@ protected:
   QByteArray m_dataRaw;
 
 public:  
-  DummySerialPort(QObject *parent = 0)
+  DummySerialPort(QObject *parent = nullptr)
     : BaseSerialPort(parent)
     , m_writeReturnValue(true)
     , m_data()
