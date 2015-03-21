@@ -3,6 +3,7 @@
 
 #include <QtTest/QtTest>
 #include "../../src/LogLevel.h"
+#include "../../src/Logger.h"
 
 namespace unittest
 {
@@ -33,6 +34,28 @@ private slots:
 
   /// Tests the logDebug function of the logger.
   void logDebug();
+};
+
+// Dummy class for testing of Logger, makes internals accessible.
+class DummyLogger : public Logger
+{
+  Q_OBJECT
+
+public:
+  DummyLogger(QObject *parent = 0)
+    : Logger(parent)
+  {
+  }
+
+  ~DummyLogger()
+  {
+  }
+
+  // make m_logLevel accessible
+  LogLevel::Enum &refLogLevel()
+  {
+    return m_logLevel;
+  }
 };
 
 // Dummy class for testing the signals of the Logger class.

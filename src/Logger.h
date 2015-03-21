@@ -11,7 +11,7 @@ class Logger : public QObject
 {
   Q_OBJECT
 
-private:
+protected:
   LogLevel::Enum m_logLevel;
 
 public:

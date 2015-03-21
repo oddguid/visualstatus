@@ -2,42 +2,36 @@
 #include <QString>
 #include <QList>
 
-// redefine private to public to get access to the member variables of the
-// Logger class
-#define private public
-#include "../../src/Logger.h"
-#undef private
-
 namespace unittest
 {
 
 void TestLogger::level()
 {
-  Logger logger;
+  DummyLogger logger;
 
   // default level should be info
-  QVERIFY(logger.m_logLevel == LogLevel::Info);
+  QVERIFY(logger.refLogLevel() == LogLevel::Info);
 
   // error
   logger.level("error");
-  QCOMPARE(logger.m_logLevel, LogLevel::Error);
+  QCOMPARE(logger.refLogLevel(), LogLevel::Error);
 
   // info
   logger.level(" Info ");
-  QCOMPARE(logger.m_logLevel, LogLevel::Info);
+  QCOMPARE(logger.refLogLevel(), LogLevel::Info);
 
   // debug
   logger.level(" DEBUG");
-  QCOMPARE(logger.m_logLevel, LogLevel::Debug);
+  QCOMPARE(logger.refLogLevel(), LogLevel::Debug);
 
   // unknown value
   logger.level("verbose");
-  QCOMPARE(logger.m_logLevel, LogLevel::Info);
+  QCOMPARE(logger.refLogLevel(), LogLevel::Info);
 }
 
 void TestLogger::clear()
 {
-  Logger logger;
+  DummyLogger logger;
   DummyLog log;
 
   log.connect(&logger, SIGNAL(clearLog()), SLOT(clearLog()));
@@ -57,7 +51,7 @@ void TestLogger::log()
   QString textExp = "Test message";
   LogLevel::Enum levelExp = LogLevel::Info;
 
-  Logger logger;
+  DummyLogger logger;
   DummyLog log;
 
   log.connect(&logger, SIGNAL(clearLog()), SLOT(clearLog()));
@@ -67,7 +61,7 @@ void TestLogger::log()
   QVERIFY(log.m_clearCalled == false);
 
   // set log level
-  logger.m_logLevel = LogLevel::Error;
+  logger.refLogLevel() = LogLevel::Error;
 
   // log
   logger.log(textExp);
@@ -76,7 +70,7 @@ void TestLogger::log()
   QVERIFY(log.m_logText.isEmpty() == true);
 
   // increase log level
-  logger.m_logLevel = LogLevel::Info;
+  logger.refLogLevel() = LogLevel::Info;
 
   // log
   logger.log(textExp);
@@ -91,7 +85,7 @@ void TestLogger::logError()
   QString textExp = "Test message";
   LogLevel::Enum levelExp = LogLevel::Error;
 
-  Logger logger;
+  DummyLogger logger;
   DummyLog log;
 
   log.connect(&logger, SIGNAL(clearLog()), SLOT(clearLog()));
@@ -113,7 +107,7 @@ void TestLogger::logWarning()
   QString textExp = "Test message";
   LogLevel::Enum levelExp = LogLevel::Warning;
 
-  Logger logger;
+  DummyLogger logger;
   DummyLog log;
 
   log.connect(&logger, SIGNAL(clearLog()), SLOT(clearLog()));
@@ -123,7 +117,7 @@ void TestLogger::logWarning()
   QVERIFY(log.m_clearCalled == false);
 
   // set log level
-  logger.m_logLevel = LogLevel::Error;
+  logger.refLogLevel() = LogLevel::Error;
 
   // log warning
   logger.logWarning(textExp);
@@ -132,7 +126,7 @@ void TestLogger::logWarning()
   QVERIFY(log.m_logText.isEmpty() == true);
 
   // increase log level
-  logger.m_logLevel = LogLevel::Warning;
+  logger.refLogLevel() = LogLevel::Warning;
 
   // log warning
   logger.logWarning(textExp);
@@ -147,7 +141,7 @@ void TestLogger::logInfo()
   QString textExp = "Test message";
   LogLevel::Enum levelExp = LogLevel::Info;
 
-  Logger logger;
+  DummyLogger logger;
   DummyLog log;
 
   log.connect(&logger, SIGNAL(clearLog()), SLOT(clearLog()));
@@ -157,7 +151,7 @@ void TestLogger::logInfo()
   QVERIFY(log.m_clearCalled == false);
 
   // set log level
-  logger.m_logLevel = LogLevel::Error;
+  logger.refLogLevel() = LogLevel::Error;
 
   // log info
   logger.logInfo(textExp);
@@ -166,7 +160,7 @@ void TestLogger::logInfo()
   QVERIFY(log.m_logText.isEmpty() == true);
 
   // increase log level
-  logger.m_logLevel = LogLevel::Info;
+  logger.refLogLevel() = LogLevel::Info;
 
   // log info
   logger.logInfo(textExp);
@@ -181,7 +175,7 @@ void TestLogger::logDebug()
   QString textExp = "Test message";
   LogLevel::Enum levelExp = LogLevel::Debug;
 
-  Logger logger;
+  DummyLogger logger;
   DummyLog log;
 
   log.connect(&logger, SIGNAL(clearLog()), SLOT(clearLog()));
@@ -191,7 +185,7 @@ void TestLogger::logDebug()
   QVERIFY(log.m_clearCalled == false);
 
   // set log level
-  logger.m_logLevel = LogLevel::Error;
+  logger.refLogLevel() = LogLevel::Error;
 
   // log debug
   logger.logDebug(textExp);
@@ -200,7 +194,7 @@ void TestLogger::logDebug()
   QVERIFY(log.m_logText.isEmpty() == true);
 
   // increase log level
-  logger.m_logLevel = LogLevel::Debug;
+  logger.refLogLevel() = LogLevel::Debug;
 
   // log debug
   logger.logDebug(textExp);
