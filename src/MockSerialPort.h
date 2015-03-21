@@ -10,7 +10,7 @@ class MockSerialPort : public BaseSerialPort
 {
   Q_OBJECT
 
-private:
+protected:
   bool m_isOpen;
 
 public:

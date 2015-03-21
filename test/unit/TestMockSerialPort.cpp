@@ -1,69 +1,63 @@
 #include "TestMockSerialPort.h"
 
-// redefine private to public to get access to the member variables of the
-// MockSerialPort class
-#define private public
-#include "../../src/MockSerialPort.h"
-#undef private
-
 namespace unittest
 {
 
 void TestMockSerialPort::defaultConstructor()
 {
-  MockSerialPort port;
+  DummySerialPort port;
 
-  QCOMPARE(port.m_isOpen, false);
+  QCOMPARE(port.refIsOpen(), false);
 }
 
 void TestMockSerialPort::open()
 {
-  MockSerialPort port;
+  DummySerialPort port;
 
   // open port
   QVERIFY(port.open("device", 0, 0) == true);
 
-  QCOMPARE(port.m_isOpen, true);
+  QCOMPARE(port.refIsOpen(), true);
 }
 
 void TestMockSerialPort::isOpen()
 {
-  MockSerialPort port;
+  DummySerialPort port;
 
   QVERIFY(port.isOpen() == false);
 
-  port.m_isOpen = true;
+  port.refIsOpen() = true;
 
   QVERIFY(port.isOpen() == true);
 }
 
 void TestMockSerialPort::close()
 {
-  MockSerialPort port;
+  DummySerialPort port;
 
   // close a closed port
   port.close();
 
-  QCOMPARE(port.m_isOpen, false);
+  QCOMPARE(port.refIsOpen(), false);
 
-  port.m_isOpen = true;
+  port.refIsOpen() = true;
 
   // close an opened port
   port.close();
 
-  QCOMPARE(port.m_isOpen, false);
+  QCOMPARE(port.refIsOpen(), false);
 }
 
 void TestMockSerialPort::setTimeout()
 {
-  MockSerialPort port;
+  DummySerialPort port;
 
   QVERIFY(port.setTimeout(100) == true);
 }
 
 void TestMockSerialPort::write()
 {
-  MockSerialPort port;
+  DummySerialPort port;
   DummyLog log;
 
   connect(&port, SIGNAL(writtenData(QString)),
@@ -95,7 +89,7 @@ void TestMockSerialPort::write()
 
 void TestMockSerialPort::writeRaw()
 {
-  MockSerialPort port;
+  DummySerialPort port;
   DummyLog log;
 
   connect(&port, SIGNAL(writtenData(QString)),

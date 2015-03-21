@@ -2,6 +2,7 @@
 #define VST_TESTMOCKSERIALPORT_H
 
 #include <QtTest/QtTest>
+#include "../../src/MockSerialPort.h"
 
 namespace unittest
 {
@@ -32,6 +33,28 @@ private slots:
 
   /// Tests the writeRaw function.
   void writeRaw();
+};
+
+// Dummy class for testing of MockSerialPort, makes internals accessible.
+class DummySerialPort : public MockSerialPort
+{
+  Q_OBJECT
+
+public:
+  DummySerialPort(QObject *parent = 0)
+    : MockSerialPort(parent)
+  {
+  }
+
+  ~DummySerialPort()
+  {
+  }
+
+  // make m_isOpen accessible
+  bool &refIsOpen()
+  {
+    return m_isOpen;
+  }
 };
 
 // Dummy class for testing the writtenData and writtenRawData signals of the
