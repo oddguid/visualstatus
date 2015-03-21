@@ -18,7 +18,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit ScriptRunner(QObject *parent = 0);
+  explicit ScriptRunner(QObject *parent = nullptr);
 
   /// Destructor.
   virtual ~ScriptRunner();

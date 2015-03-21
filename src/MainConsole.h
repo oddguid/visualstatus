@@ -23,7 +23,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit MainConsole(QObject *parent = 0);
+  explicit MainConsole(QObject *parent = nullptr);
 
   /// Destructor.
   virtual ~MainConsole();

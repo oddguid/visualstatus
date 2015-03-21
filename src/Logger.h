@@ -18,7 +18,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit Logger(QObject *parent = 0);
+  explicit Logger(QObject *parent = nullptr);
   
   /// Destructor.
   virtual ~Logger();

@@ -16,7 +16,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit JenkinsManager(QObject *parent = 0);
+  explicit JenkinsManager(QObject *parent = nullptr);
   
   /// Destructor.
   virtual ~JenkinsManager();

@@ -17,7 +17,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit MockSerialPort(QObject *parent = 0);
+  explicit MockSerialPort(QObject *parent = nullptr);
 
   /// Destructor.
   virtual ~MockSerialPort();

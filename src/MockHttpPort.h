@@ -17,7 +17,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit MockHttpPort(QObject *parent = 0);
+  explicit MockHttpPort(QObject *parent = nullptr);
 
   /// Destructor.
   virtual ~MockHttpPort();

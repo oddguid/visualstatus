@@ -14,7 +14,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit SerialLed(QObject *parent = 0);
+  explicit SerialLed(QObject *parent = nullptr);
 
   /// Destructor.
   virtual ~SerialLed();

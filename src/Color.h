@@ -22,7 +22,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit Color(QObject *parent = 0);
+  explicit Color(QObject *parent = nullptr);
   
   /// Constructor, takes RGB color.
   ///
@@ -30,7 +30,7 @@ public:
   /// \param[in] g Green component of color, range 0 <= g <= 255.
   /// \param[in] b Blue component of color, range 0 <= b <= 255.
   /// \param[in] parent Parent of this object.
-  Color(quint8 r, quint8 g, quint8 b, QObject *parent = 0);
+  Color(quint8 r, quint8 g, quint8 b, QObject *parent = nullptr);
 
   /// Destructor.
   virtual ~Color();

@@ -21,7 +21,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of his object.
-  explicit JenkinsJob(QObject *parent = 0);
+  explicit JenkinsJob(QObject *parent = nullptr);
   
   /// Destructor.
   virtual ~JenkinsJob();

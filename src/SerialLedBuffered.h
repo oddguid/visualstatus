@@ -40,13 +40,13 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit SerialLedBuffered(QObject *parent = 0);
+  explicit SerialLedBuffered(QObject *parent = nullptr);
 
   /// Constructor.
   ///
   /// \param[in] numLeds Number of LEDs to use, range is 0 <= size <= 85.
   /// \param[in] parent Parent of this object.
-  SerialLedBuffered(quint8 numLeds, QObject *parent = 0);
+  SerialLedBuffered(quint8 numLeds, QObject *parent = nullptr);
 
   /// Destructor.
   virtual ~SerialLedBuffered();

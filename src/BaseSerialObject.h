@@ -19,7 +19,7 @@ public:
   /// Constructor.
   ///
   /// \param[in] parent Parent of this object.
-  explicit BaseSerialObject(QObject *parent = 0);
+  explicit BaseSerialObject(QObject *parent = nullptr);
         
   /// Destructor.
   virtual ~BaseSerialObject();
