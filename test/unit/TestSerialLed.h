@@ -46,13 +46,13 @@ protected:
   QString m_data;
 
 public:  
-  DummySerialPort(QObject *parent = nullptr)
+  explicit DummySerialPort(QObject *parent = nullptr)
     : BaseSerialPort(parent)
     , m_data()
   {
   }
 
-  ~DummySerialPort()
+  virtual ~DummySerialPort()
   {
   }
 

@@ -45,7 +45,7 @@ class DummySerialLedBuffered : public SerialLedBuffered
   Q_OBJECT
 
 public:
-  DummySerialLedBuffered(QObject *parent = nullptr)
+  explicit DummySerialLedBuffered(QObject *parent = nullptr)
     : SerialLedBuffered(parent)
   {
   }
@@ -55,7 +55,7 @@ public:
   {
   }
 
-  ~DummySerialLedBuffered()
+  virtual ~DummySerialLedBuffered()
   {
   }
 

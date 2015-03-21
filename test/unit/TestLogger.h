@@ -42,12 +42,12 @@ class DummyLogger : public Logger
   Q_OBJECT
 
 public:
-  DummyLogger(QObject *parent = nullptr)
+  explicit DummyLogger(QObject *parent = nullptr)
     : Logger(parent)
   {
   }
 
-  ~DummyLogger()
+  virtual ~DummyLogger()
   {
   }
 

@@ -46,12 +46,12 @@ class DummyJenkinsManager : public BaseJenkinsManager
   Q_OBJECT
 
 public:
-  DummyJenkinsManager(QObject *parent = nullptr)
+  explicit DummyJenkinsManager(QObject *parent = nullptr)
     : BaseJenkinsManager(parent)
   {
   }
 
-  ~DummyJenkinsManager()
+  virtual ~DummyJenkinsManager()
   {
   }
 

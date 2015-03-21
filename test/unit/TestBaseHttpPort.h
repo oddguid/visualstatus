@@ -27,12 +27,12 @@ class DummyHttpPort : public BaseHttpPort
   Q_OBJECT
 
 public:
-  DummyHttpPort(QObject *parent = nullptr)
+  explicit DummyHttpPort(QObject *parent = nullptr)
     : BaseHttpPort(parent)
   {
   }
 
-  ~DummyHttpPort()
+  virtual ~DummyHttpPort()
   {
   }
 

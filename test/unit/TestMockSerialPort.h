@@ -41,12 +41,12 @@ class DummySerialPort : public MockSerialPort
   Q_OBJECT
 
 public:
-  DummySerialPort(QObject *parent = nullptr)
+  explicit DummySerialPort(QObject *parent = nullptr)
     : MockSerialPort(parent)
   {
   }
 
-  ~DummySerialPort()
+  virtual ~DummySerialPort()
   {
   }
 
