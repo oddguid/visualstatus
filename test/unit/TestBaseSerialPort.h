@@ -2,12 +2,7 @@
 #define VST_TESTBASESERIALPORT_H
 
 #include <QtTest/QtTest>
-
-// redefine protected to public to get access to the member variables of the
-// BaseSerialPort class
-#define protected public
 #include "../../src/BaseSerialPort.h"
-#undef protected
 
 namespace unittest
 {
@@ -26,7 +21,7 @@ private slots:
 };
 
 // Dummy class for testing of BaseSerialPort, implements the pure virtual
-// functions.
+// functions and makes internals accessible.
 class DummySerialPort : public BaseSerialPort
 {
   Q_OBJECT
@@ -81,6 +76,12 @@ public:
     Q_UNUSED(data)
 
     return true;
+  }
+
+  // make m_error accessible
+  QString &refError()
+  {
+    return m_error;
   }
 };
 
