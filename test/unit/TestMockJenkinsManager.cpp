@@ -1,24 +1,18 @@
 #include "TestMockJenkinsManager.h"
 
-// redefine protected to public to get access to the member variables of the
-// MockJenkinsManager class
-#define protected public
-#include "../../src/MockJenkinsManager.h"
-#undef protected
-
 namespace unittest
 {
 
 void TestMockJenkinsManager::defaultConstructor()
 {
-  MockJenkinsManager manager;
+  DummyJenkinsManager manager;
 
   QVERIFY(manager.jobNames().size() == 0);
 }
 
 void TestMockJenkinsManager::parseJobBufferEmpty()
 {
-  MockJenkinsManager manager;
+  DummyJenkinsManager manager;
 
   // no buffer
   manager.parseJobBuffer(NULL);
@@ -34,7 +28,7 @@ void TestMockJenkinsManager::parseJobBuffer()
         "job1|http://example.com/job1|blue\n");
 
   QBuffer jobBuffer(&jobArray);
-  MockJenkinsManager manager;
+  DummyJenkinsManager manager;
 
   // use buffer
   if (jobBuffer.open(QIODevice::ReadOnly))
@@ -66,7 +60,7 @@ void TestMockJenkinsManager::parseJobBufferError()
         "job3|blue\n");
 
   QBuffer jobBuffer(&jobArray);
-  MockJenkinsManager manager;
+  DummyJenkinsManager manager;
 
   // use buffer
   if (jobBuffer.open(QIODevice::ReadOnly))

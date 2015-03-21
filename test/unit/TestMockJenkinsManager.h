@@ -2,6 +2,7 @@
 #define VST_TESTMOCKJENKINSMANAGER_H
 
 #include <QtTest/QtTest>
+#include "../../src/MockJenkinsManager.h"
 
 namespace unittest
 {
@@ -23,6 +24,25 @@ private slots:
 
   /// Tests the parseJobBuffer function with a buffer containing an error.
   void parseJobBufferError();
+};
+
+// Dummy class for testing of MockJenkinsManager, makes internals accessible.
+class DummyJenkinsManager : public MockJenkinsManager
+{
+  Q_OBJECT
+
+public:
+  DummyJenkinsManager(QObject *parent = 0)
+    : MockJenkinsManager(parent)
+  {
+  }
+
+  ~DummyJenkinsManager()
+  {
+  }
+
+  // make parseJobBuffer accessible
+  using MockJenkinsManager::parseJobBuffer;
 };
 
 } // unittest
